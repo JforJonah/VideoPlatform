@@ -101,3 +101,5 @@ memberSchema.methods.generateJwt = function () {
     }
     );
   }
+
+  module.exports=UserSchema.model('User',UserSchema);
