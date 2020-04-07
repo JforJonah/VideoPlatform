@@ -102,4 +102,4 @@ memberSchema.methods.generateJwt = function () {
     );
   }
 
-  module.exports=UserSchema.model('User',UserSchema);
+  module.exports=UserSchema.model('Users',UserSchema);
