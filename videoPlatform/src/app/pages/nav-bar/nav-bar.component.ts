@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {NbMenuService} from '@nebular/theme';
 
 @Component({
   selector: 'app-nav-bar',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./nav-bar.component.scss']
 })
 export class NavBarComponent implements OnInit {
+  item: [{ title: 'profile' }, { title: 'logout' }];
 
   constructor() { }
 
