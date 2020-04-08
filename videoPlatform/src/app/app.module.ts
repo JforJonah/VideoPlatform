@@ -10,7 +10,7 @@ import {
   NbActionsModule,
   NbIconModule,
   NbUserModule,
-  NbContextMenuModule, NbStepperModule
+  NbContextMenuModule, NbStepperModule, NbMenuService, NbMenuModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { AuthComponent } from './auth/auth.component';
@@ -22,7 +22,7 @@ import { FavoriteComponent } from './pages/favorite/favorite.component';
 import { WatchlaterComponent } from './pages/watchlater/watchlater.component';
 import { HistoryComponent } from './pages/history/history.component';
 import { UploadvideoComponent } from './pages/uploadvideo/uploadvideo.component';
-import {ReactiveFormsModule} from "@angular/forms";
+import {ReactiveFormsModule} from '@angular/forms';
 import { FollowsComponent } from './pages/follows/follows.component';
 
 @NgModule({
@@ -51,7 +51,8 @@ import { FollowsComponent } from './pages/follows/follows.component';
     NbUserModule,
     NbContextMenuModule,
     NbStepperModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NbMenuModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

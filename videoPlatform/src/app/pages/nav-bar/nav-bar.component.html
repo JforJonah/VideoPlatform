@@ -3,8 +3,9 @@
     <nb-action title="home" icon="home-outline" link="/home"></nb-action>
     <nb-action title="favorite" icon="star-outline" link="/favorite"></nb-action>
     <nb-action title="upload video" icon="cloud-upload-outline" link="upload"></nb-action>
-    <nb-action title="following" icon="person-add-outline" link="following"></nb-action>
+    <nb-action title="following" icon="person-add-outline" link="follows"></nb-action>
+    <nb-action title="watch later" icon="clock-outline" link="watchlater"></nb-action>
   </nb-actions>
 
-  <nb-user class="right" name="Monster Hunter"></nb-user>
+  <nb-user class="right" [nbContextMenu]="item" name="Monster Hunter"></nb-user>
 </div>
