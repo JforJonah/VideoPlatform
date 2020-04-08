@@ -11,7 +11,8 @@ const Schema = mongoose.Schema,
  let UserSchema=new Schema({
      Username:{
          type:String,
-         required:"username is required"
+         required:"username is required",
+         unique:true
      },
      Email:{
          type:String,
@@ -36,6 +37,14 @@ const Schema = mongoose.Schema,
      profileImage:{
         type:String,
     },
+    firstName:{
+        type:String,
+        required:"firstName can't be empty"
+    },
+    lastName:{
+        type:String,
+        required:"lastName can't be empty"
+    },
     //The videos this user have
     videos:[
         {
@@ -48,6 +57,12 @@ const Schema = mongoose.Schema,
         {
         type:Schema.Types.ObjectId,
         ref:'Video'
+        }
+    ],
+    unlike:[
+        {
+        type:Schema.Types.ObjectId,
+        ref:'Video'           
         }
     ],
     // The user this user subscribe
