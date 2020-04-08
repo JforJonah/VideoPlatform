@@ -4,7 +4,14 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {NbThemeModule, NbLayoutModule, NbActionsModule, NbIconModule} from '@nebular/theme';
+import {
+  NbThemeModule,
+  NbLayoutModule,
+  NbActionsModule,
+  NbIconModule,
+  NbUserModule,
+  NbContextMenuModule, NbStepperModule
+} from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { AuthComponent } from './auth/auth.component';
 import { NavBarComponent } from './pages/nav-bar/nav-bar.component';
@@ -14,6 +21,9 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { FavoriteComponent } from './pages/favorite/favorite.component';
 import { WatchlaterComponent } from './pages/watchlater/watchlater.component';
 import { HistoryComponent } from './pages/history/history.component';
+import { UploadvideoComponent } from './pages/uploadvideo/uploadvideo.component';
+import {ReactiveFormsModule} from "@angular/forms";
+import { FollowsComponent } from './pages/follows/follows.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +35,9 @@ import { HistoryComponent } from './pages/history/history.component';
     ProfileComponent,
     FavoriteComponent,
     WatchlaterComponent,
-    HistoryComponent
+    HistoryComponent,
+    UploadvideoComponent,
+    FollowsComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +47,11 @@ import { HistoryComponent } from './pages/history/history.component';
     NbLayoutModule,
     NbEvaIconsModule,
     NbActionsModule,
-    NbIconModule
+    NbIconModule,
+    NbUserModule,
+    NbContextMenuModule,
+    NbStepperModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
