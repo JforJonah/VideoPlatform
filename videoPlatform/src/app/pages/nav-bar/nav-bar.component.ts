@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {NbMenuService} from '@nebular/theme';
+import {NbMenuItem, NbMenuService} from '@nebular/theme';
 
 @Component({
   selector: 'app-nav-bar',
@@ -7,7 +7,18 @@ import {NbMenuService} from '@nebular/theme';
   styleUrls: ['./nav-bar.component.scss']
 })
 export class NavBarComponent implements OnInit {
-  item: [{ title: 'profile' }, { title: 'logout' }];
+  item: NbMenuItem[] = [
+    {
+      title: 'profile',
+      link: 'profile'
+    },
+    {
+      title: 'history',
+      link: 'history'
+    },
+    { title: 'logout',
+      link: 'logout'}
+    ];
 
   constructor() { }
 

@@ -7,6 +7,7 @@ import {UploadvideoComponent} from './pages/uploadvideo/uploadvideo.component';
 import {HistoryComponent} from './pages/history/history.component';
 import {WatchlaterComponent} from './pages/watchlater/watchlater.component';
 import {FollowsComponent} from './pages/follows/follows.component';
+import {ProfileComponent} from './pages/profile/profile.component';
 
 
 const routes: Routes = [
@@ -16,7 +17,8 @@ const routes: Routes = [
   {path: 'upload', component: UploadvideoComponent},
   {path: 'history', component: HistoryComponent},
   {path: 'watchlater', component: WatchlaterComponent},
-  {path: 'follows', component: FollowsComponent}
+  {path: 'follows', component: FollowsComponent},
+  {path: 'profile', component: ProfileComponent}
 ];
 
 @NgModule({
