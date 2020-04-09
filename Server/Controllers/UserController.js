@@ -137,7 +137,16 @@ exports.userUpdate=(req,res)=>{
  * @param {*} res
  */
 exports.like=(req,res)=>{
-    
+    let videoId=req.body;
+    let userId=req.id;
+    const resolver=(user)=>{
+        res.status(200);
+        res.json({"msg":'successful'});
+    }
+
+    userServices.addLike(userId,videoId)
+    .then(resolver)
+    .catch(renderErrorResponse);
 }
 /**
  * Thumb down this video
