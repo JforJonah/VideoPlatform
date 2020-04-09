@@ -1,6 +1,7 @@
 'use strict'
 const userServices=require('../Services/userServices'),
     bcrypt=require('bcrypt'),
+    HashMap=require('hashmap'),
     passport=require('passport');
     // mongoose=require('mongoose');
     // let User=mongoose.model('Users');
@@ -19,7 +20,7 @@ const userServices=require('../Services/userServices'),
     //   }
     // ));
 
-
+let map=new HashMap()
 
 exports.getUser=function(request,response){
         const resolve=(list)=>{
@@ -118,7 +119,16 @@ exports.userInfo=(req,res)=>{
  * @param {*} res
  */
 exports.userUpdate=(req,res)=>{
+    let updateUser=req.body;
+    let id=req.id;
+    const resolve=(user)=>{
+        res.status(200);
+        res.json({"token":user.generateJwt(),"msg":'ok'});
+    }
 
+    userServices.updateProfile(id,updateUser)
+    .then(resolve)
+    .catch(renderErrorResponse);
 }
 /**
  *
@@ -174,8 +184,25 @@ exports.subscribe=(req,res)=>{
 exports.unSubscribe=(req,res)=>{
 
 }
+/**
+ *get the watch history of this user
+ *
+ * @param {*} req
+ * @param {*} res
+ */
+exports.getHistory=(req,res)=>{
+    
+}
 
-
+/**
+ * update the watch history of this user
+ *
+ * @param {*} req
+ * @param {*} res
+ */
+exports.updateHistory=(req,res)=>{
+    
+}
 /**
  * Throws error if error object is present.
  *
