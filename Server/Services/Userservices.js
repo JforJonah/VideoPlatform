@@ -258,23 +258,24 @@ exports.unSubscribe=(userId,authorId)=>{
  */
 exports.updateHistory=(userId,videoId)=>{
     let his=Users.findById(userId);
-    his.history.forEach(element=>{
-        if(element==videoId){
-            const promise=Users.update({
-                "_id":userId
-            },
-            {
-                $pull:{
-                    history:videoId
+    // let exist=false;
+    if(his.history!==null){
+        his.history.forEach(element=>{
+            if(element==videoId){
+                // exist=true;
+                Users.update({
+                    "_id":userId
                 },
-                $push:{
-                    history:videoId
+                {
+                    $pull:{
+                        history:videoId
+                    },
                 }
+                );
+                return promise;
             }
-            ).exec();
-            return promise;
-        }
-    });
+        });
+    }
     const promise=Users.update({
         "_id":userId
     },
