@@ -7,6 +7,27 @@
                     <span class="count">1</span>
                     <a class="more" (click)="more(title)">More</a>
                 </div>
+                <div class="videoContent">
+                    <ng-container *ngFor="let item of Arr">
+                        <div class="small-item">
+                            <a href="" target="_blank" class="cover">
+                                <!-- <img> -->
+                                <span class="length">0{{item}}:48</span>
+                                <span class="i-watchlater"></span>
+                            </a>
+                            <!--href question, double check-->
+                            <a href="" target="_blank" title="video1" class="title">
+                                Video Title
+                            </a>
+                            <div class="meta">
+                                <span class="play">
+                                    <i class="icon"></i>288
+                                    </span><span class="time"><i class="icon"></i>2020-4-8
+                                    </span></div>
+                            </div>
+                        </div>       
+                    </ng-container>
+                </div>
             </div>
         </ng-container>
     </section>
