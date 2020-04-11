@@ -31,4 +31,32 @@
             </div>
         </ng-container>
     </section>
+    <section *ngIf="pageStatus !== 'proPage'">
+        <div class="videoList">
+            <div class="videoTtiel">
+                <a href="" class="t">{{title}}</a>
+                <span class="count">1</span>
+                <a class="more" (click)="return()">return</a>
+            </div>
+            <div class="videoContent">
+                <ng-container *ngFor="let item of Arr1">
+                    <div class="small-item">
+                        <a href="" target="_blank" class="corver">
+                            <!-- <img> -->
+                            <span class="length">0{{item}}:48</span>
+                                <span class="i-watchlater"></span>
+                        </a>
+                        <a href="" target="_blank" title="video1" class="title">
+                            Video Title
+                        </a> <!--href question, double check-->
+                        <div class="meta">
+                            <span class="play">
+                                <i class="icon"></i>288
+                                </span><span class="time"><i class="icon"></i>2020-4-8
+                                </span></div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </section>
 </div>
