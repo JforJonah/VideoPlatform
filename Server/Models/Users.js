@@ -45,9 +45,11 @@ const Schema = mongoose.Schema,
         type:String,
         required:"lastName can't be empty"
     },
-    history:{
-        type:Schema.Types.Mixed
-    },
+    history:[
+        {
+            type:Schema.Types.ObjectId
+        }
+    ],
     //The videos this user have
     videos:[
         {

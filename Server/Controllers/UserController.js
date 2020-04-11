@@ -274,22 +274,22 @@ exports.unSubscribe=(req,res)=>{
     .then(resolve)
     .catch(renderErrorResponse(response));
 }
-/**
- *get the watch history of this user
- *
- * @param {*} req
- * @param {*} res
- */
-exports.getHistory=(req,res)=>{
-    let userId=req.param.id;
-    const resolve=(list)=>{
-        res.status(200).json(list);
-    }
-    userServices.getHistory(req.param.id)
-    .then(resolve)
-    .catch(renderErrorResponse(response));
-    // let map=
-}
+// /**
+//  *get the watch history of this user
+//  *
+//  * @param {*} req
+//  * @param {*} res
+//  */
+// exports.getHistory=(req,res)=>{
+//     let userId=req.param.id;
+//     const resolve=(list)=>{
+//         res.status(200).json(list);
+//     }
+//     userServices.getHistory(req.param.id)
+//     .then(resolve)
+//     .catch(renderErrorResponse(response));
+//     // let map=
+// }
 
 /**
  * update the watch history of this user

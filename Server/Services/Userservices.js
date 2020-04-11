@@ -219,8 +219,15 @@ exports.subscribe=(userId,authorId)=>{
     const promise3=promise1.then(promise2);
     return promise3;
 }
-
+/**
+ *Unsubscribe a author
+ *
+ * @param {*} userId
+ * @param {*} authorId
+ * @returns
+ */
 exports.unSubscribe=(userId,authorId)=>{
+    
     const promise1=Users.update({
         "_id":userId
     },
@@ -242,4 +249,40 @@ exports.unSubscribe=(userId,authorId)=>{
     
     const promise3=promise1.then(promise2);
     return promise3;
+}
+/**
+ *Update watch history of this user
+ *
+ * @param {*} userId
+ * @param {*} videoId
+ */
+exports.updateHistory=(userId,videoId)=>{
+    let his=Users.findById(userId);
+    his.history.forEach(element=>{
+        if(element==videoId){
+            const promise=Users.update({
+                "_id":userId
+            },
+            {
+                $pull:{
+                    history:videoId
+                },
+                $push:{
+                    history:videoId
+                }
+            }
+            ).exec();
+            return promise;
+        }
+    });
+    const promise=Users.update({
+        "_id":userId
+    },
+    {
+        $push:{
+            history:videoId
+        }
+    }
+    ).exec();
+    return promise;
 }
