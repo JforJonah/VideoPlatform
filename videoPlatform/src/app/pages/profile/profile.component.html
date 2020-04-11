@@ -1,1 +1,13 @@
-<p>profile works!</p>
+<div class="wrapper">
+    <section *ngIf="pageStatus == 'proPage'">
+        <ng-container *ngFor="let title of titleArr">
+            <div class="videoList">
+                <div class="videoTitle">
+                    <a href="" class="t">{{title}}</a>
+                    <span class="count">1</span>
+                    <a class="more" (click)="more(title)">More</a>
+                </div>
+            </div>
+        </ng-container>
+    </section>
+</div>
