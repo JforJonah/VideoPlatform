@@ -68,7 +68,7 @@ const Schema = mongoose.Schema,
         ref:'Video'           
         }
     ],
-    // The user this user subscribe
+    // The users this user subscribe
     subscribe:[
         {
             type:Schema.Types.ObjectId,

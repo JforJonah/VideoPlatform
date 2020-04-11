@@ -116,7 +116,7 @@ exports.unLike=(userId,videoId)=>{
  */
 exports.cancelLike=(userId,videoId)=>{
     
-    const promise=User.update(
+    const promise=Users.update(
         {
             "_id":userId
         },
@@ -137,7 +137,7 @@ exports.cancelLike=(userId,videoId)=>{
  * @returns
  */
 exports.cancelUnLike=(userId,videoId)=>{
-    const promise=User.update( {
+    const promise=Users.update( {
         "_id":userId
     },
     {
@@ -145,6 +145,101 @@ exports.cancelUnLike=(userId,videoId)=>{
             unlike:videoId
         }
     }
-    ).exec()
+    ).exec();
     return promise;
+}
+/**
+ * add a video to your folder
+ *
+ * @param {*} userId
+ * @param {*} videoId
+ * @returns
+ */
+exports.addFavorite=(userId,videoId)=>{
+    
+    const promise=Users.update(
+        {
+            "_id":userId
+        },
+        {
+            $push:{
+                favorite:videoId
+            }
+        }
+    ).exec();
+    return promise;
+}
+/**
+ * remove a video from your folder
+ *
+ * @param {*} userId
+ * @param {*} videoId
+ * @returns
+ */
+exports.unFavorite=(userId,videoId)=>{
+    
+    const promise=Users.update({
+        "_id":userId
+    },
+    {
+        $pull:{
+            favorite:videoId
+        }
+    }
+    ).exec();
+    return promise;
+}
+/**
+ * subscribe a author
+ *
+ * @param {*} userId
+ * @param {*} authorId
+ */
+exports.subscribe=(userId,authorId)=>{
+    
+    const promise1=Users.update({
+        "_id":userId
+    },
+    {
+        $push:{
+            subscribe:authorId
+        }
+    }
+    ).exec();
+    const promise2=Users.update({
+        "_id":authorId
+    },
+    {
+        $push:{
+            subscribed:userId
+        }
+    }
+    ).exec();
+
+    const promise3=promise1.then(promise2);
+    return promise3;
+}
+
+exports.unSubscribe=(userId,authorId)=>{
+    const promise1=Users.update({
+        "_id":userId
+    },
+    {
+        $pull:{
+            subscribe:authorId
+        }
+    }
+    ).exec();
+    const promise2=Users.update({
+        "_id":authorId
+    },
+    {
+        $pull:{
+            subscribed:userId
+        }
+    }
+    ).exec();
+    
+    const promise3=promise1.then(promise2);
+    return promise3;
 }
