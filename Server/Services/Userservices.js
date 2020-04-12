@@ -287,3 +287,15 @@ exports.updateHistory=(userId,videoId)=>{
     ).exec();
     return promise;
 }
+
+exports.uploadVideo=(videoId,authorId)=>{
+    const promise=Users.update({
+        "_id":authorId
+    },
+    {
+        $push:{
+            videos:videoId
+        }
+    }
+    ).exec();
+}
