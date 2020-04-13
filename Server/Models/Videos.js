@@ -42,4 +42,4 @@ const VideoSchema=new Schema({
   VideoSchema.set('toJSON', {
     virtuals: true
   });
-  module.exports=VideoSchema.model('Videos',VideoSchema);
+  module.exports=mongoose.model('Videos',VideoSchema);

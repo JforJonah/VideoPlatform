@@ -96,11 +96,11 @@ const Schema = mongoose.Schema,
   }
  );
  // Duplicate the id field as mongoose returns _id field instead of id.
-memberSchema.virtual('id').get(function(){
+UserSchema.virtual('id').get(function(){
     return this._id.toHexString();
   });
   // Ensure virtual fields are serialised.
-  memberSchema.set('toJSON', {
+  UserSchema.set('toJSON', {
     virtuals: true
   });
 // decode the password in database and compare to the input password
@@ -113,7 +113,7 @@ memberSchema.virtual('id').get(function(){
  *
  * @returns a token file used to verify the identity 
  */
-memberSchema.methods.generateJwt = function () {
+UserSchema.methods.generateJwt = function () {
     return jwt.sign({ _id: this._id },
       "SECRET#123",
     {
@@ -122,4 +122,4 @@ memberSchema.methods.generateJwt = function () {
     );
   }
 
-  module.exports=UserSchema.model('Users',UserSchema);
+  module.exports=mongoose.model('Users',UserSchema);
