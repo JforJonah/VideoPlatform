@@ -1,7 +1,7 @@
 'use strict'
 const userController=require('../Controllers/UserController'),
     // videoController=require('../Controllers/VideoController'),
-    passport=require('passport'),
+   
     jwt=require('../Configuration/jwt');
 
 module.exports=(app)=>{

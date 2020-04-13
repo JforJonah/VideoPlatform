@@ -30,9 +30,9 @@ const VideoSchema=new Schema({
     comments:{
         type:Schema.Types.Mixed
     },
-    url:{
-        type:String
-    }
+    // url:{
+    //     type:String
+    // }
 });
  // Duplicate the id field as mongoose returns _id field instead of id.
  VideoSchema.virtual('id').get(function(){
