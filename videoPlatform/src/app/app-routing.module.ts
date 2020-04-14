@@ -8,17 +8,31 @@ import {HistoryComponent} from './pages/history/history.component';
 import {WatchlaterComponent} from './pages/watchlater/watchlater.component';
 import {FollowsComponent} from './pages/follows/follows.component';
 import {ProfileComponent} from './pages/profile/profile.component';
-
+import { AuthGuard } from './server/auth-guard.service';
+import {
+  NbAuthComponent,
+  NbLoginComponent,
+  NbRegisterComponent,
+  NbLogoutComponent,
+  NbRequestPasswordComponent,
+  NbResetPasswordComponent,
+} from '@nebular/auth';
 
 const routes: Routes = [
-  {path: '', redirectTo: '/home', pathMatch: 'full'},
-  {path: 'home', component: HomeComponent},
-  {path: 'favorite', component: FavoriteComponent},
-  {path: 'upload', component: UploadvideoComponent},
-  {path: 'history', component: HistoryComponent},
-  {path: 'watchlater', component: WatchlaterComponent},
-  {path: 'follows', component: FollowsComponent},
-  {path: 'profile', component: ProfileComponent}
+  {
+    path: '',
+    redirectTo: '/auth/login',
+    pathMatch: 'full',
+  },
+  {
+    path: 'pages',
+    canActivate: [AuthGuard], // here we tell Angular to check the access with our AuthGuard
+    loadChildren: 'app/pages/pages.module#PagesModule'
+  },
+  {
+    path: 'auth',
+    loadChildren: './auth/auth.module#NgxAuthModule',
+  },
 ];
 
 @NgModule({
