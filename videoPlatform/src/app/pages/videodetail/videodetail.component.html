@@ -1,14 +1,41 @@
 <div class = "videodetail">
-    <div class = "videoinfo">
-        <h3 class = "videotitle">title of video</h3>
-        <p class = "videodescription">desc of video</p>
+    <div class = "left">
+        <div class = "videoinfo">
+            <h3 class = "videotitle">title of video</h3>
+            <p class = "videodescription">desc of video</p>
+        </div>
+        <div class="videoframe">
+            <iframe width="1041" height="586" 
+            src="https://www.youtube.com/embed/n-O5mnscPQE" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+        </iframe>
+        </div>
+        <div class = "icon-group">
+            <button nbButton ghost status="primary"><nb-icon icon="heart"></nb-icon> Like</button>
+            <button nbButton ghost status="success"><nb-icon icon="star"></nb-icon> Favorite</button>
+        </div>
+        <div class = "comment-list">
+            <h4 class = "comment-list-title">Comments</h4>
+        </div>
     </div>
-    <div class="videoframe">
-        <iframe width="1041" height="586" 
-        src="https://www.youtube.com/embed/n-O5mnscPQE" 
-        frameborder="0" 
-        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-    </iframe>
+    <div class = "right">
+        <nb-user class="user-info" 
+                size="large" 
+                name="Monster Hunter"
+                picture=""
+                color = "green">
+        </nb-user>
+        <div class = "follow-btn">
+            <button nbButton status="danger">+ Follow</button>
+            
+        </div>
+        <div class = "video-list">
+            
+        </div>
+        
     </div>
+    
+
    
 </div>

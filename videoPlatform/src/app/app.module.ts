@@ -10,6 +10,7 @@ import {
   NbActionsModule,
   NbIconModule,
   NbUserModule,
+  NbButtonModule,
   NbContextMenuModule, NbStepperModule, NbMenuService, NbMenuModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
@@ -52,6 +53,7 @@ import { FollowsComponent } from './pages/follows/follows.component';
     NbContextMenuModule,
     NbStepperModule,
     ReactiveFormsModule,
+    NbButtonModule,
     NbMenuModule.forRoot()
   ],
   providers: [],
