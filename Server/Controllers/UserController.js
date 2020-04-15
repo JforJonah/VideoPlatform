@@ -27,10 +27,11 @@ let arr={};
 // get a single user by id
 exports.getUser=function(request,response){
         const resolve=(list)=>{
-            response.setStatus(200);
+            response.status(200);
             response.json(list);
         }
-        userServices.getUser(request.param.id).then(resolve).catch(renderErrorResponse(response));
+        console.log(request.params.id);
+        userServices.getUser(request.params.id).then(resolve).catch(renderErrorResponse(response));
     };
 
 /**
@@ -48,19 +49,20 @@ exports.signUp=function(request,response){
     newUser.firstName=request.body.firstName;
     newUser.lastName=request.body.lastName;
     // check if the password equals confirmPassword
-    let password=newUser.password,
+    let password=request.body.password,
         confirmPassword=request.body.confirmPassword;
-    if(password!==confirmPassword){
-        response.setStatus(422).json({message:'the two password must be the same!'});
-        return;
-    }
+    // if(password!==confirmPassword){
+    //     response.status(422).json({message:'the two password must be the same!'});
+    //     return;
+    // }
     
     // encode the password
-    newUser.password=bcrypt.hash(password, 10);
+    newUser.password=bcrypt.hashSync(password, 10);
     // return token to user
 
     const resolve=(user)=>{
-        response.status(200).json({'token': user.generateJwt()})
+        response.status(201);
+        response.json({'token': user.generateJwt()});
     }
     let errorHandle=(response)=>{
         const errorCallback=(error)=>{
@@ -76,9 +78,11 @@ exports.signUp=function(request,response){
         }
         return errorCallback;
     };
+    console.log(1);
     userServices.signUp(newUser)
     .then(resolve)
-    .catch(errorHandle);
+    .catch(errorHandle(response));
+    console.log(2);
 }
 /**
  *use login
@@ -118,7 +122,7 @@ exports.userInfo=(req,res)=>{
           res.status(200);
           res.json(user);
       }
-      userServices.getUser(req.param.id)
+      userServices.getUser(req.params.id)
       .then(resolve)
       .catch(renderErrorResponse(response));
   }
@@ -148,7 +152,7 @@ exports.userUpdate=(req,res)=>{
  */
 exports.like=(req,res)=>{
     let videoId=req.body;
-    let userId=req.param.id;
+    let userId=req.params.id;
     const resolver=(user)=>{
         res.status(200);
         res.json({"msg":'successful'});
@@ -166,7 +170,7 @@ exports.like=(req,res)=>{
  */
 exports.unLike=(req,res)=>{
     let videoId=req.body;
-    let userId=req.param.id;
+    let userId=req.params.id;
     const resolve=(user)=>{
         res.status(200);
         res.json({"msg":'successful'});
@@ -184,7 +188,7 @@ exports.unLike=(req,res)=>{
 exports.cancelLike=(req,res)=>{
     
     let videoId=req.body;
-    let userId=req.param.id;
+    let userId=req.params.id;
     const resolve=()=>{
         res.status(200).json({"msg":'successful'});
     }
@@ -201,7 +205,7 @@ exports.cancelLike=(req,res)=>{
 exports.cancelUnLike=(req,res)=>{
     
     let videoId=req.body;
-    let userId=req.param.id;
+    let userId=req.params.id;
     const resolve=()=>{
         res.status(200).json({"msg":'successful'});
     }
@@ -217,7 +221,7 @@ exports.cancelUnLike=(req,res)=>{
  */
 exports.favorite=(req,res)=>{
     let videoId=req.body;
-    let userId=req.param.id;
+    let userId=req.params.id;
     const resolve=()=>{
         res.status(200);
         res.json({"msg":'successful'});
@@ -234,7 +238,7 @@ exports.favorite=(req,res)=>{
  */
 exports.unFavorite=(req,res)=>{
     let videoId=req.body;
-    let userId=req.param.id;
+    let userId=req.params.id;
     const resolve=()=>{
         res.status(200).json({"msg":'successful'});
     }
@@ -250,7 +254,7 @@ exports.unFavorite=(req,res)=>{
  */
 exports.subscribe=(req,res)=>{
     let authorId=req.body;
-    let userId=req.param.id;
+    let userId=req.params.id;
     const resolve=()=>{
         res.status(200).json({"msg":'successful'});
     }
@@ -266,7 +270,7 @@ exports.subscribe=(req,res)=>{
  */
 exports.unSubscribe=(req,res)=>{
     let authorId=req.body;
-    let userId=req.param.id;
+    let userId=req.params.id;
     const resolve=()=>{
         res.status(200).json({"msg":'successful'});
     }
@@ -298,7 +302,7 @@ exports.unSubscribe=(req,res)=>{
  * @param {*} res
  */
 exports.updateHistory=(req,res)=>{
-    let userId=req.param.id;
+    let userId=req.params.id;
     let videoId=req.body;
     const resolve=(video)=>{
         res.status(200).json(video);
