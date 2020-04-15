@@ -4,19 +4,100 @@
 
     .left{
         grid-column-start: 1;
+        margin-right: 100px;
         .icon-group{
             margin-top: 20px;
             border-bottom :1px solid #000;
             
             button{
                 margin-right: 20px;
+                margin-bottom: 10px;
             }
         }
+        .comment-up{
+            
+            div{
+                display: inline-block;
+            }
+            textarea{
+                font-size: 12px;
+                
+                box-sizing: border-box;
+                background-color: #f4f5f7;
+                border: 1px solid #e5e9ef;
+                overflow: auto;
+                border-radius: 4px;
+                color: #555;
+                width: 100%!important;
+                height: 65px;
+                transition: 0s;
+                padding: 5px 10px;
+                line-height: normal;
+            }
+            button{
+                margin-left: 50px;
+                margin-bottom: 55px;
+                width: 90px;
+                height: 64px;
+            }
+            
+        }
+        .comment-list{
+            margin-bottom: 30px;
+            p{
+                line-height: 20px;
+                padding: 2px 0;
+                font-size: 14px;
+                text-shadow: none;
+                overflow: hidden;
+                word-wrap: break-word;
+                word-break: break-word;
+            }
+        }
+        
       }
       .right{
         grid-column-start: 2;
         .follow-btn{
             margin-top: 20px;
+        }
+        .video-list{
+            margin-top: 50px;
+            .video-card{
+                margin-top: 50px;
+                div{
+                    display: inline-block;
+                    
+                }
+                .video-pic{
+                    img{
+                        width:180px;
+                        height:96px;
+                    }
+                }
+                .video-card-info{
+                    
+                    margin-left: 30px;
+                    .title{
+                        margin-bottom: 50px;
+                        height: 70px;
+                        width:200px;
+                        line-height: 18px;
+                        font-size: 14px;
+                        font-weight: 500;
+                        margin-bottom: 6px;
+                        word-break: break-all;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 2;
+                    }
+                    span{
+                        font-size:10px;
+                        
+                    }
+                }
+            }
         }
       }
 }

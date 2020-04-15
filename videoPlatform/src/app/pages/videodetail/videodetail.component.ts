@@ -15,4 +15,6 @@ export class VideodetailComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  addcomment(){}
+
 }
