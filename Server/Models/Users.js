@@ -106,7 +106,7 @@ UserSchema.virtual('id').get(function(){
 // decode the password in database and compare to the input password
 
   UserSchema.methods.verifyPassword=function(input_password){
-    return bcrypt.compareSync(to_check_password, this.password);
+    return bcrypt.compareSync(input_password, this.password);
   }
 /**
  * this jwt is going to help user no need to login again

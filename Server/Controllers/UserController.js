@@ -1,4 +1,5 @@
 'use strict'
+require('../Configuration/passportConfig');
 const userServices=require('../Services/userServices'),
     bcrypt=require('bcrypt'),
     HashMap=require('hashmap'),
@@ -104,7 +105,7 @@ exports.login=function(request,response,next){
         }
         else return response.status(404).json(info);
         
-    });
+    })(request, response, next);
 }
 
 exports.signOut = (req, res) => {
