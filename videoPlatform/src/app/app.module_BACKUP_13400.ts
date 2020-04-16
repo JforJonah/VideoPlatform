@@ -10,7 +10,6 @@ import {
   NbActionsModule,
   NbIconModule,
   NbUserModule,
-
   NbContextMenuModule, 
   NbStepperModule, 
   NbMenuService, 
@@ -63,7 +62,6 @@ import { FollowsComponent } from './pages/follows/follows.component';
     NbContextMenuModule,
     NbStepperModule,
     ReactiveFormsModule,
-
     NbMenuModule.forRoot(),
     NbTabsetModule,
     NbToggleModule,

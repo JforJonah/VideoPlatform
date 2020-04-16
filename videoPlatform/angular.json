@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1, 
+  "version": 1,
   "newProjectRoot": "projects",
   "projects": {
     "videoPlatform": {
@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "videoPlatform"
+    }
+  },
+  "defaultProject": "videoPlatform",
+  "cli": {
+    "analytics": "be63cd26-9c20-455a-a66b-9fa99efd4ced"
+  }
 }

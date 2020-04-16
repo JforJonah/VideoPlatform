@@ -10,7 +10,6 @@ import {
   NbActionsModule,
   NbIconModule,
   NbUserModule,
-
   NbContextMenuModule, 
   NbStepperModule, 
   NbMenuService, 
@@ -19,9 +18,7 @@ import {
   NbToggleModule,
   NbInputModule,
   NbDatepickerModule,
-  NbSelectModule,
-  NbButtonModule
-
+  NbSelectModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { AuthComponent } from './auth/auth.component';
@@ -63,15 +60,12 @@ import { FollowsComponent } from './pages/follows/follows.component';
     NbContextMenuModule,
     NbStepperModule,
     ReactiveFormsModule,
-
     NbMenuModule.forRoot(),
     NbTabsetModule,
     NbToggleModule,
     NbInputModule,
     NbDatepickerModule.forRoot(),
-    NbSelectModule,
-    NbButtonModule
-
+    NbSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]
