@@ -1,1 +1,111 @@
-<p>videodetail works!</p>
+<div class = "videodetail">
+    <div class = "left">
+        <div class = "video-info">
+            <h3 class = "videotitle">title of video</h3>
+            <p class = "videodescription">desc of video</p>
+        </div>
+        <div class="videoframe">
+            <iframe width="90%" height="500px" 
+            src="https://www.youtube.com/embed/n-O5mnscPQE" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+        </iframe>
+        </div>
+        <div class = "icon-group">
+            <button nbButton ghost status="primary">
+                <nb-icon icon="heart"></nb-icon> 
+                Like
+            </button>
+            <button nbButton ghost status="success">
+                <nb-icon icon="star"></nb-icon> 
+                Favorite
+            </button>
+        </div>
+        <div class = "comment-up">
+            <h4 class = "comment-list-title">Comments</h4>
+            <div class = "comment-txt">
+                <textarea cols="80" 
+                      rows="5" 
+                      placeholder="请自觉遵守互联网相关的政策法规，严禁发布色情、暴力、反动的言论。" 
+                     ></textarea>
+            </div>
+            <div class = "comment-btn">
+                <button nbButton status="primary" 
+                (click)="addcomment()">Comment</button>
+            </div>
+           
+        </div>
+        <!--*ngFor-->
+        <div class= "comment-area">
+            <div class = "comment-list" >
+                <div class="comment-user">
+                    <nb-user class="user-info" 
+                    size="small" 
+                    name="Monster Hunter"
+                    picture=""
+                    color = "green">
+                </nb-user>
+                </div>
+                <div class = "comment">
+                    <p class = "comment-text">鸡你太美~~ baby 鸡你太美~~ baby 鸡你实在是太美~~ baby</p>
+                </div>
+            </div>
+            <div class = "comment-list" >
+                <div class="comment-user">
+                    <nb-user class="user-info" 
+                    size="small" 
+                    name="Monster Hunter"
+                    picture=""
+                    color = "green">
+                </nb-user>
+                </div>
+                <div class = "comment">
+                    <p class = "comment-text">鸡你太美~~ baby</p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <div class = "right">
+        <nb-user class="user-info" 
+                size="large" 
+                name="Monster Hunter"
+                picture=""
+                color = "green">
+        </nb-user>
+        <div class = "follow-btn">
+            <button nbButton status="danger">+ Follow</button>
+            
+        </div>
+        <div class = "video-list" scrollshow="true">
+            <!--*ngFor-->
+            <div class = "video-card">
+                <div class="video-pic">
+                    <img src="https://img.youtube.com/vi/n-O5mnscPQE/mqdefault.jpg">
+                </div>
+                <div class="video-card-info">
+                    <a href="/watchlater" title="" class="title">
+                        国家队都是什么怪物？距话筒一米照样秒杀你！网友：你爸爸永远是你爸爸
+                    </a>
+                    <span>Monster Hunter</span>
+                </div>
+            </div>
+            <div class = "video-card">
+                <div class="video-pic">
+                    <img src="https://img.youtube.com/vi/n-O5mnscPQE/mqdefault.jpg">
+                </div>
+                <div class="video-card-info">
+                    <a href="/watchlater" title="" class="title">
+                        国家队都是什么怪物？距话筒一米照样秒杀你！网友：你爸爸永远是你爸爸
+                    </a>
+                    <span>Monster Hunter</span>
+                </div>
+            </div>
+
+        </div>
+        
+    </div>
+    
+
+   
+</div>
