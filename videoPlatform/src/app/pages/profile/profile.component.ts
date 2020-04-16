@@ -98,7 +98,7 @@ export class ProfileComponent implements OnInit {
     this.pageID = "home";
   }
 
-ngAfterViewInit() : void {
+ngAfterViewInit(): void {
   this.renderer.listen(this.file.nativeElement, "change", (event) => {
     console.log(event);
     let files = event.target.files;
@@ -113,8 +113,8 @@ ngAfterViewInit() : void {
       this.fileArr.push(file);
     }
     console.log(this.fileArr);
-    this.file.nativeElement.value = "";
-  })
+    this.file.nativeElement.value="";
+  });
 }
   
 }
