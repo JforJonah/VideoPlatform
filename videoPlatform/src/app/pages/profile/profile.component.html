@@ -1,22 +1,92 @@
-<div class="wrapper">
+<div class="wrapper" *ngIf="pageID === 'home'">
+    <nb-user name="ABC"></nb-user>
+        <nb-tabset (changeTab)="setKey($event)">
+            <ng-container *ngFor="let item of tabs">
+                <nb-tab [tabTitle]="item">
+                    <div> {{item}} </div>
+            </nb-tab>
+        </ng-container>
+    </nb-tabset>
+
+    <div [ngSwitch]="tabKey">
+        <div *ngSwitchCase="'User Info'">
+            <div class="userInfoConetent">
+                <div class="input">
+                    <span class="title"> User Name </span>
+                    <input type="text" nbInput fullWidth fieldSize="medium" placeholder="User Name">
+                    <a>Change User Name</a>
+                </div>
+                <div class="input">
+                    <span class="title"> Email </span>
+                    <input type="text" nbInput fullWidth fieldSize="medium" placeholder="Email">
+                </div>
+                <div class="input">
+                    <span class="title"> Password </span>
+                    <input type="text" nbInput fullWidth fieldSize="medium" placeholder="Password">
+                    <a>Change User Name</a>
+                </div>
+                <div class="input">
+                    <span class="title"> Gender </span>
+                    <nb-select placeholder="select your gender">
+                        <nb-option value="1">Male</nb-option>
+                        <nb-option value="2">Female</nb-option>
+                        <nb-option value="3">Secret</nb-option>
+                    </nb-select>
+                </div>
+                <div class="input">
+                    <span class="title">Date of Birth</span>
+                    <input style="width:300px !important" nbInput placeholder="Pick Date" [nbDatepicker]="formpicker">
+                    <nb-datepicker #formpicker></nb-datepicker>
+                </div>
+                <input style="margin: 20px;" (click)="onSave()" nbButton type="submit" value="Save" />
+
+                <input style="    position: absolute; top:120px; left: 100px;" (click)="upload()" nbButton type="submit"
+                    value="upload" />
+
+                <nb-user style="    position: absolute; top: 30px; left: 100px;" size="large" name="John Doe"
+                    title="Engineer" [picture]="this.fileArr[0]?.url" (click)="upload()"></nb-user>
+            </div>
+        </div>
+
+    </div>
+</div>
+        <!-- <nb-tab tabTitle="My Video">
+           
+        </nb-tab>
+        <nb-tab tabTitle="Liked">
+            Liked Video
+        </nb-tab>
+        <nb-tab tabTitle="Subscription"> 
+            Subscription
+        </nb-tab>
+        <nb-tab tabTitle="Watch Later">
+            Watch Later
+        </nb-tab>
+        <nb-tab tabTitle="Settings"> -->
+            <!-- <nb-toggle [(checked)]="checked"></nb-toggle> -->
+            <!-- <nb-toggle [(checked)]="checked"></nb-toggle> -->
+        <!-- </nb-tab>
+    </nb-tabset>
     <section *ngIf="pageStatus == 'proPage'">
         <ng-container *ngFor="let title of titleArr">
             <div class="videoList">
                 <div class="videoTitle">
-                    <a href="" class="t">{{title}}</a>
-                    <span class="count">1</span>
-                    <a class="more" (click)="more(title)">More</a>
+                    <a href="" class="t">{{title}}</a> -->
+                    <!-- <span class="count">1</span> -->
+                    <!-- <a class="more" (click)="more(title)">More</a>
                 </div>
-                <div class="videoContent">
-                    <ng-container *ngFor="let item of Arr">
+                <div class="videoContent"> -->
+                    <!-- video time area -->
+                    <!-- <ng-container *ngFor="let item of Arr">
                         <div class="small-item">
-                            <a href="" target="_blank" class="cover">
+                            <a href="" target="_blank" class="cover"> -->
                                 <!-- <img> -->
-                                <span class="length">0{{item}}:48</span>
+                                <!-- <span class="length">0{{item}}:48</span>
                                 <span class="i-watchlater"></span>
-                            </a>
+                            </a> -->
+                            <!--video time area end-->
                             <!--href question, double check-->
-                            <a href="" target="_blank" title="video1" class="title">
+                            <!-- <a href="" target="_blank" title="video1" class="title">
                                 Video Title
                             </a>
                             <div class="meta">
@@ -25,10 +95,12 @@
                                     </span><span class="time"><i class="icon"></i>2020-4-8
                                     </span></div>
                             </div>
-                        </div>       
-                    </ng-container>
-                </div>
-            </div>
+                        </ng-container>
+                        </div>   -->
+                        
+                    <!-- </ng-container> -->
+                <!-- </div> -->
+            <!-- </div>
         </ng-container>
     </section>
     <section *ngIf="pageStatus !== 'proPage'">
@@ -38,17 +110,17 @@
                 <span class="count">1</span>
                 <a class="more" (click)="return()">return</a>
             </div>
-            <div class="videoContent">
-                <ng-container *ngFor="let item of Arr1">
+            <div class="videoContent"> -->
+                <!-- <ng-container *ngFor="let item of Arr1">
                     <div class="small-item">
-                        <a href="" target="_blank" class="corver">
+                        <a href="" target="_blank" class="corver"> -->
                             <!-- <img> -->
-                            <span class="length">0{{item}}:48</span>
+                            <!-- <span class="length">0{{item}}:48</span>
                                 <span class="i-watchlater"></span>
                         </a>
                         <a href="" target="_blank" title="video1" class="title">
-                            Video Title
-                        </a> <!--href question, double check-->
+                            Video Title -->
+                        <!-- </a> href question, double check
                         <div class="meta">
                             <span class="play">
                                 <i class="icon"></i>288
@@ -59,4 +131,4 @@
             </div>
         </div>
     </section>
-</div>
+</div> -->
