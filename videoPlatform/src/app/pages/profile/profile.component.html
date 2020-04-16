@@ -1,1 +1,216 @@
-<p>profile works!</p>
+<div class="wrapper" *ngIf="pageID === 'home'">
+    <!-- <nb-user name="ABC"></nb-user> -->
+        <nb-tabset (changeTab)="setKey($event)">
+            <ng-container *ngFor="let item of tabs">
+                <nb-tab [tabTitle]="item">
+                    <div> {{item}} </div>
+            </nb-tab>
+        </ng-container>
+        </nb-tabset>
+
+    <div [ngSwitch]="tabKey">
+        <div *ngSwitchCase="'User Info'">
+            <div class="userInfoContent">
+                <div class="input">
+                    <span class="title"> User Name </span>
+                    <input type="text" nbInput fullWidth fieldSize="medium" placeholder="User Name">
+                    <a>Change User Name</a>
+                </div>
+                <div class="input">
+                    <span class="title"> Email </span>
+                    <input type="text" nbInput fullWidth fieldSize="medium" placeholder="Email">
+                </div>
+                <div class="input">
+                    <span class="title"> Password </span>
+                    <input type="text" nbInput fullWidth fieldSize="medium" placeholder="Password">
+                    <a>Change Password</a>
+                </div>
+                <div class="input">
+                    <span class="title"> Gender </span>
+                    <nb-select placeholder="Select your gender">
+                        <nb-option value="1">Male</nb-option>
+                        <nb-option value="2">Female</nb-option>
+                        <nb-option value="3">Secret</nb-option>
+                    </nb-select>
+                </div>
+                <div class="input">
+                    <span class="title">Date of Birth</span>
+                    <input style="width:300px !important" nbInput placeholder="Choose Date" [nbDatepicker]="formpicker">
+                    <nb-datepicker #formpicker></nb-datepicker>
+                </div>
+                <input style="margin: 20px;" (click)="onSave()" nbButton type="submit" value="Save" />
+
+                <input style="    position: absolute; top:120px; left: 100px;" (click)="upload()" nbButton type="submit"
+                    value="Upload" />
+
+                <nb-user style="    position: absolute; top: 30px; left: 100px;" size="large" name="John Doe"
+                    title="Engineer" [picture]="this.fileArr[0]?.url" (click)="upload()"></nb-user>
+            </div>
+        </div>
+        <div *ngSwitchCase="'Setting'">
+            <div class="settings">
+                <nb-toggle labelPosition="start"><span class="text">All this website use my location</span></nb-toggle>
+                <nb-toggle labelPosition="start"><span class="text">Everyone can see my page</span></nb-toggle>
+            </div>
+        </div>
+        <div *ngSwitchDefault>
+            <section>
+                <div class="videoList">
+                    <div class="videoTitle">
+                        <a href="" class="t">{{tabKey}}</a>
+                        <span class="count">{{Arr.length}}</span>
+                    </div>
+                    <div class="videoContent">
+                        <ng-container *ngFor="let item of Arr; let index = index">
+                            <div class="small-item">
+                                <div class="cover" [ngClass]="{'redBorder': editFlag && tabKey == 'My Video'}" (click)="toEdit(item)">
+                                    <img
+                                        src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1875705305,2952422048&fm=26&gp=0.jpg"
+                                        alt="qwer">
+                                    <span class="length">0{{item.number}}:48</span>
+                                    <span class="i-watchlater"></span>
+                                    <nb-icon *ngIf="item.edit" (click)="del($event,index)" class="icon"
+                                    icon="close-outline" status="danger"></nb-icon>
+                                </div>
+                                <a href="//www.bilibili.com/video/BV1Ab411a7y9" target="_blank" title="title" class="title">title</a>
+                                <div class="meta"><span class="play"><i class="icon"></i>288
+                                </span>
+                                <span class="time"><i class="icon"></i>2019-2-23</span>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </section>
+           
+            <button *ngIf="tabKey == 'My Video'" class="editItem" (click)="editStatus()" nbButton>Edit</button>
+            <button class="deleteItem" (click)="deleteItem()" nbButton>{{buttonText}}</button>
+
+        </div>
+    </div>
+</div>
+<div class="wrapper" *ngIf="pageID !=='home'"
+    style="display: flex;flex-direction: column; justify-content: flex-start;align-items: center;">
+    <div class="small-item">
+        <div class="cover" style="width : 320px; height: 200px;"><img style="width : 320px; height: 200px;"
+                src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1875705305,2952422048&fm=26&gp=0.jpg"
+                alt=""><span class="length">0{{videoData.number}}:48</span><span class="i-watchlater"></span>
+            <nb-icon *ngIf="videoData.edit" class="icon" icon="close-outline" status="danger">
+            </nb-icon>
+
+        </div>
+        <a href="//www.bilibili.com/video/BV1Ab411a7y9" target="_blank" title="title" class="title">title</a>
+        <div class="meta"><span class="play"><i class="icon"></i>288
+            </span><span class="time"><i class="icon"></i>2019-2-23
+            </span></div>
+    </div>
+
+    <div class="userInfoContent" style="width: 820px; height: 400px; flex: unset;">
+        <div class="input">
+            <span class="title">Title</span>
+            <input type="text" placeholder="title">
+        </div>
+        <div class="input">
+            <span class="title">Description</span>
+            <input type="text" placeholder="description">
+        </div>
+        <div class="input">
+            <span class="title">Tag</span>
+            <input type="text" placeholder="tag">
+        </div>
+
+        <div style="display: flex;flex-direction: row;">
+
+            <input (click)="returnHome()" nbButton type="submit" value="return" />
+
+            <input (click)="editSAVE()" nbButton type="submit" value="upload" />
+        </div>
+    </div>
+</div>
+<input type="file" #file1 style="display:none;" accept="image/png, image/jpeg, image/gif, image/jpg" />
+
+
+
+
+        <!-- <nb-tab tabTitle="My Video">
+           
+        </nb-tab>
+        <nb-tab tabTitle="Liked">
+            Liked Video
+        </nb-tab>
+        <nb-tab tabTitle="Subscription"> 
+            Subscription
+        </nb-tab>
+        <nb-tab tabTitle="Watch Later">
+            Watch Later
+        </nb-tab>
+        <nb-tab tabTitle="Settings"> -->
+            <!-- <nb-toggle [(checked)]="checked"></nb-toggle> -->
+            <!-- <nb-toggle [(checked)]="checked"></nb-toggle> -->
+        <!-- </nb-tab>
+    </nb-tabset>
+    <section *ngIf="pageStatus == 'proPage'">
+        <ng-container *ngFor="let title of titleArr">
+            <div class="videoList">
+                <div class="videoTitle">
+                    <a href="" class="t">{{title}}</a> -->
+                    <!-- <span class="count">1</span> -->
+                    <!-- <a class="more" (click)="more(title)">More</a>
+                </div>
+                <div class="videoContent"> -->
+                    <!-- video time area -->
+                    <!-- <ng-container *ngFor="let item of Arr">
+                        <div class="small-item">
+                            <a href="" target="_blank" class="cover"> -->
+                                <!-- <img> -->
+                                <!-- <span class="length">0{{item}}:48</span>
+                                <span class="i-watchlater"></span>
+                            </a> -->
+                            <!--video time area end-->
+                            <!--href question, double check-->
+                            <!-- <a href="" target="_blank" title="video1" class="title">
+                                Video Title
+                            </a>
+                            <div class="meta">
+                                <span class="play">
+                                    <i class="icon"></i>288
+                                    </span><span class="time"><i class="icon"></i>2020-4-8
+                                    </span></div>
+                            </div>
+                        </ng-container>
+                        </div>   -->
+                        
+                    <!-- </ng-container> -->
+                <!-- </div> -->
+            <!-- </div>
+        </ng-container>
+    </section>
+    <section *ngIf="pageStatus !== 'proPage'">
+        <div class="videoList">
+            <div class="videoTtiel">
+                <a href="" class="t">{{title}}</a>
+                <span class="count">1</span>
+                <a class="more" (click)="return()">return</a>
+            </div>
+            <div class="videoContent"> -->
+                <!-- <ng-container *ngFor="let item of Arr1">
+                    <div class="small-item">
+                        <a href="" target="_blank" class="corver"> -->
+                            <!-- <img> -->
+                            <!-- <span class="length">0{{item}}:48</span>
+                                <span class="i-watchlater"></span>
+                        </a>
+                        <a href="" target="_blank" title="video1" class="title">
+                            Video Title -->
+                        <!-- </a> href question, double check
+                        <div class="meta">
+                            <span class="play">
+                                <i class="icon"></i>288
+                                </span><span class="time"><i class="icon"></i>2020-4-8
+                                </span></div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </section>
+</div> -->
