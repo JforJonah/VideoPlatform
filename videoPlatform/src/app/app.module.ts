@@ -53,16 +53,16 @@ import {environment} from '../environments/environment';
             key: 'token', // this parameter tells where to look for the token
           },
           login: {
-            redirect: {
-              success: 'pages/home',
-              failure: null, // stay on the same page
-            },
             endpoint: '/auth/login',
             method: 'post',
+            redirect: {
+              success: '/pages/home',
+              failure: null, // stay on the same page
+            },
           },
           register: {
             redirect: {
-              success: 'login',
+              success: '/pages/home',
               failure: null, // stay on the same page
             },
             endpoint: '/auth/sign-up',
