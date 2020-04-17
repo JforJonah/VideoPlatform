@@ -116,8 +116,14 @@ exports.findbyauth=(request,response)=>{
         .then(resolve)
         .catch(renderErrorResponse(response));
 }
-
+/**
+ * list all the video which have the specific tag name
+ *
+ * @param {*} req
+ * @param {*} res
+ */
 exports.findByTag=(req,res)=>{
+    
     const resolve=(list)=>{
         res.status(200);
         res.json(list);
