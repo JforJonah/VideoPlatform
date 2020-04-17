@@ -79,9 +79,11 @@ exports.signUp=function(request,response){
         }
         return errorCallback;
     };
+    // console.log(1);
     userServices.signUp(newUser)
     .then(resolve)
     .catch(errorHandle(response));
+    // console.log(2);
 }
 /**
  *use login
