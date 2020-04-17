@@ -24,7 +24,7 @@ export class ProfileComponent implements OnInit {
     "Watch Later",
     "Setting",
   ];
-  tabKey ="My video";
+  tabKey ="My Video";
 
   buttonText = "";
   fileArr = [];
