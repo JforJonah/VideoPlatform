@@ -23,8 +23,15 @@ import { HistoryComponent } from './pages/history/history.component';
 import { UploadvideoComponent } from './pages/uploadvideo/uploadvideo.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import { FollowsComponent } from './pages/follows/follows.component';
-import {HttpClientModule} from '@angular/common/http';
-import {NbPasswordAuthStrategy, NbAuthModule, NbAuthJWTToken} from '@nebular/auth';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {
+  NbPasswordAuthStrategy,
+  NbAuthModule,
+  NbAuthJWTToken,
+  NbTokenService,
+  NbAuthTokenParceler,
+  NbTokenStorage, NbTokenLocalStorage, NbAuthSimpleInterceptor
+} from '@nebular/auth';
 import { AuthGuard } from './server/auth-guard.service';
 import {NgxAuthModule} from './auth/auth.module';
 import {PagesModule} from './pages/pages.module';
@@ -114,6 +121,15 @@ import {environment} from '../environments/environment';
     }),
   ],
   providers: [
+    NbAuthModule,
+    NbTokenService,
+    NbAuthTokenParceler,
+    {provide: NbTokenStorage, useClass: NbTokenLocalStorage},
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: NbAuthSimpleInterceptor,
+      multi: true
+    },
     AuthGuard
   ],
   bootstrap: [AppComponent]
