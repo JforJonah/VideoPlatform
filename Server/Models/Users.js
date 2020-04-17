@@ -39,11 +39,11 @@ const Schema = mongoose.Schema,
     },
     firstName:{
         type:String,
-        required:"firstName can't be empty"
+        // required:"firstName can't be empty"
     },
     lastName:{
         type:String,
-        required:"lastName can't be empty"
+        // required:"lastName can't be empty"
     },
     history:[
         {

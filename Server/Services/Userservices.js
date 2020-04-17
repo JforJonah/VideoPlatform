@@ -19,9 +19,9 @@ exports.getUser=(userId)=>{
  * @returns promise
  */
 exports.signUp=(newUser)=>{
-    console.log(newUser);
+    // console.log(newUser);
     const user=new Users(newUser);
-    console.log(3);
+    // console.log(3);
     return user.save();
 }
 // update personal info
