@@ -10,21 +10,9 @@ import {
   NbActionsModule,
   NbIconModule,
   NbUserModule,
-
-  NbContextMenuModule, 
-  NbStepperModule, 
-  NbMenuService, 
-  NbMenuModule, 
-  NbTabsetModule,
-  NbToggleModule,
-  NbInputModule,
-  NbDatepickerModule,
-  NbSelectModule,
-  NbButtonModule
-
+  NbContextMenuModule, NbStepperModule, NbMenuModule, NbCardModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
-import { AuthComponent } from './auth/auth.component';
 import { NavBarComponent } from './pages/nav-bar/nav-bar.component';
 import { HomeComponent } from './pages/home/home.component';
 import { VideodetailComponent } from './pages/videodetail/videodetail.component';
@@ -35,45 +23,115 @@ import { HistoryComponent } from './pages/history/history.component';
 import { UploadvideoComponent } from './pages/uploadvideo/uploadvideo.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import { FollowsComponent } from './pages/follows/follows.component';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {
+  NbPasswordAuthStrategy,
+  NbAuthModule,
+  NbAuthJWTToken,
+  NbTokenService,
+  NbAuthTokenParceler,
+  NbTokenStorage, NbTokenLocalStorage, NbAuthSimpleInterceptor
+} from '@nebular/auth';
+import { AuthGuard } from './server/auth-guard.service';
+import {NgxAuthModule} from './auth/auth.module';
+import {PagesModule} from './pages/pages.module';
+import {environment} from '../environments/environment';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AuthComponent,
-    NavBarComponent,
-    HomeComponent,
-    VideodetailComponent,
-    ProfileComponent,
-    FavoriteComponent,
-    WatchlaterComponent,
-    HistoryComponent,
-    UploadvideoComponent,
-    FollowsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     NbThemeModule.forRoot({name: 'default'}),
-    NbLayoutModule,
     NbEvaIconsModule,
-    NbActionsModule,
-    NbIconModule,
-    NbUserModule,
-    NbContextMenuModule,
-    NbStepperModule,
-    ReactiveFormsModule,
-
     NbMenuModule.forRoot(),
-    NbTabsetModule,
-    NbToggleModule,
-    NbInputModule,
-    NbDatepickerModule.forRoot(),
-    NbSelectModule,
-    NbButtonModule
+    HttpClientModule,
+    NbAuthModule.forRoot({
+      strategies: [
+        NbPasswordAuthStrategy.setup({
+          name: 'email',
+          baseEndpoint: `${environment.serverBaseURL}`,
+          token: {
+            class: NbAuthJWTToken,
 
+            key: 'token', // this parameter tells where to look for the token
+          },
+          login: {
+            endpoint: '/auth/login',
+            method: 'post',
+            redirect: {
+              success: '/pages/home',
+              failure: null, // stay on the same page
+            },
+          },
+          register: {
+            redirect: {
+              success: '/pages/home',
+              failure: null, // stay on the same page
+            },
+            endpoint: '/auth/sign-up',
+            method: 'post',
+          },
+          logout: {
+            endpoint: '/auth/sign-out',
+            method: 'post',
+          },
+          requestPass: {
+            endpoint: '/auth/request-pass',
+            method: 'post',
+          },
+          resetPass: {
+            endpoint: '/auth/reset-pass',
+            method: 'post',
+          },
+        }),
+      ],
+      forms: {
+        login: {
+          redirectDelay: 0,
+          showMessages: {
+            success: true,
+          }
+        },
+        register: {
+          redirectDelay: 0,
+          showMessages: {
+            success: true,
+          }
+        },
+        requestPassword: {
+          redirectDelay: 0,
+          showMessages: {
+            success: true,
+          },
+        },
+        resetPassword: {
+          redirectDelay: 0,
+          showMessages: {
+            success: true,
+          },
+        },
+        logout: {
+          redirectDelay: 0,
+        },
+      },
+    }),
   ],
-  providers: [],
+  providers: [
+    NbAuthModule,
+    NbTokenService,
+    NbAuthTokenParceler,
+    {provide: NbTokenStorage, useClass: NbTokenLocalStorage},
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: NbAuthSimpleInterceptor,
+      multi: true
+    },
+    AuthGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

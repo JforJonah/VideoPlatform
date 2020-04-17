@@ -45,17 +45,17 @@ exports.getUser=function(request,response){
 exports.signUp=function(request,response){
     let newUser={};
     newUser.email=request.body.email;
-    newUser.username=request.body.username;
+    newUser.username=request.body.fullName;
     // newUser.password=request.body.password;
     newUser.firstName=request.body.firstName;
     newUser.lastName=request.body.lastName;
     // check if the password equals confirmPassword
     let password=request.body.password,
         confirmPassword=request.body.confirmPassword;
-    // if(password!==confirmPassword){
-    //     response.status(422).json({message:'the two password must be the same!'});
-    //     return;
-    // }
+    if(password!==confirmPassword){
+        response.status(422).json({message:'the two password must be the same!'});
+        return;
+    }
     
     // encode the password
     newUser.password=bcrypt.hashSync(password, 10);
@@ -79,11 +79,11 @@ exports.signUp=function(request,response){
         }
         return errorCallback;
     };
-    console.log(1);
+    // console.log(1);
     userServices.signUp(newUser)
     .then(resolve)
     .catch(errorHandle(response));
-    console.log(2);
+    // console.log(2);
 }
 /**
  *use login
@@ -93,7 +93,7 @@ exports.signUp=function(request,response){
  * @param {*} next
  */
 exports.login=function(request,response,next){
-    
+    console.log(request.body);
     passport.authenticate('local',function(err, user, info) {
         // 如果这个函数被调用了，说明认证成功。
         // `req.user` 包含已认证的用户
