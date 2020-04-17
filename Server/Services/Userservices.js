@@ -21,7 +21,7 @@ exports.getUser=(userId)=>{
 exports.signUp=(newUser)=>{
     console.log(newUser);
     const user=new Users(newUser);
-    console.log(3);
+    console.log("user has been created");
     return user.save();
 }
 // update personal info

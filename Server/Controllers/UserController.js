@@ -45,8 +45,8 @@ exports.getUser=function(request,response){
 exports.signUp=function(request,response){
     let newUser={};
     newUser.email=request.body.email;
-    newUser.username=request.body.username;
-    // newUser.password=request.body.password;
+    newUser.username=request.body.fullName;
+    newUser.password=request.body.password;
     newUser.firstName=request.body.firstName;
     newUser.lastName=request.body.lastName;
     // check if the password equals confirmPassword
