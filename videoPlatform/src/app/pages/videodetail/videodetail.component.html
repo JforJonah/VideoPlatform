@@ -12,16 +12,22 @@
         </iframe>
         </div>
         <div class = "icon-group">
-            <button nbButton ghost status="primary">
+            <button nbButton ghost status="primary" 
+            
+            (click)="likeClick()">
                 <nb-icon icon="heart"></nb-icon> 
                 Like
+                <span class= "likeCount"> 1 </span>
             </button>
-            <button nbButton ghost status="success">
+            <button nbButton ghost status="success"
+            (click)="favoriteClick()">
                 <nb-icon icon="star"></nb-icon> 
                 Favorite
+                <span class= "likeCount"> 1 </span>
             </button>
         </div>
         <div class = "comment-up">
+            
             <h4 class = "comment-list-title">Comments</h4>
             <div class = "comment-txt">
                     <nb-user class="user-info" 
@@ -39,7 +45,7 @@
                 </div>
                 <div class = "comment-btn">
                     <button nbButton status="primary" 
-                    (click)="addcomment()">Comment</button>
+                    (click)="addComment()">Comment</button>
                 </div>    
             </div>
             
@@ -96,7 +102,11 @@
                 color = "green">
         </nb-user>
         <div class = "follow-btn">
-            <button nbButton status="danger">+ Follow</button>
+            <button nbButton status="danger"
+            (click)="addFollow()"
+            >+ Follow
+                <span class ="followCount">1</span>
+            </button>
             
         </div>
         

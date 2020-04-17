@@ -15,6 +15,17 @@ export class VideodetailComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  addcomment(){}
+  addComment(){
 
+  }
+
+  likeClick(){
+    
+  }
+  favoriteClick(){
+
+  }
+  addFollow(){
+    
+  }
 }
