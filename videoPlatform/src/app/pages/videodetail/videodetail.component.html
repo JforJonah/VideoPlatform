@@ -24,27 +24,25 @@
         <div class = "comment-up">
             <h4 class = "comment-list-title">Comments</h4>
             <div class = "comment-txt">
-                <div class ="comment-head">
                     <nb-user class="user-info" 
                     size="medium" 
                     name="Monster Hunter"
                     picture=""
                     color = "green"
-                    onlyPicture>
+                    >
                 </nb-user>
-                </div>
                 <div class="comment-input">
                     <textarea cols="80" 
                     rows="5" 
                     placeholder="请自觉遵守互联网相关的政策法规，严禁发布色情、暴力、反动的言论。" 
                    ></textarea>
                 </div>
-                
+                <div class = "comment-btn">
+                    <button nbButton status="primary" 
+                    (click)="addcomment()">Comment</button>
+                </div>    
             </div>
-            <div class = "comment-btn">
-                <button nbButton status="primary" 
-                (click)="addcomment()">Comment</button>
-            </div>
+            
            
         </div>
         <!--*ngFor-->
