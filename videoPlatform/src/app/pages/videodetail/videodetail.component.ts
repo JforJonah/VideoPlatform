@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {NbMenuItem, NbMenuService} from '@nebular/theme';
+import {NbMenuItem, NbMenuService ,NbCardModule} from '@nebular/theme';
 import { ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
@@ -15,6 +15,17 @@ export class VideodetailComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  addcomment(){}
+  addComment(){
 
+  }
+
+  likeClick(){
+    
+  }
+  favoriteClick(){
+
+  }
+  addFollow(){
+    
+  }
 }

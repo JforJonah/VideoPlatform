@@ -10,7 +10,7 @@ import {
   NbActionsModule,
   NbIconModule,
   NbUserModule,
-  NbContextMenuModule, NbStepperModule, NbMenuModule
+  NbContextMenuModule, NbStepperModule, NbMenuModule, NbCardModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { NavBarComponent } from './pages/nav-bar/nav-bar.component';
