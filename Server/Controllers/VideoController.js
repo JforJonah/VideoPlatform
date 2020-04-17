@@ -117,12 +117,12 @@ exports.findbyauth=(request,response)=>{
         .catch(renderErrorResponse(response));
 }
 
-exports.findbydescription=(req,res)=>{
+exports.findByTag=(req,res)=>{
     const resolve=(list)=>{
         res.status(200);
         res.json(list);
     }
-    videoServices.search({description:req.params.id})
+    videoServices.search({tag:req.params.id})
     .then(resolve)
     .catch(renderErrorResponse(response));
 }
