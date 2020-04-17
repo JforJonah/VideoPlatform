@@ -52,10 +52,10 @@ exports.signUp=function(request,response){
     // check if the password equals confirmPassword
     let password=request.body.password,
         confirmPassword=request.body.confirmPassword;
-    // if(password!==confirmPassword){
-    //     response.status(422).json({message:'the two password must be the same!'});
-    //     return;
-    // }
+    if(password!==confirmPassword){
+        response.status(422).json({message:'the two password must be the same!'});
+        return;
+    }
     
     // encode the password
     newUser.password=bcrypt.hashSync(password, 10);
