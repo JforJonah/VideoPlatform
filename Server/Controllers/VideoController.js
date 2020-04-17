@@ -116,3 +116,13 @@ exports.findbyauth=(request,response)=>{
         .then(resolve)
         .catch(renderErrorResponse(response));
 }
+
+exports.findbydescription=(req,res)=>{
+    const resolve=(list)=>{
+        res.status(200);
+        res.json(list);
+    }
+    videoServices.search({description:req.params.id})
+    .then(resolve)
+    .catch(renderErrorResponse(response));
+}
