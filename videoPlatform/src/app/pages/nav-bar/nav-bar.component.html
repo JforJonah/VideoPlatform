@@ -1,11 +1,22 @@
-<div class="navbar">
-  <nb-actions class="left" size="small">
-    <nb-action title="home" icon="home-outline" link="/home"></nb-action>
-    <nb-action title="favorite" icon="star-outline" link="/favorite"></nb-action>
-    <nb-action title="upload video" icon="cloud-upload-outline" link="upload"></nb-action>
-    <nb-action title="following" icon="person-add-outline" link="follows"></nb-action>
-    <nb-action title="watch later" icon="clock-outline" link="watchlater"></nb-action>
-  </nb-actions>
+<nb-layout>
+  <nb-layout-header>
+    <div class="navbar">
+      <nb-actions class="left" size="small">
+        <nb-action title="home" icon="home-outline" link="/pages/home"></nb-action>
+        <nb-action title="favorite" icon="star-outline" link="/pages/favorite"></nb-action>
+        <nb-action title="upload video" icon="cloud-upload-outline" link="/pages/upload"></nb-action>
+        <nb-action title="following" icon="person-add-outline" link="/pages/follows"></nb-action>
+        <nb-action title="watch later" icon="clock-outline" link="/pages/watchlater"></nb-action>
+      </nb-actions>
 
+      <nb-user class="right" [nbContextMenu]="item" name="Monster Hunter"></nb-user>
 
-</div>
+    </div>
+  </nb-layout-header>
+  <nb-layout-column>
+  <router-outlet></router-outlet>
+  </nb-layout-column>
+  <nb-layout-footer>
+
+  </nb-layout-footer>
+</nb-layout>

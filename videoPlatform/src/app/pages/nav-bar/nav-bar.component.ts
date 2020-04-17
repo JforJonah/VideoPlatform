@@ -12,14 +12,14 @@ export class NavBarComponent implements OnInit {
   item: NbMenuItem[] = [
     {
       title: 'profile',
-      link: 'profile'
+      link: '/pages/profile'
     },
     {
       title: 'history',
-      link: 'history'
+      link: '/pages/history'
     },
     { title: 'logout',
-      link: 'logout'}
+      link: '/auth/logout'}
     ];
 
   user = {};
