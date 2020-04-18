@@ -126,14 +126,14 @@ exports.cancelUnLike=(userId,videoId)=>{
  * @returns
  */
 exports.addFavorite=(userId,videoId)=>{
-    
+    let video=videoId._id;
     const promise=Users.update(
         {
             "_id":userId
         },
         {
             $push:{
-                favorite:videoId
+                favorite:video
             }
         }
     ).exec();
@@ -147,13 +147,13 @@ exports.addFavorite=(userId,videoId)=>{
  * @returns
  */
 exports.unFavorite=(userId,videoId)=>{
-    
+    let video=videoId._id;
     const promise=Users.update({
         "_id":userId
     },
     {
         $pull:{
-            favorite:videoId
+            favorite:video
         }
     }
     ).exec();
@@ -166,18 +166,18 @@ exports.unFavorite=(userId,videoId)=>{
  * @param {*} authorId
  */
 exports.subscribe=(userId,authorId)=>{
-    
+    let author=authorId._id;
     const promise1=Users.update({
         "_id":userId
     },
     {
         $push:{
-            subscribe:authorId
+            subscribe:author
         }
     }
     ).exec();
     const promise2=Users.update({
-        "_id":authorId
+        "_id":author
     },
     {
         $push:{
@@ -197,18 +197,18 @@ exports.subscribe=(userId,authorId)=>{
  * @returns
  */
 exports.unSubscribe=(userId,authorId)=>{
-    
+    let author=authorId._id;
     const promise1=Users.update({
         "_id":userId
     },
     {
         $pull:{
-            subscribe:authorId
+            subscribe:author
         }
     }
     ).exec();
     const promise2=Users.update({
-        "_id":authorId
+        "_id":author
     },
     {
         $pull:{
@@ -216,7 +216,7 @@ exports.unSubscribe=(userId,authorId)=>{
         }
     }
     ).exec();
-    
+
     const promise3=promise1.then(promise2);
     return promise3;
 }
