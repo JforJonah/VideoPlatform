@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./uploadvideo.component.scss']
 })
 export class UploadvideoComponent implements OnInit {
+  form: any;
 
   constructor() { }
 

@@ -112,4 +112,13 @@ export class VideoService {
       return of(result as T);
     };
   }
+
+  /************** URL Method *****************/
+  getVideoURL(url: string): string{
+    return `https://www.youtube.com/embed/${url}`;
+  }
+
+  getVideoImgURL(url: string): string{
+    return `http://i.ytimg.com/vi/${url}/maxresdefault.jpg`;
+  }
 }
