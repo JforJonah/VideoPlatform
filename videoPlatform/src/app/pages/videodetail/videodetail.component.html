@@ -13,14 +13,19 @@
         </div>
         <div class = "icon-group">
             <button nbButton ghost status="primary" 
-            
-            (click)="likeClick()">
+            class ="like-btn"
+            (click)="likeClick();
+            likeClicked =!likeClicked"
+            [class.like-clicked]="likeClicked">
                 <nb-icon icon="heart"></nb-icon> 
                 Like
                 <span class= "likeCount"> 1 </span>
             </button>
-            <button nbButton ghost status="success"
-            (click)="favoriteClick()">
+            <button nbButton ghost status="primary"
+            class="favorite-btn"
+            (click)="favoriteClick();
+            favoriteClicked=!favoriteClicked"
+            [class.favorite-clicked]="favoriteClicked">
                 <nb-icon icon="star"></nb-icon> 
                 Favorite
                 <span class= "likeCount"> 1 </span>
@@ -101,10 +106,15 @@
                 picture=""
                 color = "green">
         </nb-user>
-        <div class = "follow-btn">
+        <div class = "follow-btn-div">
             <button nbButton status="danger"
-            (click)="addFollow()"
-            >+ Follow
+            class="follow-btn"
+            (click)="addFollow();
+            followClicked=!followClicked"
+            [class.follow-clicked]="followClicked">
+            + Follow
+            <nb-icon icon="heart" 
+            class="follow-icon"></nb-icon> 
                 <span class ="followCount">1</span>
             </button>
             
