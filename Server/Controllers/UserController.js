@@ -31,7 +31,7 @@ exports.getUser=function(request,response){
             response.status(200);
             response.json(list);
         }
-        console.log(request.params.id);
+        // console.log(request.params.id);
         userServices.getUser(request.params.id).then(resolve).catch(renderErrorResponse(response));
     };
 
@@ -136,11 +136,6 @@ exports.userInfo=(req,res)=>{
  */
 exports.userUpdate=(req,res)=>{
     let updateUser=req.body;
-    // let id=req.params.id;
-    // console.log(id);
-    console.log(req.params._id);
-    console.log(req._id);
-    console.log(updateUser);
     const resolve=(user)=>{
         res.status(200);
         res.json({"token":user.generateJwt(),"msg":'ok'});
