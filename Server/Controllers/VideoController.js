@@ -130,5 +130,5 @@ exports.findByTag=(req,res)=>{
     }
     videoServices.search({tag:req.params.id})
     .then(resolve)
-    .catch(renderErrorResponse(response));
+    .catch(renderErrorResponse(res));
 }

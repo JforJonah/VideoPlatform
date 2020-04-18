@@ -126,7 +126,7 @@ exports.userInfo=(req,res)=>{
       }
       userServices.getUser(req.params.id)
       .then(resolve)
-      .catch(renderErrorResponse(response));
+      .catch(renderErrorResponse(res));
   }
 /**
  *
@@ -161,7 +161,7 @@ exports.like=(req,res)=>{
 
     userServices.addLike(userId,videoId)
     .then(resolver)
-    .catch(renderErrorResponse(response));
+    .catch(renderErrorResponse(res));
 }
 /**
  * Thumb down this video
@@ -178,7 +178,7 @@ exports.unLike=(req,res)=>{
     }
     userServices.unLike(userId,videoId)
     .then(resolve)
-    .catch(renderErrorResponse(response));
+    .catch(renderErrorResponse(res));
 }
 /**
  * cancel thumb up 
@@ -229,7 +229,7 @@ exports.favorite=(req,res)=>{
     }
     userServices.addFavorite(userId,videoId)
     .then(resolve)
-    .catch(renderErrorResponse(response));
+    .catch(renderErrorResponse(res));
 }
 /**
  * remove the video from your favorite folder
@@ -245,7 +245,7 @@ exports.unFavorite=(req,res)=>{
     }
     userServices.unFavorite(userId,videoId)
     .then(resolve)
-    .catch(renderErrorResponse(response));
+    .catch(renderErrorResponse(res));
 }
 /**
  *subscribe a user
@@ -261,7 +261,7 @@ exports.subscribe=(req,res)=>{
     }
     userServices.subscribe(userId,authorId)
     .then(resolve)
-    .catch(renderErrorResponse(response));
+    .catch(renderErrorResponse(res));
 }
 /**
  * 
@@ -277,7 +277,7 @@ exports.unSubscribe=(req,res)=>{
     }
     userServices.unSubscribe(userId,authorId)
     .then(resolve)
-    .catch(renderErrorResponse(response));
+    .catch(renderErrorResponse(res));
 }
 // /**
 //  *get the watch history of this user
@@ -310,7 +310,7 @@ exports.updateHistory=(req,res)=>{
     }
     userServices.updateHistory(userId,videoId)
     .then(resolve)
-    .catch(renderErrorResponse(response));
+    .catch(renderErrorResponse(res));
 }
 /**
  * Throws error if error object is present.

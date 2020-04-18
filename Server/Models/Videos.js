@@ -8,9 +8,6 @@ const VideoSchema=new Schema({
     tag:{
         type:String
     },
-    author:{
-        type:String
-    },
     detail:{
         type:Schema.Types.Mixed
     },
