@@ -135,15 +135,19 @@ exports.userInfo=(req,res)=>{
  */
 exports.userUpdate=(req,res)=>{
     let updateUser=req.body;
-    let id=req.params.id;
+    // let id=req.params.id;
+    // console.log(id);
+    console.log(req.params._id);
+    console.log(req._id);
+    console.log(updateUser);
     const resolve=(user)=>{
         res.status(200);
         res.json({"token":user.generateJwt(),"msg":'ok'});
     }
 
-    userServices.updateProfile(id,updateUser)
+    userServices.updateProfile({_id:req._id},updateUser)
     .then(resolve)
-    .catch(renderErrorResponse(response));
+    .catch(renderErrorResponse(res));
 }
 /**
  *

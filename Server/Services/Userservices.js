@@ -26,7 +26,9 @@ exports.signUp=(newUser)=>{
 }
 // update personal info
 exports.updateProfile=(id,updateUser)=>{
-    const promise=Users.findByIdAndUpdate(id,updateUser);
+    const promise=Users.findByIdAndUpdate(id,updateUser).exec();
+    console.log("foundandupdate");
+    console.log(promise);
     return promise;
 }
 /**
