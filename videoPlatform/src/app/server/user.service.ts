@@ -17,6 +17,9 @@ export class UserService {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
+  cors = {
+    headers: new HttpHeaders({ 'Access-Control-Allow-Origin': '*' })
+  };
 
   /**
    * constructor
@@ -111,7 +114,7 @@ export class UserService {
    */
   subscribeUser(user: User): Observable<User>{
     const url = `${this.userResourceURL}/subscribe`;
-    return this.http.post<User>(url, user.id).pipe(
+    return this.http.post<User>(url, user, this.cors).pipe(
       catchError(this.handleError<User>(`subscribe user id = ${user.id}`))
     );
   }
@@ -121,7 +124,8 @@ export class UserService {
    */
   unSubscribeUser(user: User): Observable<User>{
     const url = `${this.userResourceURL}/unSubscribe`;
-    return this.http.post<User>(url, user.id).pipe(
+    console.log(`userid ${user.id}`);
+    return this.http.post<User>(url, user, this.cors).pipe(
       catchError(this.handleError<User>(`unSubscribe user id = ${user.id}`))
     );
   }
@@ -131,7 +135,7 @@ export class UserService {
    */
   unpdateHistory(video: Video): Observable<User>{
     const url = `${this.userResourceURL}/updateHistory`;
-    return this.http.post<User>(url, video.id).pipe(
+    return this.http.post<User>(url, video, this.cors).pipe(
       catchError(this.handleError<User>(`add video id = ${video.id} to history`))
     );
   }

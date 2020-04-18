@@ -36,6 +36,7 @@ import { AuthGuard } from './server/auth-guard.service';
 import {NgxAuthModule} from './auth/auth.module';
 import {PagesModule} from './pages/pages.module';
 import {environment} from '../environments/environment';
+import {NbInterceptor} from "./auth/register/NbInterceptor";
 
 @NgModule({
   declarations: [
@@ -127,7 +128,7 @@ import {environment} from '../environments/environment';
     {provide: NbTokenStorage, useClass: NbTokenLocalStorage},
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: NbAuthSimpleInterceptor,
+      useClass: NbInterceptor,
       multi: true
     },
     AuthGuard

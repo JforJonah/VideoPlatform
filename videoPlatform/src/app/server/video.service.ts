@@ -15,6 +15,9 @@ export class VideoService {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
+  cors = {
+    headers: new HttpHeaders({ 'Access-Control-Allow-Origin': '*' })
+  };
 
   /**
    * constructor
@@ -88,7 +91,7 @@ export class VideoService {
    * POST: upload the video
    */
   uploadVideo(video: Video): Observable<Video>{
-    return this.http.post<Video>(this.videoResourceURL, video).pipe(
+    return this.http.post<Video>(this.videoResourceURL, video, this.cors).pipe(
       catchError(this.handleError<Video>(`upload video`))
     );
   }

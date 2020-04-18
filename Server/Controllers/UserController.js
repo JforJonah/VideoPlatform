@@ -125,7 +125,7 @@ exports.userInfo=(req,res)=>{
       }
       userServices.getUser(req.params.id)
       .then(resolve)
-      .catch(renderErrorResponse(response));
+      .catch(renderErrorResponse(res));
   }
 /**
  *
@@ -135,7 +135,7 @@ exports.userInfo=(req,res)=>{
  */
 exports.userUpdate=(req,res)=>{
     let updateUser=req.body;
-    let id=req.params.id;
+    let id=req._id;
     const resolve=(user)=>{
         res.status(200);
         res.json({"token":user.generateJwt(),"msg":'ok'});
@@ -143,7 +143,7 @@ exports.userUpdate=(req,res)=>{
 
     userServices.updateProfile(id,updateUser)
     .then(resolve)
-    .catch(renderErrorResponse(response));
+    .catch(renderErrorResponse(res));
 }
 /**
  *
@@ -153,7 +153,7 @@ exports.userUpdate=(req,res)=>{
  */
 exports.like=(req,res)=>{
     let videoId=req.body;
-    let userId=req.params.id;
+    let userId=req._id;
     const resolver=(user)=>{
         res.status(200);
         res.json({"msg":'successful'});
@@ -161,7 +161,7 @@ exports.like=(req,res)=>{
 
     userServices.addLike(userId,videoId)
     .then(resolver)
-    .catch(renderErrorResponse(response));
+    .catch(renderErrorResponse(res));
 }
 /**
  * Thumb down this video
@@ -171,14 +171,14 @@ exports.like=(req,res)=>{
  */
 exports.unLike=(req,res)=>{
     let videoId=req.body;
-    let userId=req.params.id;
+    let userId=req._id;
     const resolve=(user)=>{
         res.status(200);
         res.json({"msg":'successful'});
     }
     userServices.unLike(userId,videoId)
     .then(resolve)
-    .catch(renderErrorResponse(response));
+    .catch(renderErrorResponse(res));
 }
 /**
  * cancel thumb up 
@@ -189,7 +189,7 @@ exports.unLike=(req,res)=>{
 exports.cancelLike=(req,res)=>{
     
     let videoId=req.body;
-    let userId=req.params.id;
+    let userId=req._id;
     const resolve=()=>{
         res.status(200).json({"msg":'successful'});
     }
@@ -206,7 +206,7 @@ exports.cancelLike=(req,res)=>{
 exports.cancelUnLike=(req,res)=>{
     
     let videoId=req.body;
-    let userId=req.params.id;
+    let userId=req._id;
     const resolve=()=>{
         res.status(200).json({"msg":'successful'});
     }
@@ -222,14 +222,14 @@ exports.cancelUnLike=(req,res)=>{
  */
 exports.favorite=(req,res)=>{
     let videoId=req.body;
-    let userId=req.params.id;
+    let userId=req._id;
     const resolve=()=>{
         res.status(200);
         res.json({"msg":'successful'});
     }
     userServices.addFavorite(userId,videoId)
     .then(resolve)
-    .catch(renderErrorResponse(response));
+    .catch(renderErrorResponse(res));
 }
 /**
  * remove the video from your favorite folder
@@ -239,13 +239,13 @@ exports.favorite=(req,res)=>{
  */
 exports.unFavorite=(req,res)=>{
     let videoId=req.body;
-    let userId=req.params.id;
+    let userId=req._id;
     const resolve=()=>{
         res.status(200).json({"msg":'successful'});
     }
     userServices.unFavorite(userId,videoId)
     .then(resolve)
-    .catch(renderErrorResponse(response));
+    .catch(renderErrorResponse(res));
 }
 /**
  *subscribe a user
@@ -255,13 +255,13 @@ exports.unFavorite=(req,res)=>{
  */
 exports.subscribe=(req,res)=>{
     let authorId=req.body;
-    let userId=req.params.id;
+    let userId=req._id;
     const resolve=()=>{
         res.status(200).json({"msg":'successful'});
     }
     userServices.subscribe(userId,authorId)
     .then(resolve)
-    .catch(renderErrorResponse(response));
+    .catch(renderErrorResponse(res));
 }
 /**
  * 
@@ -271,13 +271,15 @@ exports.subscribe=(req,res)=>{
  */
 exports.unSubscribe=(req,res)=>{
     let authorId=req.body;
-    let userId=req.params.id;
+    let userId=req._id;
+    console.log(req.body);
+    console.log('userId ' + userId);
     const resolve=()=>{
         res.status(200).json({"msg":'successful'});
     }
-    userServices.unSubscribe(userId,authorId)
+    userServices.unSubscribe(userId,authorId._id)
     .then(resolve)
-    .catch(renderErrorResponse(response));
+    .catch(renderErrorResponse(res));
 }
 // /**
 //  *get the watch history of this user
@@ -303,14 +305,14 @@ exports.unSubscribe=(req,res)=>{
  * @param {*} res
  */
 exports.updateHistory=(req,res)=>{
-    let userId=req.params.id;
+    let userId=req._id;
     let videoId=req.body;
     const resolve=(video)=>{
         res.status(200).json(video);
     }
     userServices.updateHistory(userId,videoId)
     .then(resolve)
-    .catch(renderErrorResponse(response));
+    .catch(renderErrorResponse(res));
 }
 /**
  * Throws error if error object is present.

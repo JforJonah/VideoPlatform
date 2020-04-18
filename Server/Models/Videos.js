@@ -18,9 +18,6 @@ const VideoSchema=new Schema({
         type:Date,
         default:new Date()
     },
-    auth:{
-        type:String,
-    },
     like:{
         type:Array
     },
