@@ -20,17 +20,13 @@ exports.getUser=(userId)=>{
  */
 exports.signUp=(newUser)=>{
 
-    // console.log(newUser);
     const user=new Users(newUser);
-    // console.log(3);
 
     return user.save();
 }
 // update personal info
 exports.updateProfile=(id,updateUser)=>{
     const promise=Users.findByIdAndUpdate(id,updateUser).exec();
-    console.log("foundandupdate");
-    console.log(promise);
     return promise;
 }
 /**
