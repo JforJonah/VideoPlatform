@@ -20,7 +20,7 @@
         }
 
         .count{
-            background-color    : #f7f7f7;
+            background          : #f7f7f7;
             border              : 1px solid #ddd;
             border-radius       : 3px;
             color               : #777;
@@ -45,7 +45,7 @@
             top                 : 6px;
             right               : 0;
             background-position : -310px -405px;
-            // background-image: none;
+            background-image    : none;
             position            : absolute;
         }
     }
@@ -58,7 +58,7 @@
 }
 
 
-.smaill-item {
+.small-item {
     display     : block;
     float       : left;
     width       : 160px;
@@ -71,7 +71,7 @@
     &:nth-child(4n+1) {}
 
     .cover{
-        // background: none;
+        background      : none;
         background-size : cover;
         border-radius   : 4px;
         display         : block;
@@ -118,7 +118,7 @@
             width       : 22px;
             height      : 22px;
             z-index     : 5;
-            // background: none;
+            background: none;
         }
     
     }
@@ -141,7 +141,7 @@
         line-height : 14px;
 
         span{
-            display     :inline-block;
+            display     : inline-block;
             white-space : nowrap;
             height      : 14px;
             line-height : 14px;
@@ -149,13 +149,13 @@
             overflow    : hidden;
         }
 
-        &span:first-child{
-            width:72px;
+        & span:first-child{
+            width: 72px;
         }
 
         .icon{
             display: inline-block;
-            // background-image: url();
+            background-image: url();
         }
 
     }
@@ -226,7 +226,7 @@ a{
 .editItem {
     position: fixed;
     bottom  : 100px;
-    right   : 230px;
+    right   : 280px;
 }
 
 :host ::ng-deep {

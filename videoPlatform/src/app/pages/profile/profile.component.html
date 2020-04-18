@@ -4,12 +4,13 @@
             <ng-container *ngFor="let item of tabs">
                 <nb-tab [tabTitle]="item">
                     <div> {{item}} </div>
-            </nb-tab>
-        </ng-container>
+                </nb-tab>
+            </ng-container>
         </nb-tabset>
 
     <div [ngSwitch]="tabKey">
         <div *ngSwitchCase="'User Info'">
+
             <div class="userInfoContent">
                 <div class="input">
                     <span class="title"> User Name </span>
@@ -43,13 +44,13 @@
                 <input style="    position: absolute; top:120px; left: 100px;" (click)="upload()" nbButton type="submit"
                     value="Upload" />
 
-                <nb-user style="    position: absolute; top: 30px; left: 100px;" size="large" name="John Doe"
+                <nb-user style="position: absolute; top: 30px; left: 100px;" size="large" name="John Doe"
                     title="Engineer" [picture]="this.fileArr[0]?.url" (click)="upload()"></nb-user>
             </div>
         </div>
         <div *ngSwitchCase="'Setting'">
             <div class="settings">
-                <nb-toggle labelPosition="start"><span class="text">All this website use my location</span></nb-toggle>
+                <nb-toggle labelPosition="start"><span class="text">Allow this website use my location</span></nb-toggle>
                 <nb-toggle labelPosition="start"><span class="text">Everyone can see my page</span></nb-toggle>
             </div>
         </div>
@@ -66,7 +67,7 @@
                                 <div class="cover" [ngClass]="{'redBorder': editFlag && tabKey == 'My Video'}" (click)="toEdit(item)">
                                     <img
                                         src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1875705305,2952422048&fm=26&gp=0.jpg"
-                                        alt="qwer">
+                                        >
                                     <span class="length">0{{item.number}}:48</span>
                                     <span class="i-watchlater"></span>
                                     <nb-icon *ngIf="item.edit" (click)="del($event,index)" class="icon"
@@ -108,21 +109,21 @@
     <div class="userInfoContent" style="width: 820px; height: 400px; flex: unset;">
         <div class="input">
             <span class="title">Title</span>
-            <input type="text" placeholder="title">
+            <input type="text" placeholder="Title">
         </div>
         <div class="input">
             <span class="title">Description</span>
-            <input type="text" placeholder="description">
+            <input type="text" placeholder="Add description">
         </div>
         <div class="input">
             <span class="title">Tag</span>
-            <input type="text" placeholder="tag">
+            <input type="text" placeholder="Add tag">
         </div>
 
-        <div style="display: flex;flex-direction: row;">
+        <div style="display: flex; flex-direction: row;">
 
             <input (click)="returnHome()" nbButton type="submit" value="return" />
-
+            &nbsp;
             <input (click)="editSAVE()" nbButton type="submit" value="upload" />
         </div>
     </div>

@@ -20,17 +20,17 @@ export class ProfileComponent implements OnInit {
     "User Info",
     "My Video",
     "Liked",
-    "Subscirption",
+    "Subscription",
     "Watch Later",
     "Setting",
   ];
-  tabKey ="My video";
+  tabKey ="My Video";
 
   buttonText = "";
   fileArr = [];
 
   formpicker = new Date();
-  constructor(private renderer: Renderer2) { }
+  constructor(private renderer: Renderer2) {}
 
   ngOnInit(): void {}
   setKey(event) {
@@ -51,7 +51,7 @@ export class ProfileComponent implements OnInit {
         this.buttonText = "Unlike";
         break;
       case "Subscription":
-        this.buttonText = "Unsubscrib";
+        this.buttonText = "Unsubscribe";
         break;
       case "Watch Later":
         this.buttonText = "Cancel";
@@ -61,15 +61,22 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  onSave() {}
+  onSave() {
+    //加alert
+    alert('Save SUCCESSFULLY');
+  }
 
   deleteItem(){
-    this.Arr.forEach((item) => (item.edit = true));
+    //var deleteitem = confirm('Delete?')
+    //if(deleteitem){
+      this.Arr.forEach((item) => (item.edit = true));
+    //}
+    //window.location.assign('');
   }
 
   del(event, index) {
     event.stopPropagation();
-    this.Arr.splice(index,1);
+    this.Arr.splice(index, 1);
   }
 
   upload(){
@@ -81,6 +88,7 @@ export class ProfileComponent implements OnInit {
   }
 
   pageID = "home";
+  //pages = "My Video";
   videoData = {title: "123", edit: true, number: 1};
   toEdit(data) {
     if (!this.editFlag || this.tabKey !== 'My Video') return;
@@ -98,6 +106,10 @@ export class ProfileComponent implements OnInit {
     this.pageID = "home";
   }
 
+  returnMyvideo(){
+    //this.pages = "My Video";
+    //this.editFlag = false;
+  }
 ngAfterViewInit(): void {
   this.renderer.listen(this.file.nativeElement, "change", (event) => {
     console.log(event);
