@@ -33,7 +33,7 @@ module.exports=(app)=>{
     app.route('/users/unSubscribe')
     .post(jwt.verifyJwtToken,userController.unSubscribe);
     app.route('/users/updateHistory')
-    .put(jwt.verifyJwtToken,userController.updateHistory);
+    .post(jwt.verifyJwtToken,userController.updateHistory);
     
     
 }
