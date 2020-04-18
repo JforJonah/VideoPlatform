@@ -29,7 +29,7 @@ export class ProfileComponent implements OnInit {
   buttonText = "";
   fileArr = [];
 
-  formpicker = new Date();
+  formpicker = new Date().getDate;
   constructor(private renderer: Renderer2) {}
 
   ngOnInit(): void {}
