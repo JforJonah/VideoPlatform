@@ -272,12 +272,12 @@ exports.subscribe=(req,res)=>{
 exports.unSubscribe=(req,res)=>{
     let authorId=req.body;
     let userId=req._id;
-    console.log(req.body);
-    console.log('userId ' + userId);
+    // console.log(req.body);
+    // console.log('userId ' + userId);
     const resolve=()=>{
         res.status(200).json({"msg":'successful'});
     }
-    userServices.unSubscribe(userId,authorId._id)
+    userServices.unSubscribe(userId,authorId)
     .then(resolve)
     .catch(renderErrorResponse(res));
 }

@@ -52,10 +52,10 @@ export class UserService {
   /**
    * Post: user do like operation to a video
    */
-  likeVideo(video: Video): Observable<User>{
+  likeVideo(video: Video): Observable<any>{
     const url = `${this.userResourceURL}/like`;
-    return this.http.post<User>(url, video.id).pipe(
-      catchError(this.handleError<User>(`like video id = ${video.id}`))
+    return this.http.post<any>(url, video, this.cors).pipe(
+      catchError(this.handleError<any>(`like video id = ${video.id}`))
     );
   }
 
@@ -64,7 +64,7 @@ export class UserService {
    */
   cancelLikeVideo(video: Video): Observable<User>{
     const url = `${this.userResourceURL}/cancelLike`;
-    return this.http.post<User>(url, video.id).pipe(
+    return this.http.post<User>(url, video, this.cors).pipe(
       catchError(this.handleError<User>(`cancel like video id = ${video.id}`))
     );
   }
@@ -72,40 +72,40 @@ export class UserService {
   /**
    * Post: user do unlike operation to a video
    */
-  unlikeVideo(video: Video): Observable<User>{
+  unlikeVideo(video: Video): Observable<any>{
     const url = `${this.userResourceURL}/unlike`;
-    return this.http.post<User>(url, video.id).pipe(
-      catchError(this.handleError<User>(`unlike video id = ${video.id}`))
+    return this.http.post<any>(url, video, this.cors).pipe(
+      catchError(this.handleError<any>(`unlike video id = ${video.id}`))
     );
   }
 
   /**
    * Post: user undo unlike operation to a video
    */
-  cancelUnlikeVideo(video: Video): Observable<User> {
+  cancelUnlikeVideo(video: Video): Observable<any> {
     const url = `${this.userResourceURL}/cancelUnlike`;
-    return this.http.post<User>(url, video.id).pipe(
-      catchError(this.handleError<User>(`cancel unlike video id = ${video.id}`))
+    return this.http.post<any>(url, video, this.cors).pipe(
+      catchError(this.handleError<any>(`cancel unlike video id = ${video.id}`))
     );
   }
 
   /**
    * POST: user set the video to favorite
    */
-  setFavoriteVideo(video: Video): Observable<User>{
+  setFavoriteVideo(video: Video): Observable<any>{
     const url = `${this.userResourceURL}/setFavorite`;
-    return this.http.post<User>(url, video.id).pipe(
-      catchError(this.handleError<User>(`favorite video id = ${video.id}`))
+    return this.http.post<any>(url, video, this.cors).pipe(
+      catchError(this.handleError<any>(`favorite video id = ${video.id}`))
     );
   }
 
   /**
    * POST: user undo the favorite operation
    */
-  unFavoriteVideo(video: Video): Observable<User>{
+  unFavoriteVideo(video: Video): Observable<any>{
     const url = `${this.userResourceURL}/unFavorite`;
-    return this.http.post<User>(url, video.id).pipe(
-      catchError(this.handleError<User>(`unfavorite video id = ${video.id}`))
+    return this.http.post<any>(url, video, this.cors).pipe(
+      catchError(this.handleError<any>(`unfavorite video id = ${video.id}`))
     );
   }
 

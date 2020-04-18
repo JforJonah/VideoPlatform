@@ -71,6 +71,7 @@ export class VideoService {
    * PUT: update the video
    */
   updateVideo(video: Video): Observable<Video>{
+    console.log(`video id = ${video.id}`);
     const url = `${this.videoResourceURL}/${video.id}`;
     return this.http.put(url, video, this.httpOptions).pipe(
       catchError(this.handleError<any>(`update video id = ${video.id}`))
