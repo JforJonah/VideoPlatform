@@ -35,37 +35,23 @@ exports.updateProfile=(id,updateUser)=>{
  * @returns
  */
 exports.addLike=(userId,videoId)=>{
-    
-    let exist=User.findById(userId);
-    // if you unliked this video before
-    exist.unlike.forEach(element=>{
-        if(element===videoId){
-            const promise=User.update({
-                "id":userId
-            },
-            {
-                $push:{
-                    liked:videoId
-                },
-                $pull:{
-                    unlike:videoId
-                }
-            }
-            ).exec();
-            return promise;
-        }
-    });
-
+    let video=videoId._id;
     const promise=Users.update({
-        "_id":userId
-    },
-    {
-        $push:{
-            liked:videoId
+            "_id":userId
         },
-    }
-    ).exec();
-    return promise;
+        {
+            $addToSet:{
+                liked:video
+            },
+            $pull:{
+                unlike:video
+            }
+        }
+        ).exec();
+        // console.log("cast");
+        return promise;
+    
+
 }
 /**
  * Thumb down this video
@@ -75,32 +61,16 @@ exports.addLike=(userId,videoId)=>{
  * @returns
  */
 exports.unLike=(userId,videoId)=>{
-    
-    let exist=Users.findById(userId);
-    exist.liked.forEach(element => {
-        if(element===videoId){
-            const promise=Users.update({
-                "_id":userId
-            },
-            {
-                $push:{
-                    unlike:videoId
-                },
-                $pull:{
-                    liked:videoId
-                }
-            }
-            ).exec();
-            return promise;
-        }
-        
-    });
+    let video=videoId._id;
     const promise=Users.update({
         "_id":userId
     },
     {
-        $push:{
-            unlike:videoId
+        $pull:{
+            liked:video
+        },
+        $addToSet:{
+            unlike:video
         }
     }
     ).exec();
@@ -114,14 +84,14 @@ exports.unLike=(userId,videoId)=>{
  * @returns
  */
 exports.cancelLike=(userId,videoId)=>{
-    
+    let video=videoId._id;
     const promise=Users.update(
         {
             "_id":userId
         },
         {
             $pull:{
-                liked:videoId
+                liked:video
             }
         }
     ).exec()
@@ -136,12 +106,13 @@ exports.cancelLike=(userId,videoId)=>{
  * @returns
  */
 exports.cancelUnLike=(userId,videoId)=>{
+    let video=videoId._id;
     const promise=Users.update( {
         "_id":userId
     },
     {
         $pull:{
-            unlike:videoId
+            unlike:video
         }
     }
     ).exec();

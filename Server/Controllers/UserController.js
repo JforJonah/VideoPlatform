@@ -152,14 +152,14 @@ exports.userUpdate=(req,res)=>{
  * @param {*} res
  */
 exports.like=(req,res)=>{
-    let videoId=req.body;
+    // let videoId=req.body;
     let userId=req._id;
     const resolver=(user)=>{
         res.status(200);
         res.json({"msg":'successful'});
     }
 
-    userServices.addLike(userId,videoId)
+    userServices.addLike(userId,req.body)
     .then(resolver)
     .catch(renderErrorResponse(res));
 }
@@ -188,12 +188,12 @@ exports.unLike=(req,res)=>{
  */
 exports.cancelLike=(req,res)=>{
     
-    let videoId=req.body;
+    // let videoId=req.body;
     let userId=req._id;
     const resolve=()=>{
         res.status(200).json({"msg":'successful'});
     }
-    userServices.cancelLike(userId,videoId)
+    userServices.cancelLike(userId,req.body)
     .then(resolve)
     .catch(renderErrorResponse(res));
 }
