@@ -24,13 +24,27 @@
                 margin-right: 20px;
                 margin-bottom: 10px;
                 //background-color: white;
+                
             }
+            .like-btn{
+                color: red
+            }
+            .favorite-btn{
+                color:green
+            }
+            
             span{
                 margin-left: 20px;
             }
-            .clicked{
-                background-color: white;
+            .like-clicked{
+                color:white;
+                background-color :red;
             }
+            .favorite-clicked{
+                color:white;
+                background-color :green
+            }
+
             
             
             
@@ -91,12 +105,29 @@
       .right{
         grid-column-start: 2;
         
-        .follow-btn{
+        .follow-btn-div{
             margin-top: 20px;
             margin-left: 50px;
+            .follow-btn{
+            background-color : pink;
+            .follow-icon{
+                margin-left: 10px;
+                color :pink;
+            }
+            
             span{
                 margin-left: 20px;
             }
+            }
+
+            .follow-clicked{
+                background-color: red;
+                .follow-icon{
+                    color :pink;
+                    margin-left: 10px;
+                }
+            }
+            
         }
         .video-list{
             margin-top: 50px;

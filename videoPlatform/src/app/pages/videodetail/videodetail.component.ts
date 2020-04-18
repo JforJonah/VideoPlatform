@@ -10,10 +10,16 @@ import { ChangeDetectionStrategy } from '@angular/core';
 })
 export class VideodetailComponent implements OnInit {
 
+  
+
   constructor() { }
 
   ngOnInit(): void {
   }
+
+  likeClicked = false;
+  favoriteClicked = false;
+  followClicked = false;
 
   addComment(){
 
@@ -26,6 +32,6 @@ export class VideodetailComponent implements OnInit {
 
   }
   addFollow(){
-    
+
   }
 }
