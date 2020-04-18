@@ -153,7 +153,7 @@ exports.userUpdate=(req,res)=>{
  */
 exports.like=(req,res)=>{
     let videoId=req.body;
-    let userId=req.params.id;
+    let userId=req._id;
     const resolver=(user)=>{
         res.status(200);
         res.json({"msg":'successful'});
@@ -171,7 +171,7 @@ exports.like=(req,res)=>{
  */
 exports.unLike=(req,res)=>{
     let videoId=req.body;
-    let userId=req.params.id;
+    let userId=req._id;
     const resolve=(user)=>{
         res.status(200);
         res.json({"msg":'successful'});
@@ -189,7 +189,7 @@ exports.unLike=(req,res)=>{
 exports.cancelLike=(req,res)=>{
     
     let videoId=req.body;
-    let userId=req.params.id;
+    let userId=req._id;
     const resolve=()=>{
         res.status(200).json({"msg":'successful'});
     }
@@ -206,7 +206,7 @@ exports.cancelLike=(req,res)=>{
 exports.cancelUnLike=(req,res)=>{
     
     let videoId=req.body;
-    let userId=req.params.id;
+    let userId=req._id;
     const resolve=()=>{
         res.status(200).json({"msg":'successful'});
     }
@@ -222,7 +222,7 @@ exports.cancelUnLike=(req,res)=>{
  */
 exports.favorite=(req,res)=>{
     let videoId=req.body;
-    let userId=req.params.id;
+    let userId=req._id;
     const resolve=()=>{
         res.status(200);
         res.json({"msg":'successful'});
@@ -239,7 +239,7 @@ exports.favorite=(req,res)=>{
  */
 exports.unFavorite=(req,res)=>{
     let videoId=req.body;
-    let userId=req.params.id;
+    let userId=req._id;
     const resolve=()=>{
         res.status(200).json({"msg":'successful'});
     }
@@ -255,7 +255,7 @@ exports.unFavorite=(req,res)=>{
  */
 exports.subscribe=(req,res)=>{
     let authorId=req.body;
-    let userId=req.params.id;
+    let userId=req._id;
     const resolve=()=>{
         res.status(200).json({"msg":'successful'});
     }
@@ -271,7 +271,7 @@ exports.subscribe=(req,res)=>{
  */
 exports.unSubscribe=(req,res)=>{
     let authorId=req.body;
-    let userId=req.params.id;
+    let userId=req._id;
     const resolve=()=>{
         res.status(200).json({"msg":'successful'});
     }
@@ -303,7 +303,7 @@ exports.unSubscribe=(req,res)=>{
  * @param {*} res
  */
 exports.updateHistory=(req,res)=>{
-    let userId=req.params.id;
+    let userId=req._id;
     let videoId=req.body;
     const resolve=(video)=>{
         res.status(200).json(video);
