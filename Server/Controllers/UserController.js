@@ -79,18 +79,9 @@ exports.signUp=function(request,response){
         }
         return errorCallback;
     };
-<<<<<<< HEAD
-
     userServices.signUp(newUser)
     .then(resolve)
     .catch(errorHandle(response));
-=======
-    // console.log(1);
-    userServices.signUp(newUser)
-    .then(resolve)
-    .catch(errorHandle(response));
-    // console.log(2);
->>>>>>> master
 }
 /**
  *use login

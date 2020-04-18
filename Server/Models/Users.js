@@ -39,19 +39,9 @@ const Schema = mongoose.Schema,
     },
     firstName:{
         type:String,
-<<<<<<< HEAD
-
-        // required:"firstName can't be empty"
     },
     lastName:{
         type:String,
-        // required:"lastName can't be empty"
-
-=======
-    },
-    lastName:{
-        type:String,
->>>>>>> master
     },
     history:[
         {
