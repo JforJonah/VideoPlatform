@@ -19,11 +19,15 @@ exports.getUser=(userId)=>{
  * @returns promise
  */
 exports.signUp=(newUser)=>{
+<<<<<<< HEAD
 
     // console.log(newUser);
     const user=new Users(newUser);
     // console.log(3);
 
+=======
+    const user=new Users(newUser);
+>>>>>>> master
     return user.save();
 }
 // update personal info

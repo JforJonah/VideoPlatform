@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {NbMenuItem, NbMenuService} from '@nebular/theme';
 import { NbAuthJWTToken, NbAuthService } from '@nebular/auth';
 import {User} from '../../models/User';
+<<<<<<< HEAD
 import {UserService} from "../../server/user.service";
+=======
+>>>>>>> master
 
 @Component({
   selector: 'app-nav-bar',
