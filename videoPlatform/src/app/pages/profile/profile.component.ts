@@ -61,7 +61,9 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  onSave() {}
+  onSave() {
+    //加alert
+  }
 
   deleteItem(){
     this.Arr.forEach((item) => (item.edit = true));
@@ -81,6 +83,7 @@ export class ProfileComponent implements OnInit {
   }
 
   pageID = "home";
+  //pages = "My Video";
   videoData = {title: "123", edit: true, number: 1};
   toEdit(data) {
     if (!this.editFlag || this.tabKey !== 'My Video') return;
@@ -98,6 +101,10 @@ export class ProfileComponent implements OnInit {
     this.pageID = "home";
   }
 
+  returnMyvideo(){
+    //this.pages = "My Video";
+    //this.editFlag = false;
+  }
 ngAfterViewInit(): void {
   this.renderer.listen(this.file.nativeElement, "change", (event) => {
     console.log(event);

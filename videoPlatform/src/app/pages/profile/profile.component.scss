@@ -62,7 +62,7 @@
     display     : block;
     float       : left;
     width       : 160px;
-    position    : relative;
+    position    : absolute;
     margin      : 0 0 3px;
     padding     : 10px;
     padding-left: 0;
@@ -226,7 +226,7 @@ a{
 .editItem {
     position: fixed;
     bottom  : 100px;
-    right   : 230px;
+    right   : 280px;
 }
 
 :host ::ng-deep {

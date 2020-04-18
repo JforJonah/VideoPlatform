@@ -4,12 +4,13 @@
             <ng-container *ngFor="let item of tabs">
                 <nb-tab [tabTitle]="item">
                     <div> {{item}} </div>
-            </nb-tab>
-        </ng-container>
+                </nb-tab>
+            </ng-container>
         </nb-tabset>
 
     <div [ngSwitch]="tabKey">
         <div *ngSwitchCase="'User Info'">
+
             <div class="userInfoContent">
                 <div class="input">
                     <span class="title"> User Name </span>
@@ -49,7 +50,7 @@
         </div>
         <div *ngSwitchCase="'Setting'">
             <div class="settings">
-                <nb-toggle labelPosition="start"><span class="text">All this website use my location</span></nb-toggle>
+                <nb-toggle labelPosition="start"><span class="text">Allow this website use my location</span></nb-toggle>
                 <nb-toggle labelPosition="start"><span class="text">Everyone can see my page</span></nb-toggle>
             </div>
         </div>
@@ -66,7 +67,7 @@
                                 <div class="cover" [ngClass]="{'redBorder': editFlag && tabKey == 'My Video'}" (click)="toEdit(item)">
                                     <img
                                         src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1875705305,2952422048&fm=26&gp=0.jpg"
-                                        alt="qwer">
+                                        height="100" width="100">
                                     <span class="length">0{{item.number}}:48</span>
                                     <span class="i-watchlater"></span>
                                     <nb-icon *ngIf="item.edit" (click)="del($event,index)" class="icon"
@@ -92,7 +93,7 @@
 <div class="wrapper" *ngIf="pageID !=='home'"
     style="display: flex;flex-direction: column; justify-content: flex-start;align-items: center;">
     <div class="small-item">
-        <div class="cover" style="width : 320px; height: 200px;"><img style="width : 320px; height: 200px;"
+        <div class="cover" style="width : 100px; height: 100px;"><img style="width : 100px; height: 100px;"
                 src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1875705305,2952422048&fm=26&gp=0.jpg"
                 alt=""><span class="length">0{{videoData.number}}:48</span><span class="i-watchlater"></span>
             <nb-icon *ngIf="videoData.edit" class="icon" icon="close-outline" status="danger">
@@ -119,10 +120,10 @@
             <input type="text" placeholder="tag">
         </div>
 
-        <div style="display: flex;flex-direction: row;">
+        <div style="display: flex; flex-direction: row;">
 
-            <input (click)="returnHome()" nbButton type="submit" value="return" />
-
+            <input (click)="returnMyvideo()" nbButton type="submit" value="return" />
+            &nbsp;
             <input (click)="editSAVE()" nbButton type="submit" value="upload" />
         </div>
     </div>
