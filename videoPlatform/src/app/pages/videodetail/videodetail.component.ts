@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {NbMenuItem, NbMenuService ,NbCardModule} from '@nebular/theme';
 import { ChangeDetectionStrategy } from '@angular/core';
+import {Video} from '../../models/Video';
+import {User} from '../../models/User';
+import {Comment} from '../../models/Comment';
+import {UserService} from '../../server/user.service';
+import {VideoService} from '../../server/video.service';
 
 @Component({
   selector: 'app-videodetail',
@@ -12,7 +17,11 @@ export class VideodetailComponent implements OnInit {
 
   
 
-  constructor() { }
+  constructor(private videoService: VideoService,
+              private userService: UserService) {
+                
+
+               }
 
   ngOnInit(): void {
   }
