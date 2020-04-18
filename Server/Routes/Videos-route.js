@@ -5,6 +5,8 @@ const videoController=require('../Controllers/VideoController'),
 module.exports=(app)=>{
     app.route('/videos')
     .get(videoController.list);
+    app.route('/videos/findByTag/:id')
+    .get(videoController.findByTag);
     app.route('/videos/:id')
     .get(videoController.getVideo)
     .delete(videoController.deleteVideo)
