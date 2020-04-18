@@ -54,7 +54,7 @@ exports.deleteVideo=(req,res)=>{
  * @param {*} res
  */
 exports.uploadVideo=(req,res)=>{
-    let authorId=req.param.id;
+    let authorId=req._id;
     let newVideo=Object.assign({},req.body);
 
     const resolve=(video)=>{

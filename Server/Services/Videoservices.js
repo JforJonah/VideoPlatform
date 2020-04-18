@@ -45,7 +45,7 @@ exports.uploadVideo=(authorId,newVideo)=>{
     
     const promise=Videos.create(newVideo).then((newVideo)=>{
         userServices.uploadVideo(newVideo,authorId);
-    }).exec();
+    });
 
     return promise;
 }
