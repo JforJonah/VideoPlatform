@@ -5,14 +5,14 @@ const videoController=require('../Controllers/VideoController'),
 module.exports=(app)=>{
     app.route('/videos')
     .get(videoController.list);
-    app.route('videos/:id')
+    app.route('/videos/:id')
     .get(videoController.getVideo)
     .delete(videoController.deleteVideo)
     .put(videoController.updateVideo);
-    app.route('videos/auth/:id')
+    app.route('/videos/auth/:id')
     .get(userController.getUser);
-    app.route('videos/find/:id')
+    app.route('/videos/find/:id')
     .get(videoController.findbyauth);
-    app.route('videos/upload')
+    app.route('/videos/upload')
     .post(jwt.verifyJwtToken,videoController.uploadVideo);
 }
