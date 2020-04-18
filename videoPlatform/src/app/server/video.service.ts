@@ -91,7 +91,8 @@ export class VideoService {
    * POST: upload the video
    */
   uploadVideo(video: Video): Observable<Video>{
-    return this.http.post<Video>(this.videoResourceURL, video, this.cors).pipe(
+    const url = `${this.videoResourceURL}/upload`
+    return this.http.post<Video>(url, video, this.cors).pipe(
       catchError(this.handleError<Video>(`upload video`))
     );
   }

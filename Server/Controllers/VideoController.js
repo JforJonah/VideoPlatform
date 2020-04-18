@@ -23,7 +23,7 @@ exports.list=(req,res)=>{
  * @param {*} res
  */
 exports.getVideo=(req,res)=>{
-    let id=req.param.id;
+    let id=req.params.id;
     const resolve=(video)=>{
         res.status(200).json(video);
     }
@@ -39,7 +39,7 @@ exports.getVideo=(req,res)=>{
  */
 exports.deleteVideo=(req,res)=>{
     
-    let id=req.param.id;
+    let id=req.params.id;
     const resolve=()=>{
         res.status(200).json({"msg":'delete successfully'});
     }
@@ -54,7 +54,7 @@ exports.deleteVideo=(req,res)=>{
  * @param {*} res
  */
 exports.uploadVideo=(req,res)=>{
-    let authorId=req.param.id;
+    let authorId=req._id;
     let newVideo=Object.assign({},req.body);
 
     const resolve=(video)=>{
@@ -78,7 +78,7 @@ exports.updateVideo=(req,res)=>{
     const resolve=(video)=>{
         res.status(200).json(video);
     }
-    videoServices.updateVideo(req.param.id,update)
+    videoServices.updateVideo(req.params.id,update)
     .then(resolve)
     .catch(renderErrorResponse(res));
 }
@@ -107,7 +107,7 @@ exports.updateVideo=(req,res)=>{
  * @param {*} response
  */
 exports.findbyauth=(request,response)=>{
-    console.log(`{"auth":"${request.params.id}"}`)
+    // console.log(`{"auth":"${request.params.id}"}`)
     const resolve = (list) => {        
         response.status(200);
         response.json(list);
@@ -130,5 +130,5 @@ exports.findByTag=(req,res)=>{
     }
     videoServices.search({tag:req.params.id})
     .then(resolve)
-    .catch(renderErrorResponse(response));
+    .catch(renderErrorResponse(res));
 }

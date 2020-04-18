@@ -35,37 +35,23 @@ exports.updateProfile=(id,updateUser)=>{
  * @returns
  */
 exports.addLike=(userId,videoId)=>{
-    
-    let exist=User.findById(userId);
-    // if you unliked this video before
-    exist.unlike.forEach(element=>{
-        if(element===videoId){
-            const promise=User.update({
-                "id":userId
-            },
-            {
-                $push:{
-                    liked:videoId
-                },
-                $pull:{
-                    unlike:videoId
-                }
-            }
-            ).exec();
-            return promise;
-        }
-    });
-
+    let video=videoId._id;
     const promise=Users.update({
-        "_id":userId
-    },
-    {
-        $push:{
-            liked:videoId
+            "_id":userId
         },
-    }
-    ).exec();
-    return promise;
+        {
+            $addToSet:{
+                liked:video
+            },
+            $pull:{
+                unlike:video
+            }
+        }
+        ).exec();
+        // console.log("cast");
+        return promise;
+    
+
 }
 /**
  * Thumb down this video
@@ -75,32 +61,16 @@ exports.addLike=(userId,videoId)=>{
  * @returns
  */
 exports.unLike=(userId,videoId)=>{
-    
-    let exist=Users.findById(userId);
-    exist.liked.forEach(element => {
-        if(element===videoId){
-            const promise=Users.update({
-                "_id":userId
-            },
-            {
-                $push:{
-                    unlike:videoId
-                },
-                $pull:{
-                    liked:videoId
-                }
-            }
-            ).exec();
-            return promise;
-        }
-        
-    });
+    let video=videoId._id;
     const promise=Users.update({
         "_id":userId
     },
     {
-        $push:{
-            unlike:videoId
+        $pull:{
+            liked:video
+        },
+        $addToSet:{
+            unlike:video
         }
     }
     ).exec();
@@ -114,14 +84,14 @@ exports.unLike=(userId,videoId)=>{
  * @returns
  */
 exports.cancelLike=(userId,videoId)=>{
-    
+    let video=videoId._id;
     const promise=Users.update(
         {
             "_id":userId
         },
         {
             $pull:{
-                liked:videoId
+                liked:video
             }
         }
     ).exec()
@@ -136,12 +106,13 @@ exports.cancelLike=(userId,videoId)=>{
  * @returns
  */
 exports.cancelUnLike=(userId,videoId)=>{
+    let video=videoId._id;
     const promise=Users.update( {
         "_id":userId
     },
     {
         $pull:{
-            unlike:videoId
+            unlike:video
         }
     }
     ).exec();
@@ -155,14 +126,14 @@ exports.cancelUnLike=(userId,videoId)=>{
  * @returns
  */
 exports.addFavorite=(userId,videoId)=>{
-    
+    let video=videoId._id;
     const promise=Users.update(
         {
             "_id":userId
         },
         {
             $push:{
-                favorite:videoId
+                favorite:video
             }
         }
     ).exec();
@@ -176,13 +147,13 @@ exports.addFavorite=(userId,videoId)=>{
  * @returns
  */
 exports.unFavorite=(userId,videoId)=>{
-    
+    let video=videoId._id;
     const promise=Users.update({
         "_id":userId
     },
     {
         $pull:{
-            favorite:videoId
+            favorite:video
         }
     }
     ).exec();
@@ -195,18 +166,18 @@ exports.unFavorite=(userId,videoId)=>{
  * @param {*} authorId
  */
 exports.subscribe=(userId,authorId)=>{
-    
+    let author=authorId._id;
     const promise1=Users.update({
         "_id":userId
     },
     {
         $push:{
-            subscribe:authorId
+            subscribe:author
         }
     }
     ).exec();
     const promise2=Users.update({
-        "_id":authorId
+        "_id":author
     },
     {
         $push:{
@@ -226,18 +197,18 @@ exports.subscribe=(userId,authorId)=>{
  * @returns
  */
 exports.unSubscribe=(userId,authorId)=>{
-    
+    let author=authorId._id;
     const promise1=Users.update({
         "_id":userId
     },
     {
         $pull:{
-            subscribe:authorId
+            subscribe:author
         }
     }
     ).exec();
     const promise2=Users.update({
-        "_id":authorId
+        "_id":author
     },
     {
         $pull:{
@@ -245,7 +216,7 @@ exports.unSubscribe=(userId,authorId)=>{
         }
     }
     ).exec();
-    
+
     const promise3=promise1.then(promise2);
     return promise3;
 }
@@ -256,35 +227,29 @@ exports.unSubscribe=(userId,authorId)=>{
  * @param {*} videoId
  */
 exports.updateHistory=(userId,videoId)=>{
-    let his=Users.findById(userId);
+    // let his=Users.findById(userId);
     // let exist=false;
-    if(his.history!==null){
-        his.history.forEach(element=>{
-            if(element==videoId){
-                // exist=true;
-                Users.update({
-                    "_id":userId
-                },
-                {
-                    $pull:{
-                        history:videoId
-                    },
-                }
-                );
-                return promise;
-            }
-        });
+    let video=videoId._id;
+    const promise1=Users.update({
+        "_id":userId
+    },
+    {
+        $pull:{
+            history:video
+        }
     }
-    const promise=Users.update({
+    ).exec();
+    const promise2=Users.update({
         "_id":userId
     },
     {
         $push:{
-            history:videoId
+            history:video
         }
     }
     ).exec();
-    return promise;
+    const promise3=promise1.then(promise2);
+    return promise3;
 }
 
 exports.uploadVideo=(videoId,authorId)=>{

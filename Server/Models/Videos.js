@@ -8,11 +8,11 @@ const VideoSchema=new Schema({
     tag:{
         type:String
     },
-    author:{
+    detail:{
         type:String
     },
-    detail:{
-        type:Schema.Types.Mixed
+    description:{
+        type:String
     },
     createDate:{
         type:Date,
