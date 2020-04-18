@@ -227,35 +227,29 @@ exports.unSubscribe=(userId,authorId)=>{
  * @param {*} videoId
  */
 exports.updateHistory=(userId,videoId)=>{
-    let his=Users.findById(userId);
+    // let his=Users.findById(userId);
     // let exist=false;
-    if(his.history!==null){
-        his.history.forEach(element=>{
-            if(element==videoId){
-                // exist=true;
-                Users.update({
-                    "_id":userId
-                },
-                {
-                    $pull:{
-                        history:videoId
-                    },
-                }
-                );
-                return promise;
-            }
-        });
+    let video=videoId._id;
+    const promise1=Users.update({
+        "_id":userId
+    },
+    {
+        $pull:{
+            history:video
+        }
     }
-    const promise=Users.update({
+    ).exec();
+    const promise2=Users.update({
         "_id":userId
     },
     {
         $push:{
-            history:videoId
+            history:video
         }
     }
     ).exec();
-    return promise;
+    const promise3=promise1.then(promise2);
+    return promise3;
 }
 
 exports.uploadVideo=(videoId,authorId)=>{
