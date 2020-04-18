@@ -20,7 +20,7 @@ export class ProfileComponent implements OnInit {
     "User Info",
     "My Video",
     "Liked",
-    "Subscirption",
+    "Subscription",
     "Watch Later",
     "Setting",
   ];
@@ -30,7 +30,7 @@ export class ProfileComponent implements OnInit {
   fileArr = [];
 
   formpicker = new Date();
-  constructor(private renderer: Renderer2) { }
+  constructor(private renderer: Renderer2) {}
 
   ngOnInit(): void {}
   setKey(event) {
@@ -51,7 +51,7 @@ export class ProfileComponent implements OnInit {
         this.buttonText = "Unlike";
         break;
       case "Subscription":
-        this.buttonText = "Unsubscrib";
+        this.buttonText = "Unsubscribe";
         break;
       case "Watch Later":
         this.buttonText = "Cancel";
@@ -76,7 +76,7 @@ export class ProfileComponent implements OnInit {
 
   del(event, index) {
     event.stopPropagation();
-    this.Arr.splice(index,1);
+    this.Arr.splice(index, 1);
   }
 
   upload(){
