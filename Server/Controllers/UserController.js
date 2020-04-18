@@ -79,7 +79,6 @@ exports.signUp=function(request,response){
         }
         return errorCallback;
     };
-
     userServices.signUp(newUser)
     .then(resolve)
     .catch(errorHandle(response));
@@ -126,7 +125,7 @@ exports.userInfo=(req,res)=>{
       }
       userServices.getUser(req.params.id)
       .then(resolve)
-      .catch(renderErrorResponse(response));
+      .catch(renderErrorResponse(res));
   }
 /**
  *
@@ -136,12 +135,13 @@ exports.userInfo=(req,res)=>{
  */
 exports.userUpdate=(req,res)=>{
     let updateUser=req.body;
+    let id=req._id;
     const resolve=(user)=>{
         res.status(200);
         res.json({"token":user.generateJwt(),"msg":'ok'});
     }
 
-    userServices.updateProfile({_id:req._id},updateUser)
+    userServices.updateProfile(id,updateUser)
     .then(resolve)
     .catch(renderErrorResponse(res));
 }
@@ -161,7 +161,7 @@ exports.like=(req,res)=>{
 
     userServices.addLike(userId,videoId)
     .then(resolver)
-    .catch(renderErrorResponse(response));
+    .catch(renderErrorResponse(res));
 }
 /**
  * Thumb down this video
@@ -178,7 +178,7 @@ exports.unLike=(req,res)=>{
     }
     userServices.unLike(userId,videoId)
     .then(resolve)
-    .catch(renderErrorResponse(response));
+    .catch(renderErrorResponse(res));
 }
 /**
  * cancel thumb up 
@@ -229,7 +229,7 @@ exports.favorite=(req,res)=>{
     }
     userServices.addFavorite(userId,videoId)
     .then(resolve)
-    .catch(renderErrorResponse(response));
+    .catch(renderErrorResponse(res));
 }
 /**
  * remove the video from your favorite folder
@@ -245,7 +245,7 @@ exports.unFavorite=(req,res)=>{
     }
     userServices.unFavorite(userId,videoId)
     .then(resolve)
-    .catch(renderErrorResponse(response));
+    .catch(renderErrorResponse(res));
 }
 /**
  *subscribe a user
@@ -261,7 +261,7 @@ exports.subscribe=(req,res)=>{
     }
     userServices.subscribe(userId,authorId)
     .then(resolve)
-    .catch(renderErrorResponse(response));
+    .catch(renderErrorResponse(res));
 }
 /**
  * 
@@ -272,12 +272,14 @@ exports.subscribe=(req,res)=>{
 exports.unSubscribe=(req,res)=>{
     let authorId=req.body;
     let userId=req._id;
+    console.log(req.body);
+    console.log('userId ' + userId);
     const resolve=()=>{
         res.status(200).json({"msg":'successful'});
     }
-    userServices.unSubscribe(userId,authorId)
+    userServices.unSubscribe(userId,authorId._id)
     .then(resolve)
-    .catch(renderErrorResponse(response));
+    .catch(renderErrorResponse(res));
 }
 // /**
 //  *get the watch history of this user
@@ -310,7 +312,7 @@ exports.updateHistory=(req,res)=>{
     }
     userServices.updateHistory(userId,videoId)
     .then(resolve)
-    .catch(renderErrorResponse(response));
+    .catch(renderErrorResponse(res));
 }
 /**
  * Throws error if error object is present.
