@@ -5,7 +5,7 @@ const Schema=mongoose.Schema;
  * Mongoose schema for Users object.
  */
 const VideoSchema=new Schema({
-    description:{
+    tag:{
         type:String
     },
     author:{

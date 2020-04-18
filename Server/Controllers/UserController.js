@@ -79,6 +79,7 @@ exports.signUp=function(request,response){
         }
         return errorCallback;
     };
+
     userServices.signUp(newUser)
     .then(resolve)
     .catch(errorHandle(response));
@@ -91,7 +92,9 @@ exports.signUp=function(request,response){
  * @param {*} next
  */
 exports.login=function(request,response,next){
-    console.log(request.body);
+
+    // console.log(request.body);
+
     passport.authenticate('local',function(err, user, info) {
         // 如果这个函数被调用了，说明认证成功。
         // `req.user` 包含已认证的用户
@@ -133,7 +136,7 @@ exports.userInfo=(req,res)=>{
  */
 exports.userUpdate=(req,res)=>{
     let updateUser=req.body;
-    let id=req.id;
+    let id=req.params.id;
     const resolve=(user)=>{
         res.status(200);
         res.json({"token":user.generateJwt(),"msg":'ok'});
