@@ -67,7 +67,7 @@
                                 <div class="cover" [ngClass]="{'redBorder': editFlag && tabKey == 'My Video'}" (click)="toEdit(item)">
                                     <img
                                         src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1875705305,2952422048&fm=26&gp=0.jpg"
-                                        height="100" width="100">
+                                        >
                                     <span class="length">0{{item.number}}:48</span>
                                     <span class="i-watchlater"></span>
                                     <nb-icon *ngIf="item.edit" (click)="del($event,index)" class="icon"
@@ -93,7 +93,7 @@
 <div class="wrapper" *ngIf="pageID !=='home'"
     style="display: flex;flex-direction: column; justify-content: flex-start;align-items: center;">
     <div class="small-item">
-        <div class="cover" style="width : 100px; height: 100px;"><img style="width : 100px; height: 100px;"
+        <div class="cover" style="width : 320px; height: 200px;"><img style="width : 320px; height: 200px;"
                 src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1875705305,2952422048&fm=26&gp=0.jpg"
                 alt=""><span class="length">0{{videoData.number}}:48</span><span class="i-watchlater"></span>
             <nb-icon *ngIf="videoData.edit" class="icon" icon="close-outline" status="danger">
@@ -109,20 +109,20 @@
     <div class="userInfoContent" style="width: 820px; height: 400px; flex: unset;">
         <div class="input">
             <span class="title">Title</span>
-            <input type="text" placeholder="title">
+            <input type="text" placeholder="Title">
         </div>
         <div class="input">
             <span class="title">Description</span>
-            <input type="text" placeholder="description">
+            <input type="text" placeholder="Add description">
         </div>
         <div class="input">
             <span class="title">Tag</span>
-            <input type="text" placeholder="tag">
+            <input type="text" placeholder="Add tag">
         </div>
 
         <div style="display: flex; flex-direction: row;">
 
-            <input (click)="returnMyvideo()" nbButton type="submit" value="return" />
+            <input (click)="returnHome()" nbButton type="submit" value="return" />
             &nbsp;
             <input (click)="editSAVE()" nbButton type="submit" value="upload" />
         </div>

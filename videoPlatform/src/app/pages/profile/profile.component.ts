@@ -63,10 +63,15 @@ export class ProfileComponent implements OnInit {
 
   onSave() {
     //加alert
+    alert('Save SUCCESSFULLY');
   }
 
   deleteItem(){
-    this.Arr.forEach((item) => (item.edit = true));
+    //var deleteitem = confirm('Delete?')
+    //if(deleteitem){
+      this.Arr.forEach((item) => (item.edit = true));
+    //}
+    //window.location.assign('');
   }
 
   del(event, index) {

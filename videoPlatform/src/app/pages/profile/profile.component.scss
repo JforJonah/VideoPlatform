@@ -45,7 +45,7 @@
             top                 : 6px;
             right               : 0;
             background-position : -310px -405px;
-            background-image: none;
+            background-image    : none;
             position            : absolute;
         }
     }
@@ -58,11 +58,11 @@
 }
 
 
-.smaill-item {
+.small-item {
     display     : block;
     float       : left;
     width       : 160px;
-    position    : absolute;
+    position    : relative;
     margin      : 0 0 3px;
     padding     : 10px;
     padding-left: 0;
@@ -71,7 +71,7 @@
     &:nth-child(4n+1) {}
 
     .cover{
-        background: none;
+        background      : none;
         background-size : cover;
         border-radius   : 4px;
         display         : block;
@@ -149,13 +149,13 @@
             overflow    : hidden;
         }
 
-        &span:first-child{
-            width:72px;
+        & span:first-child{
+            width: 72px;
         }
 
         .icon{
             display: inline-block;
-            // background-image: url();
+            background-image: url();
         }
 
     }
