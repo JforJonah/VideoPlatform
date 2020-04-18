@@ -5,3 +5,4 @@ export class Comment{
     createDate: Date;
     auth:String;
 }
+

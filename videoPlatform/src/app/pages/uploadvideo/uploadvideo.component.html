@@ -1,11 +1,19 @@
-<nb-stepper orientation="horizontal">
-  <nb-step label="step number one" >
-    // ... input video url
-  </nb-step>
-  <nb-step label="step number two">
-    // ... input video title and description
-  </nb-step>
-  <nb-step label="step number three">
-    // ... add tags for video
-  </nb-step>
-</nb-stepper>
+<nb-card size = giant>
+  <nb-card-header>Upload Video</nb-card-header>
+  <nb-card-body>
+    <nb-stepper orientation="horizontal">
+      <nb-step label="step number one" [stepControl]="form">
+        <!--        input video url-->
+        <form [formGroup]="form">
+
+        </form>
+      </nb-step>
+      <nb-step label="step number two">
+        <!--        input video title and description-->
+      </nb-step>
+      <nb-step label="step number three">
+        <!--        add tags for video-->
+      </nb-step>
+    </nb-stepper>
+  </nb-card-body>
+</nb-card>

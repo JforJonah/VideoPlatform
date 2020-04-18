@@ -27,7 +27,10 @@ export class NavBarComponent implements OnInit {
 
   userid;
   profile: User;
+  user1: User;
   user2: User;
+  video: Video;
+  videos: Video[];
 
   constructor(private authService: NbAuthService, private userService: UserService, private videoService: VideoService) {
 
@@ -47,6 +50,9 @@ export class NavBarComponent implements OnInit {
     // console.log(this.user2);
     // this.userService.subscribeUser(this.profile).subscribe(profile => this.profile);
     // console.log(this.profile);
+    this.videoService.getVideoById(`5e9b319aecbe9345c555ecb4`).subscribe(video => this.video = video);
+    this.userService.getUserById(`5e992c9b5a991c1bba3418b7`).subscribe(user => this.user2 = user);
+    this.userService.getUserById(`5e992afe5d617f286df4f2a8`).subscribe(user => this.user1 = user);
   }
 
   ngOnInit(): void {
@@ -54,20 +60,26 @@ export class NavBarComponent implements OnInit {
 
 
   subuser(){
-    console.log(`user2: ${this.user2.id}`);
-    // this.userService.getUserById('5e992c9b5a991c1bba3418b7').subscribe(user2 => this.user2 = user2);
-    this.userService.unSubscribeUser(this.user2).subscribe(profile => this.profile = profile);
-    const url = 'helloword';
-    const tag = 'gaming';
-    const video: Video = new Video(this.profile.id, 'this is my description', {url , tag});
-    this.videoService.uploadVideo(video).subscribe();
+    // console.log(`user2: ${this.user2.id}`);
+    // // this.userService.getUserById('5e992c9b5a991c1bba3418b7').subscribe(user2 => this.user2 = user2);
+    // this.userService.unSubscribeUser(this.user2).subscribe(profile => this.profile = profile);
+    // this.video = new Video(this.profile.id, 'this is my description', 'this should be the url');
+    // this.videoService.uploadVideo(this.video).subscribe(
+    //   vidoe => this.video = vidoe
+    // );
+    //
+    // this.videoService.getAuthor(this.video).subscribe(user => console.log(`author id: ${user.id}`));
+    console.log(this.video);
+    this.videoService.getAllVideosFromAuthor(this.video).subscribe(videos => this.videos = videos);
 
-    this.videoService.getAuthor(video).subscribe(user => console.log(user.id));
+  }
+  fun2(){
+    // this.videoService.getVideoById(`5e9b614b198a1424dda0c1e2`).subscribe(video => this.video = video);
+    console.log(this.video);
+    console.log(this.videos);
 
-    video.description = 'changed';
-    this.videoService.updateVideo(video).subscribe();
-    this.userService.likeVideo(video).subscribe();
-    this.userService.setFavoriteVideo(video).subscribe();
+    // this.userService.unSubscribeUser(this.user2).subscribe();
+    // this.videoService.deleteVideo(this.video).subscribe();
     console.log(this.profile);
 
   }

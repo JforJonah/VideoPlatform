@@ -107,7 +107,7 @@ exports.updateVideo=(req,res)=>{
  * @param {*} response
  */
 exports.findbyauth=(request,response)=>{
-    // console.log(`{"auth":"${request.params.id}"}`)
+    console.log(`{"auth":"${request.params.id}"}`)
     const resolve = (list) => {        
         response.status(200);
         response.json(list);
@@ -115,6 +115,7 @@ exports.findbyauth=(request,response)=>{
     videoServices.search({auth:request.params.id})
         .then(resolve)
         .catch(renderErrorResponse(response));
+
 }
 /**
  * list all the video which have the specific tag name

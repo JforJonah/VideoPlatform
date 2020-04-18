@@ -71,6 +71,7 @@ export class VideoService {
    * PUT: update the video
    */
   updateVideo(video: Video): Observable<Video>{
+    console.log(`video id = ${video.id}`);
     const url = `${this.videoResourceURL}/${video.id}`;
     return this.http.put(url, video, this.httpOptions).pipe(
       catchError(this.handleError<any>(`update video id = ${video.id}`))
@@ -91,7 +92,8 @@ export class VideoService {
    * POST: upload the video
    */
   uploadVideo(video: Video): Observable<Video>{
-    return this.http.post<Video>(this.videoResourceURL, video, this.cors).pipe(
+    const url = `${this.videoResourceURL}/upload`
+    return this.http.post<Video>(url, video, this.cors).pipe(
       catchError(this.handleError<Video>(`upload video`))
     );
   }
@@ -111,5 +113,14 @@ export class VideoService {
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };
+  }
+
+  /************** URL Method *****************/
+  getVideoURL(url: string): string{
+    return `https://www.youtube.com/embed/${url}`;
+  }
+
+  getVideoImgURL(url: string): string{
+    return `http://i.ytimg.com/vi/${url}/maxresdefault.jpg`;
   }
 }

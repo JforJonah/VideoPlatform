@@ -127,6 +127,8 @@ exports.cancelUnLike=(userId,videoId)=>{
  */
 exports.addFavorite=(userId,videoId)=>{
     let video=videoId._id;
+    // console.log(video);
+    // console.log(videoId);
     const promise=Users.update(
         {
             "_id":userId
