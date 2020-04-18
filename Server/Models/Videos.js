@@ -5,21 +5,18 @@ const Schema=mongoose.Schema;
  * Mongoose schema for Users object.
  */
 const VideoSchema=new Schema({
-    description:{
-        type:String
-    },
-    author:{
+    tag:{
         type:String
     },
     detail:{
-        type:Schema.Types.Mixed
+        type:String
+    },
+    description:{
+        type:String
     },
     createDate:{
         type:Date,
         default:new Date()
-    },
-    auth:{
-        type:String,
     },
     like:{
         type:Array
