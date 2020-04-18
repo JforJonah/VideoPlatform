@@ -49,3 +49,14 @@ exports.uploadVideo=(authorId,newVideo)=>{
 
     return promise;
 }
+/**
+ * update the video
+ *
+ * @param {*} videoId
+ * @param {*} update
+ * @returns
+ */
+exports.updateVideo=(videoId,update)=>{
+    const promise=Videos.findByIdAndUpdate(videoId,update).exec();
+    return promise;
+}

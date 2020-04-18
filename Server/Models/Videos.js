@@ -9,7 +9,10 @@ const VideoSchema=new Schema({
         type:String
     },
     detail:{
-        type:Schema.Types.Mixed
+        type:String
+    },
+    description:{
+        type:String
     },
     createDate:{
         type:Date,
