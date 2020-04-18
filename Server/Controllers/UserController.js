@@ -79,11 +79,10 @@ exports.signUp=function(request,response){
         }
         return errorCallback;
     };
-    // console.log(1);
+
     userServices.signUp(newUser)
     .then(resolve)
     .catch(errorHandle(response));
-    // console.log(2);
 }
 /**
  *use login
@@ -93,7 +92,9 @@ exports.signUp=function(request,response){
  * @param {*} next
  */
 exports.login=function(request,response,next){
+
     // console.log(request.body);
+
     passport.authenticate('local',function(err, user, info) {
         // 如果这个函数被调用了，说明认证成功。
         // `req.user` 包含已认证的用户
