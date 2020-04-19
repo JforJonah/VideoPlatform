@@ -8,7 +8,10 @@ const VideoSchema=new Schema({
     tag:{
         type:String
     },
-    detail:{
+    title:{
+        type:String
+    },
+    url:{
         type:String
     },
     description:{

@@ -3,8 +3,8 @@ import {NbMenuItem, NbMenuService} from '@nebular/theme';
 import { NbAuthJWTToken, NbAuthService } from '@nebular/auth';
 import {User} from '../../models/User';
 import {UserService} from '../../server/user.service';
-import {Video} from "../../models/Video";
-import {VideoService} from "../../server/video.service";
+import {Video} from '../../models/Video';
+import {VideoService} from '../../server/video.service';
 
 @Component({
   selector: 'app-nav-bar',

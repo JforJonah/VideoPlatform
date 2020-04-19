@@ -1,8 +1,8 @@
 export class Comment{
-    id : String;
-    txt : String;
-    videoId: String;
+    id: string;
+    txt: string;
+    videoId: string;
     createDate: Date;
-    auth:String;
+    auth: string;
 }
 
