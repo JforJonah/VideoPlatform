@@ -11,9 +11,9 @@ export interface User {
   lastName: string;
   history: [];
   videos: [];
-  liked: [];
+  liked: any[];
   unlike: [];
   subscribe: [];
-  favorite: [];
+  favorite: any[];
   subscribed: [];
 }

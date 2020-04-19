@@ -6,7 +6,7 @@ export class Video {
   title: string;
   url: string;
   createdDate: Date;
-  like: []; //存的userId,喜欢这个视频的人
+  like: any[]; //存的userId,喜欢这个视频的人
   unlike: [];
   comment: Comment[];
 
