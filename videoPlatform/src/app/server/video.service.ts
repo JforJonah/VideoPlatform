@@ -42,7 +42,7 @@ export class VideoService {
    * GET: get the author of this video
    */
   getAuthor(video: Video): Observable<User>{
-    const url = `${this.videoResourceURL}/auth/${video.author}`;
+    const url = `${this.videoResourceURL}/auth/${video.auth}`;
     return this.http.get<User>(url).pipe(
       catchError(this.handleError<User>(`get author from video id = ${video.id}`))
     );
@@ -92,7 +92,7 @@ export class VideoService {
    * POST: upload the video
    */
   uploadVideo(video: Video): Observable<Video>{
-    const url = `${this.videoResourceURL}/upload`
+    const url = `${this.videoResourceURL}/upload`;
     return this.http.post<Video>(url, video, this.cors).pipe(
       catchError(this.handleError<Video>(`upload video`))
     );
