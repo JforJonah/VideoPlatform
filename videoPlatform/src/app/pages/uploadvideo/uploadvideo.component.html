@@ -4,15 +4,24 @@
     <nb-stepper orientation="horizontal" [linear]="false">
       <nb-step label="step number one">
         <!--        input video url-->
+<<<<<<< HEAD
 
         <button nbButton ><nb-icon icon="arrow-left"></nb-icon></button>
         <button nbButton><nb-icon icon="arrow-right"></nb-icon> </button>
+=======
+        <label>nput your youtube URL:
+        <input [(ngModel)]="videoUrl" placeholder="input your video url"/>
+        </label>
+        <button nbButton><nb-icon icon="arrow-left"></nb-icon></button>
+        <button nbButton (click)="step1next()"><nb-icon icon="arrow-right"></nb-icon> </button>
+>>>>>>> b3a8bd9b472c62a418e3c472230e421c2caba42d
       </nb-step>
       <nb-step label="step number two">
         <!--        input video title and description-->
       </nb-step>
       <nb-step label="step number three">
         <!--        add tags for video-->
+
       </nb-step>
     </nb-stepper>
   </nb-card-body>

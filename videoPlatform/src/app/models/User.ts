@@ -9,11 +9,13 @@ export interface User {
   profileImage: string;
   firstName: string;
   lastName: string;
-  history: [];
-  videos: [];
+
+  history: any[];
+  videos: any[];
   liked: any[];
-  unlike: [];
-  subscribe: [];
+  unlike: any[];
+  subscribe: any[];
   favorite: any[];
-  subscribed: [];
+  subscribed: any[];
+
 }
