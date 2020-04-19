@@ -1,9 +1,19 @@
-export class User {
+export interface User {
   id: string;
   username: string;
   password: string;
-  constructor(username: string, password: string) {
-    this.username = username;
-    this.password = password;
-  }
+  email: string;
+  bio: string;
+  location: string;
+  sex: 'male' | 'female' | 'secrete';
+  profileImage: string;
+  firstName: string;
+  lastName: string;
+  history: [];
+  videos: [];
+  liked: [];
+  unlike: [];
+  subscribe: [];
+  favorite: [];
+  subscribed: [];
 }
