@@ -3,8 +3,8 @@ import {NbMenuItem, NbMenuService} from '@nebular/theme';
 import { NbAuthJWTToken, NbAuthService } from '@nebular/auth';
 import {User} from '../../models/User';
 import {UserService} from '../../server/user.service';
-import {Video} from "../../models/Video";
-import {VideoService} from "../../server/video.service";
+import {Video} from '../../models/Video';
+import {VideoService} from '../../server/video.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -59,7 +59,7 @@ export class NavBarComponent implements OnInit {
   }
 
 
-  subuser(){
+  subuser() {
     // console.log(`user2: ${this.user2.id}`);
     // // this.userService.getUserById('5e992c9b5a991c1bba3418b7').subscribe(user2 => this.user2 = user2);
     // this.userService.unSubscribeUser(this.user2).subscribe(profile => this.profile = profile);
@@ -73,7 +73,7 @@ export class NavBarComponent implements OnInit {
     this.videoService.getAllVideosFromAuthor(this.video).subscribe(videos => this.videos = videos);
 
   }
-  fun2(){
+  fun2() {
     // this.videoService.getVideoById(`5e9b614b198a1424dda0c1e2`).subscribe(video => this.video = video);
     console.log(this.video);
     console.log(this.videos);

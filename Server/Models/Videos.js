@@ -11,7 +11,7 @@ const VideoSchema=new Schema({
     title:{
         type:String
     },
-    detail:{
+    url:{
         type:String
     },
     description:{
