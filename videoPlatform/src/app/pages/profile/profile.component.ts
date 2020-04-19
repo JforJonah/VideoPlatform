@@ -1,4 +1,10 @@
 import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { UserService } from '../../server/user.service';
+import { VideoService } from '../../server/video.service';
+import { ActivatedRoute } from '@angular/router';
+import { User } from 'src/app/models/User';
+import { NbAuthService, NbAuthJWTToken } from '@nebular/auth';
+import { Video } from 'src/app/models/Video';
 
 @Component({
   selector: 'app-profile',
@@ -30,9 +36,53 @@ export class ProfileComponent implements OnInit {
   fileArr = [];
 
   formpicker = new Date().getDate;
-  constructor(private renderer: Renderer2) {}
+  
+  userid: string;
+  videourl: string;
+  video:Video;
+  user:User;
+  videoid:string;
+  videos: Video[];//my video
+  likes:Video[];
+  sub:User[];//看情况
+  
 
-  ngOnInit(): void {}
+  constructor(private renderer: Renderer2, private authService: NbAuthService,
+    private userService: UserService,
+    private videoService: VideoService,
+    private route:ActivatedRoute) {
+    
+      this.authService.onTokenChange()
+      .subscribe((token: NbAuthJWTToken) => {
+
+        if (token.isValid()) {
+          this.userid = token.getPayload()._id; // here we receive a payload from the token and assigns it to our `user` variable
+        }
+
+      });
+  }
+
+  ngOnInit(): void {
+    //this.route.url.subscribe(url => {this.userid = url[2].toString()});
+    //console.log(this.userid);
+    
+    this.userService.getUserById(this.userid).toPromise().then(user =>{
+      this.user = user;
+
+      
+    });
+      // this.videoService.getVideoById(this.videoid).toPromise().then(video => {
+      //   this.video = video;
+      // });
+      // this.videos = this.user.videos;
+      // this.likes = this.user.likes;
+
+    this.videourl = this.videoService.getVideoImgURL(this.video.detail);
+
+  }
+ 
+
+
   setKey(event) {
     console.log(event.tabTitle);
     this.tabKey = event.tabTitle;

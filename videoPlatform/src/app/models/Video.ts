@@ -3,9 +3,9 @@ export class Video {
   id: string;
   description: string;
   author: string;
-  detail: string;
+  detail: string;//url
   createdDate: Date;
-  like: [];
+  like: []; //存的userId,喜欢这个视频的人
   unlike: [];
   comment: Comment;
   constructor(author: string, description: string, detail: string) {
