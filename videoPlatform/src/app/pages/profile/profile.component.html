@@ -24,7 +24,7 @@
                 <div class="input">
                     <span class="title"> Password </span>
                     <input type="text" nbInput fullWidth fieldSize="medium" placeholder="Password">
-                    <a>Change Password</a>
+                    <a>Forget Password</a>
                 </div>
                 <div class="input">
                     <span class="title"> Gender </span>
@@ -34,18 +34,18 @@
                         <nb-option value="3">Secret</nb-option>
                     </nb-select>
                 </div>
-                <div class="input">
+                <!-- <div class="input">
                     <span class="title">Date of Birth</span>
                     <input style="width:300px !important" nbInput placeholder="Choose Date" [nbDatepicker]="formpicker">
                     <nb-datepicker #formpicker></nb-datepicker>
-                </div>
+                </div> -->
                 <input style="margin: 20px;" (click)="onSave()" nbButton type="submit" value="Save" />
 
-                <input style="    position: absolute; top:120px; left: 100px;" (click)="upload()" nbButton type="submit"
+                <input style="position: absolute; top:120px; left: 100px;" (click)="upload()" nbButton type="submit"
                     value="Upload" />
 
-                <nb-user style="position: absolute; top: 30px; left: 100px;" size="large" name="John Doe"
-                    title="Engineer" [picture]="this.fileArr[0]?.url" (click)="upload()"></nb-user>
+                <nb-user style="position: absolute; top: 30px; left: 100px;" size="large" [name]="user?.username"
+                     [picture]="this.fileArr[0]?.url" (click)="upload()"></nb-user>
             </div>
         </div>
         <div *ngSwitchCase="'Setting'">
@@ -68,6 +68,7 @@
                                     <img
                                         src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1875705305,2952422048&fm=26&gp=0.jpg"
                                         >
+                                        <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/gMOw8F_qrlo"></iframe> -->
                                     <span class="length">0{{item.number}}:48</span>
                                     <span class="i-watchlater"></span>
                                     <nb-icon *ngIf="item.edit" (click)="del($event,index)" class="icon"
@@ -95,13 +96,16 @@
     <div class="small-item">
         <div class="cover" style="width : 320px; height: 200px;"><img style="width : 320px; height: 200px;"
                 src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1875705305,2952422048&fm=26&gp=0.jpg"
-                alt=""><span class="length">0{{videoData.number}}:48</span><span class="i-watchlater"></span>
+                alt="">
+                <!-- <span class="length">0{{videoData.number}}:48</span> -->
+                <span class="i-watchlater"></span>
             <nb-icon *ngIf="videoData.edit" class="icon" icon="close-outline" status="danger">
             </nb-icon>
 
         </div>
         <a href="//www.bilibili.com/video/BV1Ab411a7y9" target="_blank" title="title" class="title">title</a>
-        <div class="meta"><span class="play"><i class="icon"></i>288
+        <div class="meta"><span class="play">
+            <i class="icon"></i>288
             </span><span class="time"><i class="icon"></i>2019-2-23
             </span></div>
     </div>
@@ -115,10 +119,11 @@
             <span class="title">Description</span>
             <input type="text" placeholder="Add description">
         </div>
+        <!-- //固定的
         <div class="input">
             <span class="title">Tag</span>
             <input type="text" placeholder="Add tag">
-        </div>
+        </div> -->
 
         <div style="display: flex; flex-direction: row;">
 
