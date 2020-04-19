@@ -1,12 +1,12 @@
 <nb-card size = giant>
   <nb-card-header>Upload Video</nb-card-header>
   <nb-card-body>
-    <nb-stepper orientation="horizontal">
-      <nb-step label="step number one" [stepControl]="form">
+    <nb-stepper orientation="horizontal" [linear]="false">
+      <nb-step label="step number one">
         <!--        input video url-->
-        <form [formGroup]="form">
 
-        </form>
+        <button nbButton (click)=""><nb-icon icon="arrow-left"></nb-icon></button>
+        <button nbButton><nb-icon icon="arrow-right"></nb-icon> </button>
       </nb-step>
       <nb-step label="step number two">
         <!--        input video title and description-->

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-//import { MatDatepickerModule } from '@angular/material/datepicker';
+// import { MatDatepickerModule } from '@angular/material/datepicker';
 
 import { PagesRoutingModule } from './pages-routing.module';
 import {
@@ -55,7 +55,7 @@ import {WatchlaterComponent} from './watchlater/watchlater.component';
     NbDatepickerModule.forRoot(),
     NbCardModule,
     NbToggleModule
-    //MatDatepickerModule
+    // MatDatepickerModule
   ]
 })
 export class PagesModule { }
