@@ -4,15 +4,16 @@ import { CommonModule } from '@angular/common';
 
 import { PagesRoutingModule } from './pages-routing.module';
 import {
+  NB_STEPPER,
   NbActionsModule, NbButtonModule, NbCardModule,
   NbContextMenuModule, NbDatepickerModule,
   NbIconModule,
-  NbLayoutModule, NbMenuModule, NbOptionModule, NbSelectModule,
+  NbLayoutModule, NbMenuModule, NbOptionModule, NbSelectModule, NbStepperComponent,
   NbStepperModule, NbTabsetModule, NbToggleModule,
   NbUserModule
 } from '@nebular/theme';
 import {NbEvaIconsModule} from '@nebular/eva-icons';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ProfileComponent} from './profile/profile.component';
 import {FavoriteComponent} from './favorite/favorite.component';
 import {FollowsComponent} from './follows/follows.component';
@@ -54,8 +55,9 @@ import {WatchlaterComponent} from './watchlater/watchlater.component';
     NbOptionModule,
     NbDatepickerModule.forRoot(),
     NbCardModule,
-    NbToggleModule
+    NbToggleModule,
+    FormsModule,
     // MatDatepickerModule
-  ]
+  ],
 })
 export class PagesModule { }
