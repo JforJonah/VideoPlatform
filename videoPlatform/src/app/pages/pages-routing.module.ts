@@ -24,21 +24,10 @@ const routes: Routes = [
       {path: 'follows', component: FollowsComponent},
       {path: 'profile', component: ProfileComponent},
       {
-        path: 'history/details/:id',
+        path: 'details/:id',
         component:VideodetailComponent,
       },
-      {
-        path: 'home/details/:id',
-        component:VideodetailComponent,
-      },
-      {
-        path: 'favorite/details/:id',
-        component:VideodetailComponent,
-      },
-      {
-        path: 'profile/details/:id',
-        component:VideodetailComponent,
-      },
+      
     ]
   }
   ,
