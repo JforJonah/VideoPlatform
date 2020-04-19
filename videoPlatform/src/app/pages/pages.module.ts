@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {FormsModule} from '@angular/forms';
 
 import { PagesRoutingModule } from './pages-routing.module';
 import {
@@ -36,6 +37,7 @@ import {WatchlaterComponent} from './watchlater/watchlater.component';
     WatchlaterComponent,
   ],
   imports: [
+    FormsModule,
     CommonModule,
     PagesRoutingModule,
     NbLayoutModule,

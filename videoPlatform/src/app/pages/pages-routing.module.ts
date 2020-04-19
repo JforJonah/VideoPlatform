@@ -8,6 +8,7 @@ import {WatchlaterComponent} from './watchlater/watchlater.component';
 import {FollowsComponent} from './follows/follows.component';
 import {ProfileComponent} from './profile/profile.component';
 import {NavBarComponent} from './nav-bar/nav-bar.component';
+import {VideodetailComponent} from '../pages/videodetail/videodetail.component';
 
 
 const routes: Routes = [
@@ -21,10 +22,27 @@ const routes: Routes = [
       {path: 'history', component: HistoryComponent},
       {path: 'watchlater', component: WatchlaterComponent},
       {path: 'follows', component: FollowsComponent},
-      {path: 'profile', component: ProfileComponent}
+      {path: 'profile', component: ProfileComponent},
+      {
+        path: 'history/details/:id',
+        component:VideodetailComponent,
+      },
+      {
+        path: 'home/details/:id',
+        component:VideodetailComponent,
+      },
+      {
+        path: 'favorite/details/:id',
+        component:VideodetailComponent,
+      },
+      {
+        path: 'profile/details/:id',
+        component:VideodetailComponent,
+      },
     ]
   }
   ,
+ 
 ];
 
 @NgModule({

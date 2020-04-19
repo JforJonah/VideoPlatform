@@ -7,7 +7,7 @@ export class Video {
   createdDate: Date;
   like: [];
   unlike: [];
-  comment: Comment;
+  comment: Comment[];
   constructor(author: string, description: string, detail: string) {
     this.author = author;
     this.description = description;
