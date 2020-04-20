@@ -5,9 +5,9 @@ import {Video} from '../../models/Video';
 import {NbAuthJWTToken, NbAuthService} from '@nebular/auth';
 import {UserService} from '../../server/user.service';
 import {User} from '../../models/User';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Comment} from '../../models/Comment';
-import {Tags} from "../../models/Tags";
+import {Tags} from '../../models/Tags';
 
 @Component({
   selector: 'app-uploadvideo',
@@ -56,7 +56,7 @@ export class UploadvideoComponent implements OnInit {
 
   step1next() {
     if (this.getYoutubeURL(this.firstFormGroup.value.url)) {
-      this.video.auth = this.profile.username;
+      this.video.auth = this.profile.id;
       this.video.comments = this.comments;
       // this.nbStepperComponent.next();
     }

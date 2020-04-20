@@ -78,13 +78,13 @@ videos:Video[];
                 this.userService.getUserById(this.userid).toPromise().then(user =>{
                   this.user=user;
                   //console.log(user.liked.includes(this.videoId));
-                  if(user.favorite.includes(this.videoId)){
-                    this.favoriteClicked=true;
-
-                  }
-                  else{
-                    this.favoriteClicked=false;
-                  }
+                  // if(user.favorite.includes(this.videoId)){
+                  //   this.favoriteClicked=true;
+                  //
+                  // }
+                  // else{
+                  //   this.favoriteClicked=false;
+                  // }
 
                   //video-list add
                   for(var i =0;i<user.videos.length;i++){
@@ -239,21 +239,21 @@ videos:Video[];
   favoriteClick(){
     //console.log("before",this.user.favorite);
 
-    if(!this.favoriteClicked){
-
-      var user = this.user;
-      if(!user.favorite.includes(this.videoId)){
-        //user.favorite.push(this.videoId);
-        this.userService.setFavoriteVideo(this.video).toPromise().then()
-        // this.userService.getUserById(this.userid).toPromise().then(user =>{
-        //   this.user=user;
-        // })
-      }
-
-    }
-    else if(this.favoriteClicked){
-      this.userService.unFavoriteVideo(this.video).toPromise().then()
-    }
+    // if(!this.favoriteClicked){
+    //
+    //   var user = this.user;
+    //   if(!user.favorite.includes(this.videoId)){
+    //     //user.favorite.push(this.videoId);
+    //     this.userService.setFavoriteVideo(this.video).toPromise().then()
+    //     // this.userService.getUserById(this.userid).toPromise().then(user =>{
+    //     //   this.user=user;
+    //     // })
+    //   }
+    //
+    // }
+    // else if(this.favoriteClicked){
+    //   this.userService.unFavoriteVideo(this.video).toPromise().then()
+    // }
 
 
   }
