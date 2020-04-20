@@ -19,7 +19,7 @@ export class ProfileComponent implements OnInit {
     {length: Math.floor(Math.random() * 10)},
     (item, index) => {
       return {number: index, edit: false};
-    }  
+    }
   );
 
   tabs= [
@@ -36,7 +36,7 @@ export class ProfileComponent implements OnInit {
   fileArr = [];
 
   formpicker = new Date().getDate;
-  
+
   userid: string;
   videourl: string;
   video:Video;
@@ -45,13 +45,13 @@ export class ProfileComponent implements OnInit {
   videos: Video[];//my video
   likes:Video[];
   sub:User[];//看情况
-  
+
 
   constructor(private renderer: Renderer2, private authService: NbAuthService,
     private userService: UserService,
     private videoService: VideoService,
     private route:ActivatedRoute) {
-    
+
       this.authService.onTokenChange()
       .subscribe((token: NbAuthJWTToken) => {
 
@@ -65,11 +65,11 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     //this.route.url.subscribe(url => {this.userid = url[2].toString()});
     //console.log(this.userid);
-    
+
     this.userService.getUserById(this.userid).toPromise().then(user =>{
       this.user = user;
 
-      
+
     });
       // this.videoService.getVideoById(this.videoid).toPromise().then(video => {
       //   this.video = video;
@@ -77,10 +77,10 @@ export class ProfileComponent implements OnInit {
       // this.videos = this.user.videos;
       // this.likes = this.user.likes;
 
-    this.videourl = this.videoService.getVideoImgURL(this.video.detail);
+    this.videourl = this.videoService.getVideoImgURL(this.video.url);
 
   }
- 
+
 
 
   setKey(event) {
@@ -178,5 +178,5 @@ ngAfterViewInit(): void {
     this.file.nativeElement.value="";
   });
 }
-  
+
 }

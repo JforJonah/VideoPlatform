@@ -5,6 +5,7 @@ import {Video} from '../../models/Video';
 import {NbAuthJWTToken, NbAuthService} from '@nebular/auth';
 import {UserService} from '../../server/user.service';
 import {User} from '../../models/User';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-uploadvideo',
@@ -19,10 +20,13 @@ export class UploadvideoComponent implements OnInit {
   profile: User;
   videoTitle: string;
   videoUrl: string;
-  constructor(
-              private videoService: VideoService,
+  isLinear = false;
+  firstFormGroup: FormGroup;
+  secondFormGroup: FormGroup;
+  constructor(private videoService: VideoService,
               private authService: NbAuthService,
-              private userService: UserService) {
+              private userService: UserService,
+              private formBuilder: FormBuilder) {
     this.authService.onTokenChange()
       .subscribe((token: NbAuthJWTToken) => {
 
@@ -36,23 +40,30 @@ export class UploadvideoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.firstFormGroup = this.formBuilder.group({
+      url: ['', Validators.required]
+    });
+    this.secondFormGroup = this.formBuilder.group({
+      title: ['', Validators.required],
+      description: ['']
+    });
   }
 
   step1next() {
-    if (this.getYoutubeURL(this.videoUrl)){
+    if (this.getYoutubeURL(this.firstFormGroup.value.url)){
       this.video.auth = this.profile.username;
-      this.video.title = 'Live Letters';
-      this.video.description = 'This is a video about Live Letter';
-      this.videoService.uploadVideo(this.video).subscribe();
       // this.nbStepperComponent.next();
     }
   }
-  previous() {
-    // this.nbStepperComponent.previous();
+
+  step2next() {
+    this.video.title = this.secondFormGroup.value.title;
+    this.video.description = (this.secondFormGroup.value.description === undefined ? 'none' : this.secondFormGroup.value.description);
+    this.videoService.uploadVideo(this.video).subscribe();
   }
 
   getYoutubeURL(url: string): boolean {
-    if (url !== null ) {
+    if (url !== undefined ) {
       const temp = url.replace('https://www.youtube.com/watch?v=', '');
       if (temp === null) { return false; }
       this.video.url = temp;

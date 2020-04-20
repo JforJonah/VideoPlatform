@@ -7,7 +7,7 @@ import {
   NB_STEPPER,
   NbActionsModule, NbButtonModule, NbCardModule,
   NbContextMenuModule, NbDatepickerModule,
-  NbIconModule,
+  NbIconModule, NbInputModule,
   NbLayoutModule, NbMenuModule, NbOptionModule, NbSelectModule, NbStepperComponent,
   NbStepperModule, NbTabsetModule, NbToggleModule,
   NbUserModule
@@ -23,6 +23,7 @@ import {NavBarComponent} from './nav-bar/nav-bar.component';
 import {UploadvideoComponent} from './uploadvideo/uploadvideo.component';
 import {VideodetailComponent} from './videodetail/videodetail.component';
 import {WatchlaterComponent} from './watchlater/watchlater.component';
+import { OtherprofileComponent } from './otherprofile/otherprofile.component';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import {WatchlaterComponent} from './watchlater/watchlater.component';
     UploadvideoComponent,
     VideodetailComponent,
     WatchlaterComponent,
+    OtherprofileComponent,
   ],
   imports: [
     CommonModule,
@@ -57,6 +59,7 @@ import {WatchlaterComponent} from './watchlater/watchlater.component';
     NbCardModule,
     NbToggleModule,
     FormsModule,
+    NbInputModule,
     // MatDatepickerModule
   ],
 })
