@@ -37,10 +37,12 @@ import {NgxAuthModule} from './auth/auth.module';
 import {PagesModule} from './pages/pages.module';
 import {environment} from '../environments/environment';
 import {NbInterceptor} from './auth/register/NbInterceptor';
+import { SafePipe } from './pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
+    SafePipe
   ],
   imports: [
     BrowserModule,
