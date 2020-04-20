@@ -1,10 +1,10 @@
-import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Renderer2, Input } from '@angular/core';
 import { UserService } from '../../server/user.service';
 import { VideoService } from '../../server/video.service';
 import { ActivatedRoute } from '@angular/router';
-import { User } from 'src/app/models/User';
 import { NbAuthService, NbAuthJWTToken } from '@nebular/auth';
 import { Video } from 'src/app/models/Video';
+import { User } from 'src/app/models/User';
 
 @Component({
   selector: 'app-profile',
@@ -27,59 +27,127 @@ export class ProfileComponent implements OnInit {
     "My Video",
     "Liked",
     "Subscription",
-    "Watch Later",
-    "Setting",
+    // "Watch Later",
+    // "Setting",
   ];
   tabKey ="My Video";
+  tabKeyL ="Liked";
+  tabKeyS ="Subscription";
 
   buttonText = "";
   fileArr = [];
 
-  formpicker = new Date().getDate;
-
+  //formpicker = new Date().getDate;
+  
   userid: string;
   videourl: string;
   video:Video;
+  
   user:User;
   videoid:string;
-  videos: Video[];//my video
-  likes:Video[];
-  sub:User[];//看情况
+  videos: Array<Video>;//my video
+  videoIds:Array<string>;
+  likes:Video[]; //likes 后面声明
+  realsub:Array<User>;
+  sub:Array<User>//看情况
+ 
 
+  requestId:string;
+  // videos:Array<Video>;
+  
+
+ 
 
   constructor(private renderer: Renderer2, private authService: NbAuthService,
     private userService: UserService,
     private videoService: VideoService,
     private route:ActivatedRoute) {
-
+      this.sub =new Array();
+      this.videos =new Array(); //my video 
+      this.likes = new Array(); //likes声明数组 找like的video
+      //this.videourl = this.videoService.getVideoImgURL(this.video.url);
       this.authService.onTokenChange()
       .subscribe((token: NbAuthJWTToken) => {
 
         if (token.isValid()) {
-          this.userid = token.getPayload()._id; // here we receive a payload from the token and assigns it to our `user` variable
+          this.requestId = token.getPayload()._id; // here we receive a payload from the token and assigns it to our `user` variable
+          console.log(this.requestId);
+          this.getMyVideos(this.requestId);
         }
-
+        console.log(this.videos)
       });
   }
+
+  
 
   ngOnInit(): void {
     //this.route.url.subscribe(url => {this.userid = url[2].toString()});
     //console.log(this.userid);
 
-    this.userService.getUserById(this.userid).toPromise().then(user =>{
+    this.userService.getUserById(this.requestId).toPromise().then(user =>{
       this.user = user;
-
-
     });
+    console.log(this.user);
+    let length=0;
+    this.userService.getUserById(this.requestId).subscribe(user=>{ //找到自己
+      user.subscribe.forEach((Item)=>{
+        this.userService.getUserById(Item).subscribe((fan)=>{ //通过subscribe里的id找到所有订阅的用户
+          this.sub.push(fan); //sub存的真的用户
+        })
+      })
+    });
+    console.log(this.sub);
+
+    this.userService.getUserById(this.requestId).subscribe(user=>{
+      user.liked.forEach((Item)=>{
+        this.videoService.getVideoById(Item).subscribe((ppl)=>{
+          this.likes.push(ppl);
+        })
+      })
+    });
+    console.log(this.likes);
+    //console.log(this.user + "1111");
+    
+    // this.userService.getUserById(this.requestId).subscribe(user=>{
+    //   user.liked.forEach((Item)=>{
+    //     this.videoService.getVideoImgURL(Item).((urls)=>{
+    //       this.videourl.push(urls);
+    //   })
+    // })
+      
+    // })
       // this.videoService.getVideoById(this.videoid).toPromise().then(video => {
       //   this.video = video;
       // });
-      // this.videos = this.user.videos;
-      // this.likes = this.user.likes;
-
-    this.videourl = this.videoService.getVideoImgURL(this.video.url);
+    
+      // for(let i=0;i<length;i++){
+      //   this.userService.getUserById(this.sub[i]).toPromise().then(user=>{this.realsub[i]=user,console.log(user)});
+      // }
 
   }
+
+  
+  
+  functionone() {
+    // this.videoIds = this.user.videos;
+
+    // console.log(this.videoIds);
+    // this.likes = this.user.liked;
+    // this.sub = this.user.subscribe;
+    
+    //this.videourl = this.videoService.getVideoImgURL(this.video.url);
+        
+    // for (let i = 0; i < this.videoIds.length; i++) {
+    //   this.videos[i]=this.videoService.getVideoById(this.videoIds[i]);
+      //console.log(this.videos);
+      // this.videoService.getAllVideosFromAuthor()
+    
+  };
+  getMyVideos(id:string):void{
+    this.videoService.getAllVideosFromAuthor(id).toPromise().then(video=>{this.videos=video,console.log(video)});
+  }
+
+ 
 
 
 
@@ -103,9 +171,9 @@ export class ProfileComponent implements OnInit {
       case "Subscription":
         this.buttonText = "Unsubscribe";
         break;
-      case "Watch Later":
-        this.buttonText = "Cancel";
-        break;
+      // case "Watch Later":
+      //   this.buttonText = "Cancel";
+      //   break;
       default:
         this.buttonText = "";
     }
@@ -119,7 +187,7 @@ export class ProfileComponent implements OnInit {
   deleteItem(){
     //var deleteitem = confirm('Delete?')
     //if(deleteitem){
-      this.Arr.forEach((item) => (item.edit = true));
+    //  this.Arr.forEach((item) => (item.edit = true));
     //}
     //window.location.assign('');
   }

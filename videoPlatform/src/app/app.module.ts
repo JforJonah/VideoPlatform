@@ -120,7 +120,8 @@ import {AppComponent} from './app.component';
     },
     AuthGuard
   ],
-  exports: [],
+  exports:[  
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

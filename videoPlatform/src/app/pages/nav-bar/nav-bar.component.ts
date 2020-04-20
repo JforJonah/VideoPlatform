@@ -63,9 +63,9 @@ export class NavBarComponent implements OnInit {
     //
     // this.videoService.getAuthor(this.video).subscribe(user => console.log(`author id: ${user.id}`));
     console.log(this.video);
-    this.videoService.getAllVideosFromAuthor(this.video).subscribe(videos => this.videos = videos);
+    //this.videoServmace.getAllVideosFromAuthor(this.video).subscribe(videos => this.videos = videos);
 
-  }
+  } 
   fun2() {
     // this.videoService.getVideoById(`5e9b614b198a1424dda0c1e2`).subscribe(video => this.video = video);
     console.log(this.video);

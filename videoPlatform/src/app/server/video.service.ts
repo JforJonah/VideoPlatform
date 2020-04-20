@@ -51,11 +51,12 @@ export class VideoService {
   /**
    * GET: get the videos from the same author
    */
-  getAllVideosFromAuthor(video: Video): Observable<Video[]>{
-    const url = `${this.videoResourceURL}/find/${video.id}`;
-    return this.http.get<Video[]>(url).pipe(
-      catchError(this.handleError<Video[]>(`get videos by user id = ${video.id}`))
-    );
+  getAllVideosFromAuthor(id:string): Observable<Array<Video>>{
+    const url = `http://localhost:3000/videos/find/${id}`;
+    return this.http.get<Video[]>(url);
+    //pipe(
+     // catchError(this.handleError<Video[]>(`get videos by user id = ${video.id}`))
+    //);
   }
 
   /**
