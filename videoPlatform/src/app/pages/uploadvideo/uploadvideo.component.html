@@ -4,11 +4,6 @@
     <nb-stepper orientation="horizontal" [disableStepNavigation]="true">
       <nb-step label="Input URL" [stepControl]="firstFormGroup">
         <!--        input video url-->
-<<<<<<< HEAD
-
-        
-        <button nbButton><nb-icon icon="arrow-right"></nb-icon> </button>
-=======
         <form [formGroup]="firstFormGroup">
           <label>Input your youtube URL:</label>
           <div class="InputDiv">
@@ -16,7 +11,6 @@
           </div>
           <button nbButton (click)="step1next()" nbStepperNext>Next<nb-icon icon="arrow-right"></nb-icon> </button>
         </form>
->>>>>>> 50cddf1a3c27c8e824cc91ef472f33ce0f28e890
       </nb-step>
       <nb-step label="Title & Description" [stepControl]="secondFormGroup">
         <!--        input video title and description-->
