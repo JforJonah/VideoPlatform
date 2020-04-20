@@ -5,5 +5,7 @@ export class Comment {
     videoId: string;
     createDate: Date;
     auth: string;
+    constructor() {
+    }
 }
 

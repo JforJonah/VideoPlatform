@@ -51,11 +51,12 @@ export class VideoService {
   /**
    * GET: get the videos from the same author
    */
-  getAllVideosFromAuthor(video: Video): Observable<Video[]>{
-    const url = `${this.videoResourceURL}/find/${video.id}`;
-    return this.http.get<Video[]>(url).pipe(
-      catchError(this.handleError<Video[]>(`get videos by user id = ${video.id}`))
-    );
+  getAllVideosFromAuthor(id:string): Observable<Array<Video>>{
+    const url = `http://localhost:3000/videos/find/${id}`;
+    return this.http.get<Video[]>(url);
+    //pipe(
+     // catchError(this.handleError<Video[]>(`get videos by user id = ${video.id}`))
+    //);
   }
 
   /**
@@ -89,6 +90,17 @@ export class VideoService {
   }
 
   /**
+   * GET: find video by tag
+   * @param tag the video with same tag to be found
+   */
+  getVideoByTag(tag: string): Observable<Video[]> {
+    const url = `${this.videoResourceURL}/findByTag/${tag}`;
+    return this.http.get<Video[]>(url).pipe(
+      catchError(this.handleError<any>(`get videos by tag ${tag}`))
+    );
+  }
+
+  /**
    * POST: upload the video
    */
   uploadVideo(video: Video): Observable<Video>{
@@ -116,11 +128,11 @@ export class VideoService {
   }
 
   /************** URL Method *****************/
-  getVideoURL(url: string): string{
+  getVideoURL(url: string): string {
     return `https://www.youtube.com/embed/${url}`;
   }
 
-  getVideoImgURL(url: string): string{
+  getVideoImgURL(url: string): string {
     return `http://i.ytimg.com/vi/${url}/maxresdefault.jpg`;
   }
 }

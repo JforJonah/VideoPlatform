@@ -13,17 +13,25 @@
 
             <div class="userInfoContent">
                 <div class="input">
+                    <span class="title"> First Name </span>
+                    <input type="text" nbInput fullWidth fieldSize="medium" placeholder="First Name"> 
+                </div>
+                <div class="input">
+                    <span class="title"> Last Name </span>
+                    <input type="text" nbInput fullWidth fieldSize="medium" placeholder="Last Name">
+                </div>
+                <div class="input">
                     <span class="title"> User Name </span>
                     <input type="text" nbInput fullWidth fieldSize="medium" placeholder="User Name">
                     <a>Change User Name</a>
                 </div>
                 <div class="input">
                     <span class="title"> Email </span>
-                    <input type="text" nbInput fullWidth fieldSize="medium" placeholder="Email">
+                    <input type="text" nbInput fullWidth fieldSize="medium" placeholder="Email" disabled="true">
                 </div>
                 <div class="input">
                     <span class="title"> Password </span>
-                    <input type="text" nbInput fullWidth fieldSize="medium" placeholder="Password">
+                    <input type="text" nbInput fullWidth fieldSize="medium" placeholder="Password" disabled="true">
                     <a>Forget Password</a>
                 </div>
                 <div class="input">
@@ -54,37 +62,79 @@
                 <nb-toggle labelPosition="start"><span class="text">Everyone can see my page</span></nb-toggle>
             </div>
         </div>
+
+<!-- liked video part in profile page -->
+        <div *ngSwitchCase="'Liked'">
+            <div class="videoList">
+                <div class="videoTitle">
+                    <div href="" class="t">{{tabKeyL}}</div>
+                </div>
+                <div class="videoContent">
+                    <ng-container *ngFor="let item of likes">
+                        <!-- <div class="likes">{{item.email}}</div> -->
+                        <div class="small-item">
+                            <div class="cover" [ngClass]="{'redBorder': editFlag && tabKeyL == 'Liked'}" (click)="toEdit(item)">
+                                <!-- <iframe width="160" height="100" [src]="[videourl, 'NewPipePipe']"></iframe> -->
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+        <button *ngIf="tabKey == 'Liked'" class="editItem" (click)="editStatus()" nbButton>Cancel</button>
+        <!-- <button (click)="functionone() ">1111</button> -->
+<!-- Subscription video part in profile page -->
+        <div *ngSwitchCase="'Subscription'">
+            <div class="videoList">
+                <div class="videoTitle">
+                    <div href="" class="t">{{tabKeyS}}</div>
+                </div>
+                <div class="videoContent">
+                    <ng-container *ngFor="let item of sub">
+                        <div class="sub">{{item.email}}</div>
+                        <div class="small-item">
+                            <div class="cover" [ngClass]="{'redBorder': editFlag && tabKeyL == 'Subscription'}" (click)="toEdit(item)">
+                                <!-- <iframe width="160" height="100" [src]="videourl | NewPipePipe"></iframe> -->
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+        <button *ngIf="tabKey == 'Subscription'" class="editItem" (click)="editStatus()" nbButton>Unsubscribe</button>
+
+
         <div *ngSwitchDefault>
             <section>
                 <div class="videoList">
                     <div class="videoTitle">
                         <a href="" class="t">{{tabKey}}</a>
-                        <span class="count">{{Arr.length}}</span>
+                        <!-- <span class="count">{{Arr.length}}</span> -->
                     </div>
                     <div class="videoContent">
-                        <ng-container *ngFor="let item of Arr; let index = index">
+                        <ng-container *ngFor="let item of videos; let index =index"> <!--let item of Arr; let index = index-->
+                            <div class="name">{{item.auth}}</div>
                             <div class="small-item">
                                 <div class="cover" [ngClass]="{'redBorder': editFlag && tabKey == 'My Video'}" (click)="toEdit(item)">
-                                    <img
+                                    <!-- <img
                                         src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1875705305,2952422048&fm=26&gp=0.jpg"
-                                        >
-                                        <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/gMOw8F_qrlo"></iframe> -->
-                                    <span class="length">0{{item.number}}:48</span>
-                                    <span class="i-watchlater"></span>
+                                        > -->
+                                        <!-- <iframe width="160" height="100" src="videourl | NewPipePipe"></iframe> -->
+                                    <!-- <span class="length">0{{item.number}}:48</span> -->
+                                    <!-- <span class="i-watchlater"></span>
                                     <nb-icon *ngIf="item.edit" (click)="del($event,index)" class="icon"
-                                    icon="close-outline" status="danger"></nb-icon>
-                                </div>
-                                <a href="//www.bilibili.com/video/BV1Ab411a7y9" target="_blank" title="title" class="title">title</a>
-                                <div class="meta"><span class="play"><i class="icon"></i>288
-                                </span>
-                                <span class="time"><i class="icon"></i>2019-2-23</span>
+                                    icon="close-outline" status="danger"></nb-icon> -->
+                                <!-- </div> -->
+                                <!-- <a href="//www.bilibili.com/video/BV1Ab411a7y9" target="_blank" title="title" class="title">title</a> -->
+                                <!-- <div class="meta"><span class="play"><i class="icon"></i>288 -->
+                                <!-- </span> -->
+                                <!-- <span class="time"><i class="icon"></i>2019-2-23</span> -->
                                 </div>
                             </div>
                         </ng-container>
-                    </div>
+                    </div>  
                 </div>
             </section>
-           
             <button *ngIf="tabKey == 'My Video'" class="editItem" (click)="editStatus()" nbButton>Edit</button>
             <button class="deleteItem" (click)="deleteItem()" nbButton>{{buttonText}}</button>
 

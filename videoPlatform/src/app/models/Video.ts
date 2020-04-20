@@ -6,15 +6,11 @@ export class Video {
   title: string;
   url: string;
   createdDate: Date;
-  like: any[]; //存的userId,喜欢这个视频的人
-
+  like: any[]; // 存的userId,喜欢这个视频的人
   unlike: any[];
-
-  comments: Comment[];
-
+  comments: any[];
+  tag: string;
   constructor(author: string, description: string, url: string, title: string) {
-
-
     this.auth = author;
     this.description = description;
     this.url = url;

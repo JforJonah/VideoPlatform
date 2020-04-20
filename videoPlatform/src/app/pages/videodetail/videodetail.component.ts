@@ -76,8 +76,9 @@ favorite:Array<Video>;
                 this.favorite=new Array();
 
                 this.comments=new Array();
+                this.videoId="";
 
-  
+
                 //console.log(this.video.id);
                 //get userid
                 authService.onTokenChange()
@@ -133,13 +134,16 @@ favorite:Array<Video>;
                 //   }
                 //   console.log(this.likeClicked)
 
-                //   //this video url
-                //   this.videoUrl=this.videoService.getVideoURL(video.url);
-                //   console.log(this.videoUrl)
+                  // //this video url
+                  // this.videoUrl=this.videoService.getVideoURL(video.url);
+                  // console.log(this.videoUrl)
 
                 //   //this.videoUrl = sanitizer.bypassSecurityTrustHtml(this.videoUrl);
                   
                 // })
+                //this video url
+                  // this.videoUrl=this.videoService.getVideoURL(this.video.url);
+                  // console.log(this.videoUrl)
                 
 
                }
@@ -155,6 +159,8 @@ favorite:Array<Video>;
     
     this.videoService.getVideoById(this.videoId).subscribe(video =>{
       this.video=video,console.log(this.video),
+      this.videoUrl=this.videoService.getVideoURL(video.url);
+      console.log(this.videoUrl)
       // this.videoService.getAuthor(video).subscribe(auth=>{
       //   this.author=auth;
       // })
@@ -163,6 +169,7 @@ favorite:Array<Video>;
       })
     }
     );
+    
   }
   
 
@@ -216,24 +223,24 @@ favorite:Array<Video>;
         this.video = video;
         this.video.comments=video.comments;
       });
-    
+
 
   }
 
   likeClick(){
     console.log(this.likeClicked)
-    
+
     if(!this.likeClicked){
       if(!this.video.like.includes(this.userid)){
         this.video.like.push(this.userid);
         this.userService.likeVideo(this.video).toPromise().then()
       }
-      
+
       //this.user.liked.push(this.videoId);
       //update database
       this.videoService.updateVideo(this.video)
       .subscribe(video =>{
-        
+
         this.video = video;
       });
 
@@ -241,7 +248,7 @@ favorite:Array<Video>;
       // .subscribe(user =>{
       //   this.user=user;
       // })
-      
+
       //console.log(this.video.like);
       //console.log(this.user.liked);
 
@@ -257,12 +264,12 @@ favorite:Array<Video>;
           // }
         }
       }
-      
+
       //update database
       this.videoService.updateVideo(this.video)
       .subscribe(video =>{
         this.video = video;
-        
+
       });
       //console.log(this.video.like);
 
@@ -279,15 +286,15 @@ favorite:Array<Video>;
     //console.log("before",this.user.favorite);
 
     if(!this.favoriteClicked){
-      
+
       var user = this.user;
-      if(!user.favorite.includes(this.videoId)){
+      //if(!this.user.favorite.includes(this.videoId)){
         //user.favorite.push(this.videoId);
         this.userService.setFavoriteVideo(this.video).toPromise().then()
         // this.userService.getUserById(this.userid).toPromise().then(user =>{
         //   this.user=user;
         // })
-      }
+      //}
 
     }
     else if(this.favoriteClicked){

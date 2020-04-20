@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {Observable, of} from 'rxjs';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable, of, Subject} from 'rxjs';
+import {HttpClient, HttpEventType, HttpHeaders, HttpRequest, HttpResponse} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {catchError, map, tap} from 'rxjs/operators';
 import {PagesModule} from '../pages/pages.module';
@@ -137,6 +137,16 @@ export class UserService {
     const url = `${this.userResourceURL}/updateHistory`;
     return this.http.post<User>(url, video, this.cors).pipe(
       catchError(this.handleError<User>(`add video id = ${video.id} to history`))
+    );
+  }
+
+  /**
+   * POST: Upload the user profile image
+   */
+  uploadProfileImg(form: FormData): Observable<any> {
+    const url = `${this.userResourceURL}/uploadImg`;
+    return this.http.post(url, form, this.cors).pipe(
+      catchError(this.handleError<any>(`upload Profile Image`))
     );
   }
 

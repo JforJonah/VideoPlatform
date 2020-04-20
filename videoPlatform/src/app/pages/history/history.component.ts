@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {NbAuthJWTToken, NbAuthService} from "@nebular/auth";
+import {UserService} from "../../server/user.service";
+import {User} from "../../models/User";
 
 @Component({
   selector: 'app-history',
@@ -7,9 +10,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HistoryComponent implements OnInit {
 
-  constructor() { }
+  userid;
+  profile: User;
+  constructor(private authService: NbAuthService, private userService: UserService) {
+    this.authService.onTokenChange()
+      .subscribe((token: NbAuthJWTToken) => {
+
+        if (token.isValid()) {
+          this.userid = token.getPayload()._id; // here we receive a payload from the token and assigns it to our `user` variable
+        }
+
+      });
+    userService.getUserById(this.userid).subscribe(profile => this.profile = profile);
+  }
 
   ngOnInit(): void {
   }
 
+  removeFromHistory(): void{
+  }
 }
