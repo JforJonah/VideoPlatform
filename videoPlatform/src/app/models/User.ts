@@ -1,3 +1,5 @@
+import { Video } from './Video';
+
 export interface User {
   id: string;
   username: string;
@@ -10,7 +12,7 @@ export interface User {
   firstName: string;
   lastName: string;
   history: [];
-  videos: [];
+  videos: Array<string>;
   liked: [];
   unlike: [];
   subscribe: [];
