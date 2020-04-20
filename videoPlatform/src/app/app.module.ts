@@ -2,27 +2,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   NbThemeModule,
-  NbLayoutModule,
-  NbActionsModule,
-  NbIconModule,
-  NbUserModule,
-  NbContextMenuModule, NbStepperModule, NbMenuModule, NbCardModule
+  NbMenuModule,
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
-import { NavBarComponent } from './pages/nav-bar/nav-bar.component';
-import { HomeComponent } from './pages/home/home.component';
-import { VideodetailComponent } from './pages/videodetail/videodetail.component';
-import { ProfileComponent } from './pages/profile/profile.component';
-import { FavoriteComponent } from './pages/favorite/favorite.component';
-import { WatchlaterComponent } from './pages/watchlater/watchlater.component';
-import { HistoryComponent } from './pages/history/history.component';
-import { UploadvideoComponent } from './pages/uploadvideo/uploadvideo.component';
-import {ReactiveFormsModule} from '@angular/forms';
-import { FollowsComponent } from './pages/follows/follows.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {
   NbPasswordAuthStrategy,
@@ -37,10 +22,12 @@ import {NgxAuthModule} from './auth/auth.module';
 import {PagesModule} from './pages/pages.module';
 import {environment} from '../environments/environment';
 import {NbInterceptor} from './auth/register/NbInterceptor';
+import {SafePipe} from './pages/pipe/SafePipe';
+import {AppComponent} from './app.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -133,6 +120,7 @@ import {NbInterceptor} from './auth/register/NbInterceptor';
     },
     AuthGuard
   ],
+  exports: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

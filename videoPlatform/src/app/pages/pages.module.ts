@@ -24,6 +24,7 @@ import {UploadvideoComponent} from './uploadvideo/uploadvideo.component';
 import {VideodetailComponent} from './videodetail/videodetail.component';
 import {WatchlaterComponent} from './watchlater/watchlater.component';
 import { OtherprofileComponent } from './otherprofile/otherprofile.component';
+import {SafePipe} from './pipe/SafePipe';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { OtherprofileComponent } from './otherprofile/otherprofile.component';
     VideodetailComponent,
     WatchlaterComponent,
     OtherprofileComponent,
+    SafePipe
   ],
   imports: [
     FormsModule,
@@ -51,7 +53,6 @@ import { OtherprofileComponent } from './otherprofile/otherprofile.component';
     NbContextMenuModule,
     NbStepperModule,
     ReactiveFormsModule,
-    NbMenuModule.forRoot(),
     NbButtonModule,
     NbTabsetModule,
     NbSelectModule,
@@ -63,5 +64,8 @@ import { OtherprofileComponent } from './otherprofile/otherprofile.component';
     NbInputModule,
     // MatDatepickerModule
   ],
+  exports: [
+    SafePipe
+  ]
 })
 export class PagesModule { }
