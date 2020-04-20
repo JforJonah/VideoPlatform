@@ -14,7 +14,7 @@
             <div class="userInfoContent">
                 <div class="input">
                     <span class="title"> First Name </span>
-                    <input type="text" nbInput fullWidth fieldSize="medium" placeholder="First Name"> 
+                    <input type="text" nbInput fullWidth fieldSize="medium" placeholder="First Name">
                 </div>
                 <div class="input">
                     <span class="title"> Last Name </span>
@@ -74,7 +74,7 @@
                         <!-- <div class="likes">{{item.email}}</div> -->
                         <div class="small-item">
                             <div class="cover" [ngClass]="{'redBorder': editFlag && tabKeyL == 'Liked'}" (click)="toEdit(item)">
-                                <!-- <iframe width="160" height="100" [src]="[videourl, 'NewPipePipe']"></iframe> -->
+<!--                                <iframe width="160" height="100" [src]="[videourl, 'NewPipePipe']"></iframe>-->
                             </div>
                         </div>
                     </ng-container>
@@ -94,7 +94,7 @@
                         <div class="sub">{{item.email}}</div>
                         <div class="small-item">
                             <div class="cover" [ngClass]="{'redBorder': editFlag && tabKeyL == 'Subscription'}" (click)="toEdit(item)">
-                                <!-- <iframe width="160" height="100" [src]="videourl | NewPipePipe"></iframe> -->
+<!--                                <iframe width="160" height="100" [src]="videourl | NewPipePipe"></iframe>-->
                             </div>
                         </div>
                     </ng-container>
@@ -119,7 +119,7 @@
                                     <!-- <img
                                         src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1875705305,2952422048&fm=26&gp=0.jpg"
                                         > -->
-                                        <!-- <iframe width="160" height="100" src="videourl | NewPipePipe"></iframe> -->
+<!--                                        <iframe width="160" height="100" src="videourl | NewPipePipe"></iframe>-->
                                     <!-- <span class="length">0{{item.number}}:48</span> -->
                                     <!-- <span class="i-watchlater"></span>
                                     <nb-icon *ngIf="item.edit" (click)="del($event,index)" class="icon"
@@ -132,7 +132,7 @@
                                 </div>
                             </div>
                         </ng-container>
-                    </div>  
+                    </div>
                 </div>
             </section>
             <button *ngIf="tabKey == 'My Video'" class="editItem" (click)="editStatus()" nbButton>Edit</button>
@@ -189,12 +189,12 @@
 
 
         <!-- <nb-tab tabTitle="My Video">
-           
+
         </nb-tab>
         <nb-tab tabTitle="Liked">
             Liked Video
         </nb-tab>
-        <nb-tab tabTitle="Subscription"> 
+        <nb-tab tabTitle="Subscription">
             Subscription
         </nb-tab>
         <nb-tab tabTitle="Watch Later">
@@ -235,7 +235,7 @@
                             </div>
                         </ng-container>
                         </div>   -->
-                        
+
                     <!-- </ng-container> -->
                 <!-- </div> -->
             <!-- </div>

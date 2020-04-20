@@ -92,7 +92,6 @@ favorite:Array<Video>;
 
 
 
-
                   //video-list add
                   // for(var i =0;i<user.videos.length;i++){
                   //   //console.log(user.videos[i])

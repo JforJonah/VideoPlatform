@@ -1,1 +1,16 @@
-<iframe [src]="url | safe: 'html'"></iframe>
+<nb-card *ngFor="let tag of localtags; index as i">
+  <nb-card-header>{{tag}}</nb-card-header>
+  <nb-card-body>
+    <nb-card *ngFor="let video of videoList[i]">
+      <nb-card-header>
+        <nb-user [name]="video?.auth"></nb-user>
+      </nb-card-header>
+      <nb-card-body>
+        <iframe [src]="videoService.getVideoImgURL(video.url) | safe: 'resourceUrl'"></iframe>
+      </nb-card-body>
+      <nb-card-footer>
+        {{video.title}}
+      </nb-card-footer>
+    </nb-card>
+  </nb-card-body>
+</nb-card>
