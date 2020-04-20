@@ -38,6 +38,7 @@ import {WatchlaterComponent} from './watchlater/watchlater.component';
     WatchlaterComponent,
   ],
   imports: [
+    FormsModule,
     CommonModule,
     PagesRoutingModule,
     NbLayoutModule,

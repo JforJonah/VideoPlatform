@@ -7,9 +7,14 @@ export class Video {
   url: string;
   createdDate: Date;
   like: any[]; //存的userId,喜欢这个视频的人
+
   unlike: any[];
-  comment: Comment[];
+
+  comments: Comment[];
+
   constructor(author: string, description: string, url: string, title: string) {
+
+
     this.auth = author;
     this.description = description;
     this.url = url;

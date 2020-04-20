@@ -9,6 +9,7 @@ export interface User {
   profileImage: string;
   firstName: string;
   lastName: string;
+
   history: any[];
   videos: any[];
   liked: any[];
@@ -16,4 +17,5 @@ export interface User {
   subscribe: any[];
   favorite: any[];
   subscribed: any[];
+
 }

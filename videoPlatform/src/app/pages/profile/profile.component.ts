@@ -77,7 +77,7 @@ export class ProfileComponent implements OnInit {
       // this.videos = this.user.videos;
       // this.likes = this.user.likes;
 
-    this.videourl = this.videoService.getVideoImgURL(this.video.detail);
+    //this.videourl = this.videoService.getVideoImgURL(this.video.detail);
 
   }
  
