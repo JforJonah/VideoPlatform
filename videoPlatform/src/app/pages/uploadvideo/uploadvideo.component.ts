@@ -25,6 +25,11 @@ export class UploadvideoComponent implements OnInit {
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   comments: Comment[];
+  tags: string[] = [
+    'gaming',
+    'learning',
+    'coding'
+  ];
   constructor(private videoService: VideoService,
               private authService: NbAuthService,
               private userService: UserService,
@@ -47,20 +52,23 @@ export class UploadvideoComponent implements OnInit {
     });
     this.secondFormGroup = this.formBuilder.group({
       title: ['', Validators.required],
+      tag: ['', Validators.required],
       description: ['']
     });
   }
 
   step1next() {
-    if (this.getYoutubeURL(this.firstFormGroup.value.url)){
+    if (this.getYoutubeURL(this.firstFormGroup.value.url)) {
       this.video.auth = this.profile.username;
       this.video.comments = this.comments;
       // this.nbStepperComponent.next();
     }
+    console.log(this.tags);
   }
 
   step2next() {
     this.video.title = this.secondFormGroup.value.title;
+    this.video.tag = this.secondFormGroup.value.tag;
     this.video.description = (this.secondFormGroup.value.description === undefined ? 'none' : this.secondFormGroup.value.description);
     this.videoService.uploadVideo(this.video).subscribe();
   }

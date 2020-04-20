@@ -1,12 +1,12 @@
 <div class = "videodetail">
     <div class = "left">
         <div class = "video-info">
-            <h3 class = "videotitle">title of video</h3>
-            <p class = "videodescription">desc of video</p>
+            <h3 class = "videotitle" *ngIf="video.title">{{video.title}}</h3>
+            <p class = "videodescription" *ngIf="video.title">{{video.description}}</p>
         </div>
         <div class="videoframe">
             <iframe width="90%" height="500px" 
-            src="https://www.youtube.com/embed/n-O5mnscPQE" 
+            src="https://www.youtube.com/embed/{{video.url}}" 
             frameborder="0" 
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
         </iframe>
@@ -15,11 +15,13 @@
             <button nbButton ghost status="primary" 
             class ="like-btn"
             (click)="likeClick();
-            likeClicked =!likeClicked"
+            "
             [class.like-clicked]="likeClicked">
-                <nb-icon icon="heart"></nb-icon> 
+                <nb-icon icon="heart"
+               
+                ></nb-icon> 
                 Like
-                <span class= "likeCount"> 1 </span>
+                <span class= "likeCount"></span>
             </button>
             <button nbButton ghost status="primary"
             class="favorite-btn"
@@ -28,7 +30,7 @@
             [class.favorite-clicked]="favoriteClicked">
                 <nb-icon icon="star"></nb-icon> 
                 Favorite
-                <span class= "likeCount"> 1 </span>
+                <span class= "likeCount"></span>
             </button>
         </div>
         <div class = "comment-up">
@@ -37,7 +39,7 @@
             <div class = "comment-txt">
                     <nb-user class="user-info" 
                     size="medium" 
-                    name="Monster Hunter"
+                    name={{user.username}}
                     picture=""
                     color = "green"
                     >
@@ -45,7 +47,8 @@
                 <div class="comment-input">
                     <textarea cols="80" 
                     rows="5" 
-                    placeholder="请自觉遵守互联网相关的政策法规，严禁发布色情、暴力、反动的言论。" 
+                    placeholder="Please input your comment on this video" 
+                    [(ngModel)] = "commentTxt"
                    ></textarea>
                 </div>
                 <div class = "comment-btn">
@@ -57,52 +60,34 @@
            
         </div>
         <!--*ngFor-->
-        <div class= "comment-area">
-            <div class = "comment-list" >
+        <div class= "comment-area" >
+            <div class = "comment-list" *ngFor="let comment of comments">
                 <nb-card>
                     <nb-card-body>
                         <div class="comment-user">
                             <nb-user class="user-info" 
-                            size="small" 
-                            name="Monster Hunter"
+                             size="small" 
+                            name="{{comment.auth}}"
                             picture=""
                             color = "green">
                         </nb-user>
                         </div>
                         <div class = "comment">
-                            <p class = "comment-text">鸡你太美~~ baby 鸡你太美~~ baby 鸡你实在是太美~~ baby</p>
+                            <p class = "comment-text">{{comment.txt}}</p>
                         </div>
                     </nb-card-body>
                 </nb-card>
                 
                 
             </div>
-            <div class = "comment-list" >
-                <nb-card>
-                    <nb-card-body>
-                        <div class="comment-user">
-                            <nb-user class="user-info" 
-                            size="small" 
-                            name="Monster Hunter"
-                            picture=""
-                            color = "green">
-                        </nb-user>
-                        </div>
-                        <div class = "comment">
-                            <p class = "comment-text">鸡你太美~~ baby</p>
-                        </div>
-                    </nb-card-body>
-                </nb-card>
-                
-                
-            </div>
+            
         </div>
         
     </div>
     <div class = "right">
             <nb-user class="user-info" 
                 size="large" 
-                name="Monster Hunter"
+                name={{video?.auth}}
                 picture=""
                 color = "green">
         </nb-user>
@@ -115,17 +100,17 @@
             + Follow
             <nb-icon icon="heart" 
             class="follow-icon"></nb-icon> 
-                <span class ="followCount">1</span>
+                <span class ="followCount"></span>
             </button>
             
         </div>
         
 
-        <div class = "video-list" scrollshow="true">
+        <!-- <div class = "video-list" scrollshow="true">
             <div class="video-list-title">
                 <h5>More Videos</h5>
             </div>
-            <!--*ngFor-->
+            
             <div class = "video-card">
                 <nb-card>
                     <nb-card-body>
@@ -159,7 +144,7 @@
                 
             </div>
 
-        </div>
+        </div> -->
         
     </div>
     

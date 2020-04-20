@@ -40,6 +40,7 @@ import { OtherprofileComponent } from './otherprofile/otherprofile.component';
     OtherprofileComponent,
   ],
   imports: [
+    FormsModule,
     CommonModule,
     PagesRoutingModule,
     NbLayoutModule,

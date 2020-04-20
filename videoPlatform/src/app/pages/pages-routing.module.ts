@@ -9,6 +9,7 @@ import {FollowsComponent} from './follows/follows.component';
 import {ProfileComponent} from './profile/profile.component';
 import {NavBarComponent} from './nav-bar/nav-bar.component';
 import {OtherprofileComponent} from "./otherprofile/otherprofile.component";
+import {VideodetailComponent} from '../pages/videodetail/videodetail.component';
 
 
 const routes: Routes = [
@@ -23,7 +24,8 @@ const routes: Routes = [
       {path: 'watchlater', component: WatchlaterComponent},
       {path: 'follows', component: FollowsComponent},
       {path: 'profile', component: ProfileComponent},
-      {path: 'profile/:id', component: OtherprofileComponent },
+      {path: 'details/:id', component: VideodetailComponent},
+      {path: 'profile/:id', component: OtherprofileComponent},
     ]
   }
   ,

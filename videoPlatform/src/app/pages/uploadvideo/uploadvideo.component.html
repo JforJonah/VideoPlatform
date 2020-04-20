@@ -16,11 +16,18 @@
         <!--        input video title and description-->
         <form [formGroup]="secondFormGroup">
           <div>
-            <label> Title: </label>
+            <label> Title </label>
             <div class="InputDiv">
               <input nbInput placeholder="video title" formControlName="title" required>
             </div>
-
+          </div>
+          <div>
+            <label> Tag </label>
+            <div class="InputDiv">
+              <nb-select formControlName="tag">
+                <nb-option *ngFor="let tag of tags" [value]="tag">{{tag}}</nb-option>
+              </nb-select>
+            </div>
           </div>
           <div>
             <label> Description </label>
