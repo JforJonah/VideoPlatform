@@ -133,6 +133,8 @@ import {NbInterceptor} from './auth/register/NbInterceptor';
     },
     AuthGuard
   ],
+  exports:[  
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -27,8 +27,8 @@ export class ProfileComponent implements OnInit {
     "My Video",
     "Liked",
     "Subscription",
-    "Watch Later",
-    "Setting",
+    // "Watch Later",
+    // "Setting",
   ];
   tabKey ="My Video";
   tabKeyL ="Liked";
@@ -50,6 +50,7 @@ export class ProfileComponent implements OnInit {
   likes:Video[]; //likes 后面声明
   realsub:Array<User>;
   sub:Array<User>//看情况
+ 
 
   requestId:string;
   // videos:Array<Video>;
@@ -64,6 +65,7 @@ export class ProfileComponent implements OnInit {
       this.sub =new Array();
       this.videos =new Array(); //my video 
       this.likes = new Array(); //likes声明数组 找like的video
+      //this.videourl = this.videoService.getVideoImgURL(this.video.url);
       this.authService.onTokenChange()
       .subscribe((token: NbAuthJWTToken) => {
 
@@ -105,6 +107,14 @@ export class ProfileComponent implements OnInit {
     console.log(this.likes);
     //console.log(this.user + "1111");
     
+    // this.userService.getUserById(this.requestId).subscribe(user=>{
+    //   user.liked.forEach((Item)=>{
+    //     this.videoService.getVideoImgURL(Item).((urls)=>{
+    //       this.videourl.push(urls);
+    //   })
+    // })
+      
+    // })
       // this.videoService.getVideoById(this.videoid).toPromise().then(video => {
       //   this.video = video;
       // });
@@ -160,9 +170,9 @@ export class ProfileComponent implements OnInit {
       case "Subscription":
         this.buttonText = "Unsubscribe";
         break;
-      case "Watch Later":
-        this.buttonText = "Cancel";
-        break;
+      // case "Watch Later":
+      //   this.buttonText = "Cancel";
+      //   break;
       default:
         this.buttonText = "";
     }
@@ -176,7 +186,7 @@ export class ProfileComponent implements OnInit {
   deleteItem(){
     //var deleteitem = confirm('Delete?')
     //if(deleteitem){
-      this.Arr.forEach((item) => (item.edit = true));
+    //  this.Arr.forEach((item) => (item.edit = true));
     //}
     //window.location.assign('');
   }

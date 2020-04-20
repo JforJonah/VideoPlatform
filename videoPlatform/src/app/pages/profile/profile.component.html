@@ -71,10 +71,10 @@
                 </div>
                 <div class="videoContent">
                     <ng-container *ngFor="let item of likes">
-                        <div class="likes">{{item.email}}</div>
+                        <!-- <div class="likes">{{item.email}}</div> -->
                         <div class="small-item">
                             <div class="cover" [ngClass]="{'redBorder': editFlag && tabKeyL == 'Liked'}" (click)="toEdit(item)">
-                                <iframe width="160" height="100" src="{{videourl}}"></iframe>
+                                <iframe width="160" height="100" [src]="[videourl, 'NewPipePipe']"></iframe>
                             </div>
                         </div>
                     </ng-container>
@@ -94,7 +94,7 @@
                         <div class="sub">{{item.email}}</div>
                         <div class="small-item">
                             <div class="cover" [ngClass]="{'redBorder': editFlag && tabKeyL == 'Subscription'}" (click)="toEdit(item)">
-                                <iframe width="160" height="100" src="{{videourl}}"></iframe>
+                                <iframe width="160" height="100" [src]="videourl | NewPipePipe"></iframe>
                             </div>
                         </div>
                     </ng-container>
@@ -116,18 +116,18 @@
                             <div class="name">{{item.auth}}</div>
                             <div class="small-item">
                                 <div class="cover" [ngClass]="{'redBorder': editFlag && tabKey == 'My Video'}" (click)="toEdit(item)">
-                                    <img
+                                    <!-- <img
                                         src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1875705305,2952422048&fm=26&gp=0.jpg"
-                                        >
-                                        <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/gMOw8F_qrlo"></iframe> -->
+                                        > -->
+                                        <iframe width="160" height="100" src="videourl | NewPipePipe"></iframe>
                                     <!-- <span class="length">0{{item.number}}:48</span> -->
-                                    <span class="i-watchlater"></span>
+                                    <!-- <span class="i-watchlater"></span>
                                     <nb-icon *ngIf="item.edit" (click)="del($event,index)" class="icon"
-                                    icon="close-outline" status="danger"></nb-icon>
-                                </div>
-                                <a href="//www.bilibili.com/video/BV1Ab411a7y9" target="_blank" title="title" class="title">title</a>
-                                <div class="meta"><span class="play"><i class="icon"></i>288
-                                </span>
+                                    icon="close-outline" status="danger"></nb-icon> -->
+                                <!-- </div> -->
+                                <!-- <a href="//www.bilibili.com/video/BV1Ab411a7y9" target="_blank" title="title" class="title">title</a> -->
+                                <!-- <div class="meta"><span class="play"><i class="icon"></i>288 -->
+                                <!-- </span> -->
                                 <!-- <span class="time"><i class="icon"></i>2019-2-23</span> -->
                                 </div>
                             </div>
