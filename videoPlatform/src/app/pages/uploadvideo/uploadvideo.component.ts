@@ -1,28 +1,39 @@
 import { Component, OnInit } from '@angular/core';
-import {NbStepperComponent} from '@nebular/theme';
+import {NB_STEPPER, NbStepperComponent} from '@nebular/theme';
 import {VideoService} from '../../server/video.service';
 import {Video} from '../../models/Video';
 import {NbAuthJWTToken, NbAuthService} from '@nebular/auth';
 import {UserService} from '../../server/user.service';
 import {User} from '../../models/User';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Comment} from '../../models/Comment';
 
 @Component({
   selector: 'app-uploadvideo',
   templateUrl: './uploadvideo.component.html',
-  styleUrls: ['./uploadvideo.component.scss']
+  styleUrls: ['./uploadvideo.component.scss'],
+  providers: [{ provide: NB_STEPPER, useExisting: NbStepperComponent }],
 })
 export class UploadvideoComponent implements OnInit {
   form: any;
   video: Video;
   userid: string;
   profile: User;
-  videoUrl: string;
   videoTitle: string;
-  videourl: string;
-  constructor(private nbStepperComponent: NbStepperComponent,
-              private videoService: VideoService,
+  videoUrl: string;
+  isLinear = false;
+  firstFormGroup: FormGroup;
+  secondFormGroup: FormGroup;
+  comments: Comment[];
+  tags: string[] = [
+    'gaming',
+    'learning',
+    'coding'
+  ];
+  constructor(private videoService: VideoService,
               private authService: NbAuthService,
-              private userService: UserService) {
+              private userService: UserService,
+              private formBuilder: FormBuilder) {
     this.authService.onTokenChange()
       .subscribe((token: NbAuthJWTToken) => {
 
@@ -32,21 +43,38 @@ export class UploadvideoComponent implements OnInit {
 
       });
     this.userService.getUserById(this.userid).subscribe(profile => this.profile = profile);
+    this.video = new Video('', '', '', '');
   }
 
   ngOnInit(): void {
-    this.video = new Video(this.profile.username, '', '', '');
+    this.firstFormGroup = this.formBuilder.group({
+      url: ['', Validators.required]
+    });
+    this.secondFormGroup = this.formBuilder.group({
+      title: ['', Validators.required],
+      tag: ['', Validators.required],
+      description: ['']
+    });
   }
 
-  Step1next() {
-    this.nbStepperComponent.next();
+  step1next() {
+    if (this.getYoutubeURL(this.firstFormGroup.value.url)) {
+      this.video.auth = this.profile.username;
+      this.video.comments = this.comments;
+      // this.nbStepperComponent.next();
+    }
+    console.log(this.tags);
   }
-  previous() {
-    this.nbStepperComponent.previous();
+
+  step2next() {
+    this.video.title = this.secondFormGroup.value.title;
+    this.video.tag = this.secondFormGroup.value.tag;
+    this.video.description = (this.secondFormGroup.value.description === undefined ? 'none' : this.secondFormGroup.value.description);
+    this.videoService.uploadVideo(this.video).subscribe();
   }
 
   getYoutubeURL(url: string): boolean {
-    if (url !== null ) {
+    if (url !== undefined ) {
       const temp = url.replace('https://www.youtube.com/watch?v=', '');
       if (temp === null) { return false; }
       this.video.url = temp;

@@ -42,7 +42,7 @@ export class VideoService {
    * GET: get the author of this video
    */
   getAuthor(video: Video): Observable<User>{
-    const url = `${this.videoResourceURL}/auth/${video.author}`;
+    const url = `${this.videoResourceURL}/auth/${video.auth}`;
     return this.http.get<User>(url).pipe(
       catchError(this.handleError<User>(`get author from video id = ${video.id}`))
     );
@@ -90,10 +90,21 @@ export class VideoService {
   }
 
   /**
+   * GET: find video by tag
+   * @param tag the video with same tag to be found
+   */
+  getVideoByTag(tag: string): Observable<Video[]> {
+    const url = `${this.videoResourceURL}/findByTag/${tag}`;
+    return this.http.get<Video[]>(url).pipe(
+      catchError(this.handleError<any>(`get videos by tag ${tag}`))
+    );
+  }
+
+  /**
    * POST: upload the video
    */
   uploadVideo(video: Video): Observable<Video>{
-    const url = `${this.videoResourceURL}/upload`
+    const url = `${this.videoResourceURL}/upload`;
     return this.http.post<Video>(url, video, this.cors).pipe(
       catchError(this.handleError<Video>(`upload video`))
     );
@@ -117,11 +128,11 @@ export class VideoService {
   }
 
   /************** URL Method *****************/
-  getVideoURL(url: string): string{
+  getVideoURL(url: string): string {
     return `https://www.youtube.com/embed/${url}`;
   }
 
-  getVideoImgURL(url: string): string{
+  getVideoImgURL(url: string): string {
     return `http://i.ytimg.com/vi/${url}/maxresdefault.jpg`;
   }
 }

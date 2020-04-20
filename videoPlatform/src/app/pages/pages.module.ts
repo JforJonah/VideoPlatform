@@ -4,15 +4,16 @@ import { CommonModule } from '@angular/common';
 
 import { PagesRoutingModule } from './pages-routing.module';
 import {
+  NB_STEPPER,
   NbActionsModule, NbButtonModule, NbCardModule,
   NbContextMenuModule, NbDatepickerModule,
-  NbIconModule,
-  NbLayoutModule, NbMenuModule, NbOptionModule, NbSelectModule,
+  NbIconModule, NbInputModule,
+  NbLayoutModule, NbMenuModule, NbOptionModule, NbSelectModule, NbStepperComponent,
   NbStepperModule, NbTabsetModule, NbToggleModule,
   NbUserModule
 } from '@nebular/theme';
 import {NbEvaIconsModule} from '@nebular/eva-icons';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ProfileComponent} from './profile/profile.component';
 import {FavoriteComponent} from './favorite/favorite.component';
 import {FollowsComponent} from './follows/follows.component';
@@ -22,6 +23,8 @@ import {NavBarComponent} from './nav-bar/nav-bar.component';
 import {UploadvideoComponent} from './uploadvideo/uploadvideo.component';
 import {VideodetailComponent} from './videodetail/videodetail.component';
 import {WatchlaterComponent} from './watchlater/watchlater.component';
+import { OtherprofileComponent } from './otherprofile/otherprofile.component';
+import {SafePipe} from './pipe/SafePipe';
 
 
 @NgModule({
@@ -35,8 +38,11 @@ import {WatchlaterComponent} from './watchlater/watchlater.component';
     UploadvideoComponent,
     VideodetailComponent,
     WatchlaterComponent,
+    OtherprofileComponent,
+    SafePipe
   ],
   imports: [
+    FormsModule,
     CommonModule,
     PagesRoutingModule,
     NbLayoutModule,
@@ -47,15 +53,19 @@ import {WatchlaterComponent} from './watchlater/watchlater.component';
     NbContextMenuModule,
     NbStepperModule,
     ReactiveFormsModule,
-    NbMenuModule.forRoot(),
     NbButtonModule,
     NbTabsetModule,
     NbSelectModule,
     NbOptionModule,
     NbDatepickerModule.forRoot(),
     NbCardModule,
-    NbToggleModule
+    NbToggleModule,
+    FormsModule,
+    NbInputModule,
     // MatDatepickerModule
+  ],
+  exports: [
+    SafePipe
   ]
 })
 export class PagesModule { }

@@ -19,7 +19,7 @@ export class ProfileComponent implements OnInit {
     {length: Math.floor(Math.random() * 10)},
     (item, index) => {
       return {number: index, edit: false};
-    }  
+    }
   );
 
   tabs= [
@@ -87,6 +87,7 @@ export class ProfileComponent implements OnInit {
     this.userService.getUserById(this.requestId).toPromise().then(user =>{
       this.user = user;
     });
+    console.log(this.user);
     let length=0;
     this.userService.getUserById(this.requestId).subscribe(user=>{ //找到自己
       user.subscribe.forEach((Item)=>{
@@ -245,5 +246,5 @@ ngAfterViewInit(): void {
     this.file.nativeElement.value="";
   });
 }
-  
+
 }

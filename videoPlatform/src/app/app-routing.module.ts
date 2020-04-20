@@ -9,6 +9,7 @@ import {WatchlaterComponent} from './pages/watchlater/watchlater.component';
 import {FollowsComponent} from './pages/follows/follows.component';
 import {ProfileComponent} from './pages/profile/profile.component';
 import { AuthGuard } from './server/auth-guard.service';
+
 import {
   NbAuthComponent,
   NbLoginComponent,
