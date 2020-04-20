@@ -7,6 +7,7 @@ import {UserService} from '../../server/user.service';
 import {User} from '../../models/User';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Comment} from '../../models/Comment';
+import {Tags} from "../../models/Tags";
 
 @Component({
   selector: 'app-uploadvideo',
@@ -25,11 +26,7 @@ export class UploadvideoComponent implements OnInit {
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   comments: Comment[];
-  tags: string[] = [
-    'gaming',
-    'learning',
-    'coding'
-  ];
+  tags = Tags;
   constructor(private videoService: VideoService,
               private authService: NbAuthService,
               private userService: UserService,
