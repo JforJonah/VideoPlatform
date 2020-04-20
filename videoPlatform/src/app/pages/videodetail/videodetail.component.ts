@@ -159,11 +159,11 @@ favorite:Array<Video>;
     
     this.videoService.getVideoById(this.videoId).subscribe(video =>{
       this.video=video,console.log(this.video),
-      this.videoUrl=this.videoService.getVideoURL(video.url);
+      this.videoUrl=this.videoService.getVideoURL(video.url),
       console.log(this.videoUrl)
-      // this.videoService.getAuthor(video).subscribe(auth=>{
-      //   this.author=auth;
-      // })
+      this.videoService.getAuthor(video).subscribe(auth=>{
+        this.author=auth;
+      })
       video.comments.forEach((Item)=>{
         this.comments.push(Item)
       })

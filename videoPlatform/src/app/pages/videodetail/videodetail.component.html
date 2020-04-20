@@ -6,7 +6,7 @@
         </div>
         <div class="videoframe">
             <iframe width="90%" height="500px" 
-            [src]="videoUrl | safe:'resourceUrl '" 
+            [src]="videoUrl | safe:'resourceUrl'" 
             frameborder="0" 
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
         </iframe>
@@ -88,7 +88,7 @@
     <div class = "right">
             <nb-user class="user-info" 
                 size="large" 
-                name={{video?.auth}}
+                name={{author?.username}}
                 picture=""
                 color = "green">
         </nb-user>
