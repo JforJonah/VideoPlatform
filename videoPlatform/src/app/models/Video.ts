@@ -10,7 +10,7 @@ export class Video {
 
   unlike: any[];
 
-  comment: Comment[];
+  comments: Comment[];
 
   constructor(author: string, description: string, url: string, title: string) {
 

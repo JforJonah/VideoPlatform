@@ -1,12 +1,12 @@
 <div class = "videodetail">
     <div class = "left">
         <div class = "video-info">
-            <h3 class = "videotitle">title of video</h3>
-            <p class = "videodescription">desc of video</p>
+            <h3 class = "videotitle" *ngIf="video.title">{{video.title}}</h3>
+            <p class = "videodescription" *ngIf="video.title">{{video.description}}</p>
         </div>
         <div class="videoframe">
             <iframe width="90%" height="500px" 
-            src="https://www.youtube.com/embed/n-O5mnscPQE" 
+            src="https://www.youtube.com/embed/{{video.url}}" 
             frameborder="0" 
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
         </iframe>
@@ -15,9 +15,11 @@
             <button nbButton ghost status="primary" 
             class ="like-btn"
             (click)="likeClick();
-            likeClicked =!likeClicked"
+            "
             [class.like-clicked]="likeClicked">
-                <nb-icon icon="heart"></nb-icon> 
+                <nb-icon icon="heart"
+               
+                ></nb-icon> 
                 Like
                 <span class= "likeCount"></span>
             </button>
@@ -37,7 +39,7 @@
             <div class = "comment-txt">
                     <nb-user class="user-info" 
                     size="medium" 
-                    name="Monster Hunter"
+                    name={{user.username}}
                     picture=""
                     color = "green"
                     >
@@ -58,52 +60,34 @@
            
         </div>
         <!--*ngFor-->
-        <div class= "comment-area">
-            <div class = "comment-list" >
+        <div class= "comment-area" >
+            <div class = "comment-list" *ngFor="let comment of comments">
                 <nb-card>
                     <nb-card-body>
                         <div class="comment-user">
                             <nb-user class="user-info" 
-                            size="small" 
-                            name="Monster Hunter"
+                             size="small" 
+                            name="{{comment.auth}}"
                             picture=""
                             color = "green">
                         </nb-user>
                         </div>
                         <div class = "comment">
-                            <p class = "comment-text">鸡你太美~~ baby 鸡你太美~~ baby 鸡你实在是太美~~ baby</p>
+                            <p class = "comment-text">{{comment.txt}}</p>
                         </div>
                     </nb-card-body>
                 </nb-card>
                 
                 
             </div>
-            <div class = "comment-list" >
-                <nb-card>
-                    <nb-card-body>
-                        <div class="comment-user">
-                            <nb-user class="user-info" 
-                            size="small" 
-                            name="Monster Hunter"
-                            picture=""
-                            color = "green">
-                        </nb-user>
-                        </div>
-                        <div class = "comment">
-                            <p class = "comment-text">鸡你太美~~ baby</p>
-                        </div>
-                    </nb-card-body>
-                </nb-card>
-                
-                
-            </div>
+            
         </div>
         
     </div>
     <div class = "right">
             <nb-user class="user-info" 
                 size="large" 
-                name="Monster Hunter"
+                name={{video?.auth}}
                 picture=""
                 color = "green">
         </nb-user>
@@ -122,11 +106,11 @@
         </div>
         
 
-        <div class = "video-list" scrollshow="true">
+        <!-- <div class = "video-list" scrollshow="true">
             <div class="video-list-title">
                 <h5>More Videos</h5>
             </div>
-            <!--*ngFor-->
+            
             <div class = "video-card">
                 <nb-card>
                     <nb-card-body>
@@ -160,7 +144,7 @@
                 
             </div>
 
-        </div>
+        </div> -->
         
     </div>
     
