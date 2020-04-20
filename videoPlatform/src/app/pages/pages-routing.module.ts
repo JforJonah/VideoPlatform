@@ -8,6 +8,7 @@ import {WatchlaterComponent} from './watchlater/watchlater.component';
 import {FollowsComponent} from './follows/follows.component';
 import {ProfileComponent} from './profile/profile.component';
 import {NavBarComponent} from './nav-bar/nav-bar.component';
+import {OtherprofileComponent} from "./otherprofile/otherprofile.component";
 
 
 const routes: Routes = [
@@ -21,7 +22,8 @@ const routes: Routes = [
       {path: 'history', component: HistoryComponent},
       {path: 'watchlater', component: WatchlaterComponent},
       {path: 'follows', component: FollowsComponent},
-      {path: 'profile', component: ProfileComponent}
+      {path: 'profile', component: ProfileComponent},
+      {path: 'profile/:id', component: OtherprofileComponent },
     ]
   }
   ,

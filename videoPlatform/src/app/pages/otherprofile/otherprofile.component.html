@@ -1,0 +1,10 @@
+<nb-card  *ngIf="profile" size="giant">
+  <nb-card-header>
+    <nb-user [name]="profile?.username" [picture]="profile?.profileImage"></nb-user>
+  </nb-card-header>
+    <div *ngFor="let video of profile.videos">
+    </div>
+  <nb-card-body>
+
+  </nb-card-body>
+</nb-card>
