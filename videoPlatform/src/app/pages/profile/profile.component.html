@@ -11,29 +11,29 @@
         <div *ngSwitchCase="'User Info'">
 
             <div class="userInfoContent">
-                <div class="input">
+                <div class="input" >
                     <span class="title"> First Name </span>
-                    <input type="text" nbInput fullWidth fieldSize="medium" placeholder="First Name">
+                    <input type="text" nbInput fullWidth fieldSize="medium" placeholder="First Name" [(ngModel)]="user.firstName">
                 </div>
                 <div class="input">
                     <span class="title"> Last Name </span>
-                    <input type="text" nbInput fullWidth fieldSize="medium" placeholder="Last Name">
+                    <input type="text" nbInput fullWidth fieldSize="medium" placeholder="Last Name" [(ngModel)]="user.lastName">
                 </div>
                 <div class="input">
                     <span class="title"> User Name </span>
-                    <input type="text" nbInput fullWidth fieldSize="medium" placeholder="User Name">
+                    <input type="text" nbInput fullWidth fieldSize="medium" placeholder="User Name" [(ngModel)]="user.username">
                     <a>Change User Name</a>
                 </div>
                 <div class="input">
                     <span class="title"> Email </span>
-                    <input type="text" nbInput fullWidth fieldSize="medium" placeholder="Email" disabled="true">
+                    <input type="text" nbInput fullWidth fieldSize="medium" placeholder="Email" disabled="true" [(ngModel)]="user.email">
                 </div>
                 <div class="input">
                     <span class="title"> Password </span>
-                    <input type="text" nbInput fullWidth fieldSize="medium" placeholder="Password" disabled="true">
+                    <input type="text" nbInput fullWidth fieldSize="medium" placeholder="Password" disabled="true" [(ngModel)]="user.password">
                     <a>Forget Password</a>
                 </div>
-                <div class="input">
+                <div class="input" [ngModel]="user.sex">
                     <span class="title"> Gender </span>
                     <nb-select placeholder="Select your gender">
                         <nb-option value="1">Male</nb-option>
@@ -142,6 +142,9 @@
         </div>
     </div>
 </div>
+<div class="wrapper" *ngIf="pageID === 'home'">
+    <div class="cover" [ngClass]="{'redBorder': editFlag && tabKeyU == 'User-Info'}"></div>
+</div>
 <div class="wrapper" *ngIf="pageID !=='home'"
     style="display: flex;flex-direction: column; justify-content: flex-start;align-items: center;">
     <div class="small-item">
@@ -188,7 +191,7 @@
             <input (click)="editSAVE()" nbButton type="submit" value="upload" />
         </div>
     </div>
-<!-- </div> -->
+</div>
 <input type="file" #file1 style="display:none;" accept="image/png, image/jpeg, image/gif, image/jpg" />
 <!--ok的代码-->
 

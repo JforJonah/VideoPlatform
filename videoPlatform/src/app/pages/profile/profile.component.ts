@@ -36,6 +36,7 @@ export class ProfileComponent implements OnInit {
   tabKey ="My Video";
   tabKeyL ="Liked";
   tabKeyS ="Subscription";
+  tabKeyU = "User-Info"
 
   buttonText = "";
   fileArr = [];
@@ -43,7 +44,7 @@ export class ProfileComponent implements OnInit {
   //formpicker = new Date().getDate;
   
   userid: string;
-  videourl= 'https://www.youtube.com/embed/3yxNUbYZEWU';
+  videourl: string;
   video:Video;
   
   user:User;
@@ -81,6 +82,7 @@ export class ProfileComponent implements OnInit {
         }
         console.log(this.videos)
       });
+      this.videourl="";
   }
 
   
@@ -111,6 +113,11 @@ export class ProfileComponent implements OnInit {
       })
     });
     console.log(this.likes);
+
+    this.videoService.getVideoById(this.route.snapshot.paramMap.get('id')).subscribe(
+      video => this.videourl=this.videoService.getVideoURL(video.url)
+    )
+    
     //console.log(this.user + "1111");
     
     // this.userService.getUserById(this.requestId).subscribe(user=>{
@@ -185,6 +192,7 @@ export class ProfileComponent implements OnInit {
   }
 
   onSave() {
+    this.userService.updateUser(this.user).subscribe();
     //获取input的框的值
     // const saveinfo: User={
     //   firstName: "",
@@ -218,7 +226,7 @@ export class ProfileComponent implements OnInit {
     
     var file: File = this.fileArr.pop()
     var form = new FormData()
-    form.append("file1", file)
+    form.append("file", file)
     this.userService.uploadProfileImg(form).toPromise().then();
        
   
@@ -266,7 +274,9 @@ export class ProfileComponent implements OnInit {
   //   this.pagesId = "My Video";
   //   this.editFlag = false;
   // }
-  ngAfterViewInit(): void { //这边应该需要改的吧 打开网站这里一直显示未定义 不知道怎么和后端连起来
+  ngAfterViewInit(): void { 
+    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+    //Add 'implements AfterViewInit' to the class.
     this.renderer.listen(this.file.nativeElement, "change", (event) => {
       console.log(event);
       let files = event.target.files;
