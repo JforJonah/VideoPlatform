@@ -182,6 +182,13 @@ historys:Array<Video>;
       video.comments.forEach((Item)=>{
         this.comments.push(Item)
       })
+      //init button
+                  if(video.like.includes(this.userid)){
+                    this.likeClicked=true;
+                  }
+                  else{
+                    this.likeClicked=false;
+                  }
       
     }
     );
@@ -204,7 +211,16 @@ historys:Array<Video>;
           
          })
       })
+      //init button
+      if(user.favorite.includes(this.videoId)){
+        this.favoriteClicked=true;
+      }
+      else{
+        this.favoriteClicked=false;
+      }
       //console.log(this.videos)
+
+      //if(user.subscribe.includes(this.author))
     }
       
       
