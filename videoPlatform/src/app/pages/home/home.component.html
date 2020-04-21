@@ -1,11 +1,11 @@
-<nb-card *ngFor="let tag of localtags; index as i">
+<nb-card *ngFor="let tag of videoList.keys(); index as i">
   <nb-card-header>{{tag}}</nb-card-header>
-  <nb-card-body class="div-container" *ngIf="videoList[i]">
-    <nb-card *ngFor="let video of videoList[i]">
-      <!-- <nb-card-header>
-        <nb-user [name]="video?.auth"></nb-user>
+  <nb-card-body class="div-container" *ngIf="videoList.get(tag)">
+    <nb-card *ngFor="let video of videoList.get(tag)">
+      <nb-card-header>
+        <nb-user [name]="userList.get(video.id)?.username" [picture]="userList.get(video.id)?.profileImage"></nb-user>
         {{video.title}}
-      </nb-card-header> -->
+      </nb-card-header>
       <div class = "video-info">
         <div class="video-pic"
         routerLink="/pages/details/{{video?.id}}">
@@ -14,21 +14,21 @@
         </div>
       <div class="video-like">
         <div class="like">
-          <div class="title">
-            {{video.title}}
-          </div>
-          <nb-icon icon="heart" 
-            class="like-icon"></nb-icon> 
+<!--          <div class="title">-->
+<!--            {{video.title}}-->
+<!--          </div>-->
+          <nb-icon icon="heart"
+            class="like-icon"></nb-icon>
             like: {{video.like.length}}
         </div>
         <div class="favorite">
-          <nb-icon icon="edit" 
+          <nb-icon icon="edit"
             class="favorite-icon"></nb-icon>
-            comments: {{video.comments.length}} 
+            comments: {{video.comments.length}}
         </div>
       </div>
     </div>
-      
+
       <nb-card-footer>
         {{video.description}}
       </nb-card-footer>
