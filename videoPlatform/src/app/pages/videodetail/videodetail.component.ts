@@ -27,6 +27,8 @@ favoriteClicked =false;
 followClicked =false;
 
 
+likedVideo: Video[] = [];
+followers: User[] = [];
 
 //comment text
 commentTxt : string;
@@ -41,6 +43,7 @@ video:Video;
 userid;
 user:User;
 author:User;
+authorid;
 
 //video-url
 videoUrl:string;
@@ -51,12 +54,12 @@ comments:Comment[];
 //video-list
 videos:Video[];
 
-favorite:Array<Video>;
+favorite: Video[] = [];
 
 change:Boolean;
 
 //history
-historys:Array<Video>;
+historys:Video[] = [];
   
 
   constructor(private videoService: VideoService,
@@ -97,147 +100,219 @@ historys:Array<Video>;
 
                     });
 
-
-
-                  //video-list add
-                  // for(var i =0;i<user.videos.length;i++){
-                  //   //console.log(user.videos[i])
-                  //   this.videoService.getVideoById(user.videos[i])
-                  //   .subscribe(video1 =>{
-                  //     //console.log(video1)
-                  //     if(video1!=null){
-                  //       var video2 = new Video(video1.auth,
-                  //                             video1.description,
-                  //                             video1.url,
-                  //                             video1.description)
-                  //       videos.push(video2);
-                  //     }
-                      
-                  //    })
-                  // }
-
-                  // this.videos=videos;
-                //})
-
-
-                //console.log(this.likeClicked)
-                //console.log("check user",this.user.id);
-
-                //get videoid
-                // this.route.url.subscribe(url=>{this.videoId=url[1].toString()});
-                // console.log(this.videoId)
-                // this.videoService.getVideoById(this.videoId).toPromise().then(video =>{
-                //   this.comments=video.comments;
-                //   this.video=video;
-                //   //console.log(video.like.includes(this.userid))
-
-                //   //init button
-                //   if(video.like.includes(this.userid)){
-                //     this.likeClicked=true;
-                //   }
-                //   else{
-                //     this.likeClicked=false;
-                //   }
-                //   console.log(this.likeClicked)
-
-                  // //this video url
-                  // this.videoUrl=this.videoService.getVideoURL(video.url);
-                  // console.log(this.videoUrl)
-
-                //   //this.videoUrl = sanitizer.bypassSecurityTrustHtml(this.videoUrl);
-                  
-                // })
-                //this video url
-                  // this.videoUrl=this.videoService.getVideoURL(this.video.url);
-                  // console.log(this.videoUrl)
-                //this.getProfile();
-                //this.getVideo();
-
                }
 
   ngOnInit(): void {
-    this.getProfile();
-    this.getVideo();
-    //this.userService.unpdateHistory(this.video).toPromise().then()
+    
+    this.getReadyData();
+    //this.getReadyButton();
+    //this.getVideo();
+    //this.getProfile();
+    
   }
 
-  // ngOnChanges():void{
-  //   this.getProfile();
-  //   this.getVideo();
-  // }
+  getReadyData(): void{
 
-  getVideo(){
-    console.log(this.videoId)
-    this.route.url.subscribe(url=>{this.videoId=url[1].toString()});
+    //get the user now
+    this.userService.getUserById(this.userid).subscribe(
+      user => this.user=user
+    )
+
+    //get the video url
+    this.videoService.getVideoById(this.route.snapshot.paramMap.get('id')).subscribe(
+      video => this.videoUrl=this.videoService.getVideoURL(video.url)
+    )
+
+
+    // get the favorite video list from profile
+    this.userService.getUserById(this.userid).subscribe(
+      user => user.favorite.forEach(
+            video =>  this.favorite.push(video))
+      );
+
+    // get the liked video list from profile
+    this.userService.getUserById(this.userid).subscribe(
+      user => user.liked.forEach(
+        video => this.likedVideo.push(video)
+      )
+    );
+
+    // get the follower list from profile
+    this.userService.getUserById(this.userid).subscribe(
+      user => user.subscribe.forEach(
+        follower => this.followers.push(follower)
+      )
+    );
+
     
-    this.videoService.getVideoById(this.videoId).subscribe(video =>{
-      this.video=video,console.log(this.video),
-      this.videoUrl=this.videoService.getVideoURL(video.url),
-      console.log(this.videoUrl)
-      this.userService.unpdateHistory(this.video).toPromise().then()
-      console.log("update history",this.video)
-      this.videoService.getAuthor(video).subscribe(auth=>{
-        this.author=auth;
-      })
-      video.comments.forEach((Item)=>{
+    // get the author of this video
+    this.videoService.getVideoById(this.route.snapshot.paramMap.get('id')).subscribe(
+      video => this.videoService.getAuthor(video).subscribe(
+        author => {
+        this.author = author,
+        this.authorid=author.id
+        }
+      )
+    );
+
+    // get the video from route
+    this.videoService.getVideoById(this.route.snapshot.paramMap.get('id')).subscribe(
+      video => this.video = video
+    );
+
+    // get all of the video from author
+    this.videoService.getVideoById(this.route.snapshot.paramMap.get('id')).subscribe(
+      profilevideo => this.videoService.getAuthor(profilevideo).subscribe(
+        author => this.videoService.getAllVideosFromAuthor(author.id).subscribe(
+          videos => videos.forEach(
+            video => this.videos.push(video)
+          )
+        )
+      )
+    );
+
+    // update history
+    this.videoService.getVideoById(this.route.snapshot.paramMap.get('id')).subscribe(
+      video => this.userService.unpdateHistory(video).subscribe()
+    );
+
+    //comments
+    this.videoService.getVideoById(this.route.snapshot.paramMap.get('id')).subscribe(
+      video=>video.comments.forEach((Item)=>{
         this.comments.push(Item)
       })
-      //init button
-                  if(video.like.includes(this.userid)){
-                    this.likeClicked=true;
-                  }
-                  else{
-                    this.likeClicked=false;
-                  }
-      
-    }
-    );
-    //this.userService.likeVideo(this.video).toPromise().then()
+    )
     
+    //init button
+    //like
+    this.videoService.getVideoById(this.route.snapshot.paramMap.get('id')).subscribe(
+      video => {
+        if(video.like.includes(this.userid)){
+          this.likeClicked=true;
+        }
+        else{
+          this.likeClicked=false;
+        }
+      }
+    );
+
+    //favorite
+    this.userService.getUserById(this.userid).subscribe(
+      user=>{
+        if(user.favorite.includes(this.route.snapshot.paramMap.get('id'))){
+          this.favoriteClicked=true;
+        }
+        else{
+          this.favoriteClicked=false;
+        }
+      }
+    )
+
+    //follows
+    this.userService.getUserById(this.userid).subscribe(
+      user => {
+        //console.log(this.author.id)
+        if(user.subscribe.includes(this.authorid)){
+          this.followClicked=true;
+        }
+        else{
+          this.followClicked=false;
+        }
+      }
+      );
+
+
+
+
+
   }
+
+  // getReadyButton(): void{
+  //   //init button
+  //   if (this.favorite.includes(this.video)){
+  //     this.favoriteClicked = true;
+  //   } else{
+  //     this.favoriteClicked = false;
+  //   }
+
+  //   if(this.likedVideo.includes(this.video)){
+  //     this.likeClicked = true;
+  //   } else{
+  //     this.likeClicked = false;
+  //   }
+
+  //   if(this.followers.includes(this.author)){
+  //     this.followClicked = true;
+  //   } else {
+  //     this.followClicked = false;
+  //   }
+  // }
+
+  // getVideo(){
+  //   console.log(this.videoId)
+  //   this.route.url.subscribe(url=>{this.videoId=url[1].toString()});
+    
+  //   this.videoService.getVideoById(this.videoId).subscribe(video =>{
+  //     this.video=video,console.log(this.video),
+  //     this.videoUrl=this.videoService.getVideoURL(video.url),
+  //     console.log(this.videoUrl)
+  //     this.userService.unpdateHistory(this.video).toPromise().then()
+  //     console.log("update history",this.video)
+
+  //     //get author of video
+  //     this.videoService.getAuthor(video).subscribe(auth=>{
+  //       this.author=auth;
+  //     })
+  //     video.comments.forEach((Item)=>{
+  //       this.comments.push(Item)
+  //     })
+  //     //init button
+  //                 if(video.like.includes(this.userid)){
+  //                   this.likeClicked=true;
+  //                 }
+  //                 else{
+  //                   this.likeClicked=false;
+  //                 }
+      
+  //   }
+  //   );
+    
+  // }
   
 
-  getProfile(){                
-    this.userService.getUserById(this.userid).subscribe(user =>{
-      this.user=user,
-      this.user.favorite.forEach((Item)=>{
-        this.favorite.push(Item)
-      }),
-      this.user.videos.forEach((Item)=>{
-         this.videoService.getVideoById(Item).subscribe((fan)=>{
-          if(!this.videos.includes(fan)) {
-            this.videos.push(fan);
-          }
+  // getProfile(){                
+  //   this.userService.getUserById(this.userid).subscribe(user =>{
+  //     this.user=user,
+  //     //add favorite to list
+  //     this.user.favorite.forEach((Item)=>{
+  //       this.favorite.push(Item)
+  //     }),
+
+  //     //add video of user
+  //     this.user.videos.forEach((Item)=>{
+  //        this.videoService.getVideoById(Item).subscribe((fan)=>{
+  //         if(!this.videos.includes(fan)) {
+  //           this.videos.push(fan);
+  //         }
           
-         })
-      })
-      //init button
-      if(user.favorite.includes(this.videoId)){
-        this.favoriteClicked=true;
-      }
-      else{
-        this.favoriteClicked=false;
-      }
-      //console.log(this.videos)
-
-      //if(user.subscribe.includes(this.author))
-    }
+  //        })
+  //     })
+  //     //init button
+  //     if(user.favorite.includes(this.videoId)){
+  //       this.favoriteClicked=true;
+  //     }
+  //     else{
+  //       this.favoriteClicked=false;
+  //     }
+  //     //console.log(this.videos)
+  //     //console.log(this.author.id)
+  //     //if(user.subscribe.includes(this.author))
+  //   }
       
       
 
-  );
-  //console.log(this.user)
-  
-
-    // if(this.user.favorite.includes(this.videoId)){
-    //   this.favoriteClicked=true;
-      
-    // }
-    // else{
-    //   this.favoriteClicked=false;
-    // }
-
-  }
+  // );
+  // }
 
   addComment(){
     var newComment={
@@ -248,12 +323,6 @@ historys:Array<Video>;
       auth: this.user.username,
     };
     console.log(this.video.comments)
-    //var len = this.video.comment.length+1;
-    // newComment.id = "0";
-    // newComment.videoId=this.videoId;
-    // newComment.createDate = new Date();
-    // newComment.txt = this.commentTxt;
-    // newComment.auth = this.userid;
 
     this.video.comments.push(newComment);
     this.commentTxt='';
@@ -278,21 +347,12 @@ historys:Array<Video>;
         this.userService.likeVideo(this.video).toPromise().then()
       }
 
-      //this.user.liked.push(this.videoId);
       //update database
       this.videoService.updateVideo(this.video)
       .subscribe(video =>{
 
         this.video = video;
       });
-
-      // this.userService.updateUser(this.user)
-      // .subscribe(user =>{
-      //   this.user=user;
-      // })
-
-      //console.log(this.video.like);
-      //console.log(this.user.liked);
 
 
     }
@@ -301,9 +361,7 @@ historys:Array<Video>;
         if(this.video.like[i]==this.userid){
           this.video.like.splice(i,1);
           this.userService.unlikeVideo(this.video).toPromise().then()
-          // if(this.video.like==undefined){
-          //   this.video.like=[];
-          // }
+
         }
       }
 
@@ -315,10 +373,6 @@ historys:Array<Video>;
       });
       //console.log(this.video.like);
 
-      // this.userService.updateUser(this.user)
-      // .subscribe(user =>{
-      //   this.user=user;
-      // })
     }
     this.likeClicked =!this.likeClicked;
   }
@@ -334,9 +388,7 @@ historys:Array<Video>;
         //user.favorite.push(this.videoId);
         this.userService.setFavoriteVideo(this.video).toPromise().then()
         console.log(this.favorite)
-        // this.userService.getUserById(this.userid).toPromise().then(user =>{
-        //   this.user=user;
-        // })
+    
       }
 
     }
@@ -351,18 +403,11 @@ historys:Array<Video>;
     //var author:User;
 
     if(!this.followClicked){
-    // this.videoService.getAuthor(this.video).subscribe(user =>{
-    //   this.author=user;
-    // })
     this.userService.subscribeUser(this.author).toPromise().then()
 
     }
     else if(this.followClicked){
-      //var author:User;
-
-    //   this.videoService.getAuthor(this.video).subscribe(user =>{
-    //   this.author=user;
-    // })
+  
     this.userService.unSubscribeUser(this.author).toPromise().then()
     }
   }
