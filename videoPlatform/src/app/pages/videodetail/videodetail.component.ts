@@ -16,7 +16,7 @@ import {  Inject,  OnChanges, SimpleChanges } from "@angular/core";
 
 @Component({
   selector: 'app-videodetail',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  //changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './videodetail.component.html',
   styleUrls: ['./videodetail.component.scss']
 })
@@ -86,6 +86,7 @@ historys:Video[] = [];
 
                 this.historys=new Array();
                 this.videoId="";
+                this.authorid=""
 
                 this.change = false;
 
@@ -99,6 +100,14 @@ historys:Video[] = [];
                       }
 
                     });
+                // get the authorid of this video
+                this.videoService.getVideoById(this.route.snapshot.paramMap.get('id')).subscribe(
+                  video => this.videoService.getAuthor(video).subscribe(
+                    author => {
+                    this.authorid=author.id
+                    }
+                  )
+                );
 
                }
 
@@ -149,8 +158,8 @@ historys:Video[] = [];
     this.videoService.getVideoById(this.route.snapshot.paramMap.get('id')).subscribe(
       video => this.videoService.getAuthor(video).subscribe(
         author => {
-        this.author = author,
-        this.authorid=author.id
+        this.author = author
+        //this.authorid=author.id
         }
       )
     );
@@ -173,7 +182,7 @@ historys:Video[] = [];
 
     // update history
     this.videoService.getVideoById(this.route.snapshot.paramMap.get('id')).subscribe(
-      video => this.userService.unpdateHistory(video).subscribe()
+      video => this.userService.unpdateHistory(video).toPromise().then()
     );
 
     //comments
@@ -211,7 +220,7 @@ historys:Video[] = [];
     //follows
     this.userService.getUserById(this.userid).subscribe(
       user => {
-        //console.log(this.author.id)
+        //console.log("auth",this.authorid)
         if(user.subscribe.includes(this.authorid)){
           this.followClicked=true;
         }
