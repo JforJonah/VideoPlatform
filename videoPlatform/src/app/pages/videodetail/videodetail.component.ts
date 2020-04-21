@@ -20,7 +20,7 @@ import {  Inject,  OnChanges, SimpleChanges } from "@angular/core";
   templateUrl: './videodetail.component.html',
   styleUrls: ['./videodetail.component.scss']
 })
-export class VideodetailComponent implements OnInit {
+export class VideodetailComponent implements OnInit{
 // button clicked
 likeClicked =false;
 favoriteClicked =false;
@@ -53,6 +53,10 @@ videos:Video[];
 
 favorite:Array<Video>;
 
+change:Boolean;
+
+//history
+historys:Array<Video>;
   
 
   constructor(private videoService: VideoService,
@@ -76,8 +80,11 @@ favorite:Array<Video>;
                 this.favorite=new Array();
 
                 this.comments=new Array();
+
+                this.historys=new Array();
                 this.videoId="";
 
+                this.change = false;
 
                 //console.log(this.video.id);
                 //get userid
@@ -150,7 +157,13 @@ favorite:Array<Video>;
   ngOnInit(): void {
     this.getProfile();
     this.getVideo();
+    //this.userService.unpdateHistory(this.video).toPromise().then()
   }
+
+  // ngOnChanges():void{
+  //   this.getProfile();
+  //   this.getVideo();
+  // }
 
   getVideo(){
     console.log(this.videoId)
@@ -160,14 +173,18 @@ favorite:Array<Video>;
       this.video=video,console.log(this.video),
       this.videoUrl=this.videoService.getVideoURL(video.url),
       console.log(this.videoUrl)
+      this.userService.unpdateHistory(this.video).toPromise().then()
+      console.log("update history",this.video)
       this.videoService.getAuthor(video).subscribe(auth=>{
         this.author=auth;
       })
       video.comments.forEach((Item)=>{
         this.comments.push(Item)
       })
+      
     }
     );
+    //this.userService.likeVideo(this.video).toPromise().then()
     
   }
   
@@ -185,6 +202,7 @@ favorite:Array<Video>;
       //console.log(this.user
 
   );
+  console.log(this.user)
 
     // if(this.user.favorite.includes(this.videoId)){
     //   this.favoriteClicked=true;
