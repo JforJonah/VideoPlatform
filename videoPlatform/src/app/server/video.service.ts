@@ -134,6 +134,6 @@ export class VideoService {
   }
 
   getVideoImgURL(url: string): string {
-    return `http://i.ytimg.com/vi/${url}/maxresdefault.jpg`;
+    return `http://i.ytimg.com/vi/${url}/mqdefault.jpg`;
   }
 }
