@@ -36,12 +36,15 @@ export class ProfileComponent implements OnInit {
   tabKey ="My Video";
   tabKeyL ="Liked";
   tabKeyS ="Subscription";
-  videourl: string;
+  tabKeyU = "User-Info"
+
   buttonText = "";
   fileArr = [];
 
   //formpicker = new Date().getDate;
-
+  
+  userid: string;
+  videourl: string;
   video:Video;
 
   user: User;
@@ -56,8 +59,8 @@ export class ProfileComponent implements OnInit {
   requestId:string;
 
   // picFile:File;
-
-
+ 
+  
 
   constructor(private renderer: Renderer2, private authService: NbAuthService,
               private userService: UserService,
@@ -76,6 +79,7 @@ export class ProfileComponent implements OnInit {
           this.getMyVideos(this.requestId);
         }
       });
+      this.videourl="";
   }
 
 
@@ -103,6 +107,28 @@ export class ProfileComponent implements OnInit {
       })
     });
     console.log(this.likes);
+
+    this.videoService.getVideoById(this.route.snapshot.paramMap.get('id')).subscribe(
+      video => this.videourl=this.videoService.getVideoURL(video.url)
+    )
+    
+    //console.log(this.user + "1111");
+    
+    // this.userService.getUserById(this.requestId).subscribe(user=>{
+    //   user.liked.forEach((Item)=>{
+    //     this.videoService.getVideoImgURL(Item).((urls)=>{
+    //       this.videourl.push(urls);
+    //   })
+    // })
+      
+    // })
+      // this.videoService.getVideoById(this.videoid).toPromise().then(video => {
+      //   this.video = video;
+      // });
+    
+      // for(let i=0;i<length;i++){
+      //   this.userService.getUserById(this.sub[i]).toPromise().then(user=>{this.realsub[i]=user,console.log(user)});
+      // }
 
   }
 
@@ -143,15 +169,25 @@ export class ProfileComponent implements OnInit {
   }
 
   onSave() {
-    this.user.username = '';
-    this.userService.updateUser(this.user);
+    this.userService.updateUser(this.user).subscribe();
+    //获取input的框的值
+    // const saveinfo: User={
+    //   firstName: "",
+    //   lastName: "",
+    //   username: "",
+    //   sex:"male"
+    // }
+    //this.userService.updateUser(saveinfo).toPromise().then()
+    //加alert
     alert('Save SUCCESSFULLY');
   }
 
   deleteItem(){//删除需要与后端连接
-    // var deleteitem = confirm('Delete?')
-    // if(deleteitem){
     this.Arr.forEach((item) => (item.edit = true));
+    //  var deleteitem = confirm('Delete?')
+    //  if(deleteitem){
+    this.videoService.deleteVideo(this.video).subscribe();
+     
     //}
     //window.location.assign('');
   }
@@ -161,30 +197,32 @@ export class ProfileComponent implements OnInit {
     this.Arr.splice(index, 1);
   }
 
-  upload1(){
-    this.file.nativeElement.click();
-  }
-
-  upload(){     //头像上传有问题
-
+  //local files open (prepare for upload)
+  upload1(){ 
+      this.file.nativeElement.click();
+    }
+  
+  //upload profile image
+  upload(){     
+    
     var file: File = this.fileArr.pop()
     var form = new FormData()
-    form.append("file1", file)
+    form.append("file", file)
     this.userService.uploadProfileImg(form).toPromise().then();
-
-
-  }
+       
+  
+   }
   // onPicfileChange(event){//加了事件一直显示报错不知道为啥
   //   if(event.target.files){
   //     const [file] = event.target.files;
   //     this.picFile = file;
   //   }
-  // this.picfile = event.target.file[0];
-  // let Url = window.URL.createObjectURL(this.picfiles);
-  // this.Url = this.sanitizer.bypassSecurityTrustUrl(Url);
-  // console.log(Url);
+    // this.picfile = event.target.file[0];
+    // let Url = window.URL.createObjectURL(this.picfiles);
+    // this.Url = this.sanitizer.bypassSecurityTrustUrl(Url);
+    // console.log(Url);
   //}
-
+  
 
 
   editFlag: boolean = false;
@@ -193,7 +231,7 @@ export class ProfileComponent implements OnInit {
   }
 
   pageID = "home";
-  //pages = "My Video";
+  //pageID = "My Video";
   videoData = {title: "123", edit: true, number: 1};
   toEdit(data) {
     if (!this.editFlag || this.tabKey !== 'My Video') return;
@@ -208,16 +246,17 @@ export class ProfileComponent implements OnInit {
   }
 
   editSAVE() {
-    this.pageID = "home";
+    this.pageID = "edit";
+    alert('Save SUCCESSFULLY');
   }
 
   //pagesId = "My Video";
-  // returnMyvideo(){ //编辑完视频之后应该回到My video页面 这里还有问题
-  //   if(this.pagesId !== 'My Video') return this.pagesId = "My Video";
-  //   this.pagesId = "My Video";
-  //   this.editFlag = false;
-  // }
-  ngAfterViewInit(): void { //这边应该需要改的吧 打开网站这里一直显示未定义 不知道怎么和后端连起来
+  returnMyvideo(){ //编辑完视频之后应该回到My video页面 这里还有问题
+    this.tabKey="My Video";
+  }
+  ngAfterViewInit(): void { 
+    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+    //Add 'implements AfterViewInit' to the class.
     this.renderer.listen(this.file.nativeElement, "change", (event) => {
       console.log(event);
       let files = event.target.files;
@@ -233,8 +272,8 @@ export class ProfileComponent implements OnInit {
       }
       console.log(this.fileArr);
       this.file.nativeElement.value = "";
-    });
-  }
+  });
+  }  
 }
 
 
