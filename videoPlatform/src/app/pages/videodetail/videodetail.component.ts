@@ -44,6 +44,7 @@ userid;
 user:User;
 author:User;
 authorid;
+authorname:string;
 
 //video-url
 videoUrl:string;
@@ -104,7 +105,9 @@ historys:Video[] = [];
                 this.videoService.getVideoById(this.route.snapshot.paramMap.get('id')).subscribe(
                   video => this.videoService.getAuthor(video).subscribe(
                     author => {
-                    this.authorid=author.id
+                    this.authorid=author.id,
+                    this.authorname=author.username
+                    
                     }
                   )
                 );

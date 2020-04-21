@@ -115,14 +115,21 @@
             <div class = "video-card" *ngFor="let video1 of videos">
                 <nb-card>
                     <nb-card-body>
-                        <div class="video-pic">
+                        <div class="video-pic"
+                        routerLink="/pages/details/{{video1?.id}}">
                             <img src="https://img.youtube.com/vi/{{video1?.url}}/mqdefault.jpg">
                         </div>
                         <div class="video-card-info">
                             <a href="/pages/details/{{video1?.id}}" title="" class="title">
                                 {{video1?.title}}
                             </a>
-                            <span>Monster Hunter</span>
+                            <!-- <span>{{authorname}}</span> -->
+                            <nb-user class="user-info" 
+                                size="small" 
+                                [name]="authorname"
+                                picture=""
+                                color = "green">
+                        </nb-user>
                         </div>
                     </nb-card-body>
                 </nb-card>

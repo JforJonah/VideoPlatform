@@ -10,11 +10,15 @@
         <div class = "video-card" *ngFor="let video of videos">
             <nb-card>
                 <nb-card-body>
-                    <div class="video-pic">
-                        <img src="https://img.youtube.com/vi/{{video?.url}}/mqdefault.jpg">
-                    </div>
+                    
+                        <div class="video-pic" 
+                        routerLink = "/pages/details/{{video?.id}}">
+                            <img src="https://img.youtube.com/vi/{{video?.url}}/mqdefault.jpg">
+                        </div>
+                    
+                    
                     <div class="video-card-info">
-                        <a href="/pages/details/{{video?.id}}" title="" class="title">
+                        <a routerLink="/pages/details/{{video?.id}}" title="" class="title">
                             {{video?.title}}
                         </a>
                         <!-- <nb-user class="user-info" 
@@ -23,6 +27,7 @@
                                 picture=""
                                 color = "green">
                         </nb-user> -->
+                        <span>{{video?.description}}</span>
                     </div>
                 </nb-card-body>
             </nb-card>
