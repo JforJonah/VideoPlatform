@@ -9,7 +9,6 @@ import {VideoService} from '../../server/video.service';
 import {ActivatedRoute} from '@angular/router';
 import { NbAuthJWTToken, NbAuthService } from '@nebular/auth';
 import { JsonpInterceptor } from '@angular/common/http';
-import { SafePipe } from 'src/app/pipe';
 import { DomPortal } from '@angular/cdk/portal';
 import { DomSanitizer } from '@angular/platform-browser';
 import {  Inject,  OnChanges, SimpleChanges } from "@angular/core";
@@ -20,15 +19,15 @@ import {  Inject,  OnChanges, SimpleChanges } from "@angular/core";
   styleUrls: ['./favorite.component.scss']
 })
 export class FavoriteComponent implements OnInit {
-  
+
 
   userid;
   profile: User;
   videos:Array<Video>;
-  constructor(private authService: NbAuthService, 
+  constructor(private authService: NbAuthService,
               private userService: UserService,
               private videoService : VideoService) {
-    
+
                 //init
                 this.videos=new Array();
 
@@ -47,7 +46,7 @@ export class FavoriteComponent implements OnInit {
                   this.getProfile();
                   //this.getHistory();
                 }
-                getProfile(){                
+                getProfile(){
                   this.userService.getUserById(this.userid).subscribe(user =>{
                     this.profile=user
                     this.profile.favorite.forEach((Item)=>{
@@ -58,8 +57,8 @@ export class FavoriteComponent implements OnInit {
                   }
                 );
                 console.log(this.videos)
-              
-              
+
+
                 }
 
 }

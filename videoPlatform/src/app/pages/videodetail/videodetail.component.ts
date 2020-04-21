@@ -9,7 +9,6 @@ import {VideoService} from '../../server/video.service';
 import {ActivatedRoute} from '@angular/router';
 import { NbAuthJWTToken, NbAuthService } from '@nebular/auth';
 import { JsonpInterceptor } from '@angular/common/http';
-import { SafePipe } from 'src/app/pipe';
 import { DomPortal } from '@angular/cdk/portal';
 import { DomSanitizer } from '@angular/platform-browser';
 import {  Inject,  OnChanges, SimpleChanges } from "@angular/core";
@@ -57,7 +56,7 @@ videos:Video[];
 
 favorite: Video[] = [];
 
-change:Boolean;
+change: boolean;
 
 //history
 historys:Video[] = [];
@@ -65,7 +64,7 @@ historys:Video[] = [];
 
   constructor(private videoService: VideoService,
               private userService: UserService,
-              private route:ActivatedRoute,
+              private route: ActivatedRoute,
               private authService: NbAuthService,
               private sanitizer: DomSanitizer) {
 
@@ -107,7 +106,7 @@ historys:Video[] = [];
                     author => {
                     this.authorid=author.id,
                     this.authorname=author.username
-                    
+
                     }
                   )
                 );
