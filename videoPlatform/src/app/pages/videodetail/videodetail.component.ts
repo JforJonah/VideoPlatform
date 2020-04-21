@@ -60,7 +60,7 @@ change:Boolean;
 
 //history
 historys:Video[] = [];
-  
+
 
   constructor(private videoService: VideoService,
               private userService: UserService,
@@ -112,12 +112,12 @@ historys:Video[] = [];
                }
 
   ngOnInit(): void {
-    
+
     this.getReadyData();
     //this.getReadyButton();
     //this.getVideo();
     //this.getProfile();
-    
+
   }
 
   getReadyData(): void{
@@ -153,7 +153,7 @@ historys:Video[] = [];
       )
     );
 
-    
+
     // get the author of this video
     this.videoService.getVideoById(this.route.snapshot.paramMap.get('id')).subscribe(
       video => this.videoService.getAuthor(video).subscribe(
@@ -191,7 +191,7 @@ historys:Video[] = [];
         this.comments.push(Item)
       })
     )
-    
+
     //init button
     //like
     this.videoService.getVideoById(this.route.snapshot.paramMap.get('id')).subscribe(
@@ -260,7 +260,7 @@ historys:Video[] = [];
   // getVideo(){
   //   console.log(this.videoId)
   //   this.route.url.subscribe(url=>{this.videoId=url[1].toString()});
-    
+
   //   this.videoService.getVideoById(this.videoId).subscribe(video =>{
   //     this.video=video,console.log(this.video),
   //     this.videoUrl=this.videoService.getVideoURL(video.url),
@@ -282,14 +282,14 @@ historys:Video[] = [];
   //                 else{
   //                   this.likeClicked=false;
   //                 }
-      
+
   //   }
   //   );
-    
-  // }
-  
 
-  // getProfile(){                
+  // }
+
+
+  // getProfile(){
   //   this.userService.getUserById(this.userid).subscribe(user =>{
   //     this.user=user,
   //     //add favorite to list
@@ -303,7 +303,7 @@ historys:Video[] = [];
   //         if(!this.videos.includes(fan)) {
   //           this.videos.push(fan);
   //         }
-          
+
   //        })
   //     })
   //     //init button
@@ -317,8 +317,8 @@ historys:Video[] = [];
   //     //console.log(this.author.id)
   //     //if(user.subscribe.includes(this.author))
   //   }
-      
-      
+
+
 
   // );
   // }
@@ -397,7 +397,7 @@ historys:Video[] = [];
         //user.favorite.push(this.videoId);
         this.userService.setFavoriteVideo(this.video).toPromise().then()
         console.log(this.favorite)
-    
+
       }
 
     }
@@ -416,7 +416,7 @@ historys:Video[] = [];
 
     }
     else if(this.followClicked){
-  
+
     this.userService.unSubscribeUser(this.author).toPromise().then()
     }
   }

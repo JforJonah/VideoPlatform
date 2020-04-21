@@ -1,6 +1,6 @@
 <nb-card *ngFor="let tag of localtags; index as i">
   <nb-card-header>{{tag}}</nb-card-header>
-  <nb-card-body *ngIf="videoList[i]">
+  <nb-card-body class="div-container" *ngIf="videoList[i]">
     <nb-card *ngFor="let video of videoList[i]">
       <nb-card-header>
         <nb-user [name]="video?.auth"></nb-user>

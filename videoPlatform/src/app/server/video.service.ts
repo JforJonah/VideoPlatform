@@ -50,6 +50,7 @@ export class VideoService {
 
   /**
    * GET: get the videos from the same author
+   * @Param id author id of the video
    */
   getAllVideosFromAuthor(id: string): Observable<Array<Video>> {
     const url = `http://localhost:3000/videos/find/${id}`;
