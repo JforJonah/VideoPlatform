@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
   tags = Tags;
   localtags: string[] = [];
   url = 'https://www.youtube.com/embed/3yxNUbYZEWU';
-  videoList: Array<Array<Video>>;
+  videoList: Array<Array<Video>> = [];
 
   constructor(private userService: UserService, public videoService: VideoService) {
   }
@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
     for (let i = 0 ; i < this.tags.length; i++) {
       this.videoService.getVideoByTag(this.tags[i]).subscribe(
         videos => {
-          if (videos !== undefined ){
+          if (videos !== undefined) {
             this.localtags.push(this.tags[i]);
             this.videoList.push(videos);
           }
