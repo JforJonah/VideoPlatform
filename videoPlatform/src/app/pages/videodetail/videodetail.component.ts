@@ -150,7 +150,8 @@ historys:Array<Video>;
                 //this video url
                   // this.videoUrl=this.videoService.getVideoURL(this.video.url);
                   // console.log(this.videoUrl)
-                
+                //this.getProfile();
+                //this.getVideo();
 
                }
 
@@ -192,17 +193,25 @@ historys:Array<Video>;
   getProfile(){                
     this.userService.getUserById(this.userid).subscribe(user =>{
       this.user=user,
-      user.videos.forEach((Item)=>{
+      this.user.favorite.forEach((Item)=>{
+        this.favorite.push(Item)
+      }),
+      this.user.videos.forEach((Item)=>{
          this.videoService.getVideoById(Item).subscribe((fan)=>{
-           this.videos.push(fan);
+          if(!this.videos.includes(fan)) {
+            this.videos.push(fan);
+          }
+          
          })
       })
+      //console.log(this.videos)
     }
       
-      //console.log(this.user
+      
 
   );
-  console.log(this.user)
+  //console.log(this.user)
+  
 
     // if(this.user.favorite.includes(this.videoId)){
     //   this.favoriteClicked=true;
@@ -305,17 +314,19 @@ historys:Array<Video>;
     if(!this.favoriteClicked){
 
       var user = this.user;
-      //if(!this.user.favorite.includes(this.videoId)){
+      if(!this.favorite.includes(this.video)){
         //user.favorite.push(this.videoId);
         this.userService.setFavoriteVideo(this.video).toPromise().then()
+        console.log(this.favorite)
         // this.userService.getUserById(this.userid).toPromise().then(user =>{
         //   this.user=user;
         // })
-      //}
+      }
 
     }
     else if(this.favoriteClicked){
       this.userService.unFavoriteVideo(this.video).toPromise().then()
+      console.log(this.favorite)
     }
 
 
