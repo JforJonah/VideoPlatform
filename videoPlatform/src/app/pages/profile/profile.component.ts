@@ -5,6 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { NbAuthService, NbAuthJWTToken } from '@nebular/auth';
 import { Video } from 'src/app/models/Video';
 import { User } from 'src/app/models/User';
+//import { url } from 'inspector';
+
 
 @Component({
   selector: 'app-profile',
@@ -12,6 +14,7 @@ import { User } from 'src/app/models/User';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
+  [x: string]: any;
   @ViewChild("file1") file:ElementRef;
 
 
@@ -40,7 +43,7 @@ export class ProfileComponent implements OnInit {
   //formpicker = new Date().getDate;
   
   userid: string;
-  videourl: string;
+  videourl= 'https://www.youtube.com/embed/3yxNUbYZEWU';
   video:Video;
   
   user:User;
@@ -53,9 +56,10 @@ export class ProfileComponent implements OnInit {
  
 
   requestId:string;
+  //imgUrl: any;
   // videos:Array<Video>;
   
-
+  // picFile:File;
  
 
   constructor(private renderer: Renderer2, private authService: NbAuthService,
@@ -83,7 +87,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     //this.route.url.subscribe(url => {this.userid = url[2].toString()});
     //console.log(this.userid);
-
+    // console.log(this.videourl);
     this.userService.getUserById(this.requestId).toPromise().then(user =>{
       this.user = user;
     });
@@ -184,22 +188,44 @@ export class ProfileComponent implements OnInit {
     alert('Save SUCCESSFULLY');
   }
 
-  deleteItem(){
-    //var deleteitem = confirm('Delete?')
-    //if(deleteitem){
-    //  this.Arr.forEach((item) => (item.edit = true));
-    //}
+  deleteItem(){//删除需要与后端连接
+    var deleteitem = confirm('Delete?')
+    if(deleteitem){
+     this.Arr.forEach((item) => (item.edit = true));
+    }
     //window.location.assign('');
   }
 
-  del(event, index) {
+  del(event, index) { //这个也需要
     event.stopPropagation();
     this.Arr.splice(index, 1);
   }
 
-  upload(){
-    this.file.nativeElement.click();
+ 
+  
+  // upload(){     //头像上传有问题
+    // window.URL = window.URL || window.webkitURL;
+    // var fileElem = document.getElementById("fileElem"),
+    //     fileList = document.getElementById("fileList");
+    // this.userService.uploadProfileImg()
+    // let form = new FormData();
+    // form.append("file", this.picfile);
+    // this.userService.uploadProfileImg(form);
+    //this.file.nativeElement.click();
+  //}
+  onPicfileChange(event){//加了事件一直显示报错不知道为啥
+    if(event.target.files){
+      const [file] = event.target.files;
+      this.picFile = file;
+    }
+    // this.picfile = event.target.file[0];
+    // let Url = window.URL.createObjectURL(this.picfiles);
+    // this.Url = this.sanitizer.bypassSecurityTrustUrl(Url);
+    // console.log(Url);
   }
+  
+
+
   editFlag: boolean = false;
   editStatus(){
     this.editFlag = true;
@@ -224,27 +250,29 @@ export class ProfileComponent implements OnInit {
     this.pageID = "home";
   }
 
-  returnMyvideo(){
-    //this.pages = "My Video";
-    //this.editFlag = false;
+  pagesId = "My Video";
+  returnMyvideo(){ //编辑完视频之后应该回到My video页面 这里还有问题
+    if(this.pagesId !== 'My Video') return this.pagesId = "My Video";
+    this.pagesId = "My Video";
+    this.editFlag = false;
   }
-ngAfterViewInit(): void {
-  this.renderer.listen(this.file.nativeElement, "change", (event) => {
-    console.log(event);
-    let files = event.target.files;
-    this.fileArr = [];
-    for(let index = 0; index < files.length; index++) {
-      const file = files[index];
-      let reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = function(e) {
-        file.url = this.result;
-      };
-      this.fileArr.push(file);
-    }
-    console.log(this.fileArr);
-    this.file.nativeElement.value="";
-  });
+ngAfterViewInit(): void { //这边应该需要改的吧 打开网站这里一直显示未定义 不知道怎么和后端连起来
+  // this.renderer.listen(this.file.nativeElement, "change", (event) => {
+  //   console.log(event);
+  //   let files = event.target.files;
+  //   this.fileArr = [];
+  //   for(let index = 0; index < files.length; index++) {
+  //     const file = files[index];
+  //     let reader = new FileReader();
+  //     reader.readAsDataURL(file);
+  //     reader.onload = function(e) {
+  //       file.url = this.result;
+  //     };
+  //     this.fileArr.push(file);
+  //   }
+  //   console.log(this.fileArr);
+  //   this.file.nativeElement.value="";
+  //});
 }
 
 }
