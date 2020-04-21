@@ -16,49 +16,50 @@ import {  Inject,  OnChanges, SimpleChanges } from "@angular/core";
 
 @Component({
   selector: 'app-videodetail',
+  //changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './videodetail.component.html',
   styleUrls: ['./videodetail.component.scss']
 })
 export class VideodetailComponent implements OnInit{
 // button clicked
-  likeClicked =false;
-  favoriteClicked =false;
-  followClicked =false;
+likeClicked =false;
+favoriteClicked =false;
+followClicked =false;
 
 
-  likedVideo: Video[] = [];
-  followers: User[] = [];
+likedVideo: Video[] = [];
+followers: User[] = [];
 
 //comment text
-  commentTxt : string;
+commentTxt : string;
 
 //video Id
-  videoId:string;
+videoId:string;
 
 //video
-  video:Video;
+video:Video;
 
 //user
-  userid;
-  user:User;
-  author:User;
-  authorid;
+userid;
+user:User;
+author:User;
+authorid;
 
 //video-url
-  videoUrl:string;
+videoUrl:string;
 
 //comment-list
-  comments:Comment[];
+comments:Comment[];
 
 //video-list
-  videos:Video[];
+videos:Video[];
 
-  favorite: Video[] = [];
+favorite: Video[] = [];
 
-  change:Boolean;
+change:Boolean;
 
 //history
-  historys:Video[] = [];
+historys:Video[] = [];
 
 
   constructor(private videoService: VideoService,
@@ -67,39 +68,48 @@ export class VideodetailComponent implements OnInit{
               private authService: NbAuthService,
               private sanitizer: DomSanitizer) {
 
-    //video-list
-    this.videos=new Array();
+                //video-list
+                this.videos=new Array();
 
-    //video
-    this.video=new Video("","","","");
+                //video
+                this.video=new Video("","","","");
 
-    //user
-    //this.user=new User();
+                //user
+                //this.user=new User();
 
-    //safeurl
-    this.videoUrl="";
+                //safeurl
+                this.videoUrl="";
 
-    this.favorite=new Array();
+                this.favorite=new Array();
 
-    this.comments=new Array();
+                this.comments=new Array();
 
-    this.historys=new Array();
-    this.videoId="";
+                this.historys=new Array();
+                this.videoId="";
+                this.authorid=""
 
-    this.change = false;
+                this.change = false;
 
-    //console.log(this.video.id);
-    //get userid
-    authService.onTokenChange()
-      .subscribe((token: NbAuthJWTToken) => {
+                //console.log(this.video.id);
+                //get userid
+                authService.onTokenChange()
+                    .subscribe((token: NbAuthJWTToken) => {
 
-        if (token.isValid()) {
-          this.userid = token.getPayload()._id; // here we receive a payload from the token and assigns it to our `user` variable
-        }
+                      if (token.isValid()) {
+                        this.userid = token.getPayload()._id; // here we receive a payload from the token and assigns it to our `user` variable
+                      }
 
-      });
+                    });
+                // get the authorid of this video
+                this.videoService.getVideoById(this.route.snapshot.paramMap.get('id')).subscribe(
+                  video => this.videoService.getAuthor(video).subscribe(
+                    author => {
+                    this.authorid=author.id
+                    }
+                  )
+                );
 
-  }
+               }
 
   ngOnInit(): void {
 
@@ -126,8 +136,8 @@ export class VideodetailComponent implements OnInit{
     // get the favorite video list from profile
     this.userService.getUserById(this.userid).subscribe(
       user => user.favorite.forEach(
-        video =>  this.favorite.push(video))
-    );
+            video =>  this.favorite.push(video))
+      );
 
     // get the liked video list from profile
     this.userService.getUserById(this.userid).subscribe(
@@ -148,8 +158,8 @@ export class VideodetailComponent implements OnInit{
     this.videoService.getVideoById(this.route.snapshot.paramMap.get('id')).subscribe(
       video => this.videoService.getAuthor(video).subscribe(
         author => {
-          this.author = author,
-            this.authorid=author.id
+        this.author = author
+        //this.authorid=author.id
         }
       )
     );
@@ -172,7 +182,7 @@ export class VideodetailComponent implements OnInit{
 
     // update history
     this.videoService.getVideoById(this.route.snapshot.paramMap.get('id')).subscribe(
-      video => this.userService.unpdateHistory(video).subscribe()
+      video => this.userService.unpdateHistory(video).toPromise().then()
     );
 
     //comments
@@ -210,7 +220,7 @@ export class VideodetailComponent implements OnInit{
     //follows
     this.userService.getUserById(this.userid).subscribe(
       user => {
-        //console.log(this.author.id)
+        //console.log("auth",this.authorid)
         if(user.subscribe.includes(this.authorid)){
           this.followClicked=true;
         }
@@ -218,7 +228,7 @@ export class VideodetailComponent implements OnInit{
           this.followClicked=false;
         }
       }
-    );
+      );
 
 
 
@@ -348,10 +358,10 @@ export class VideodetailComponent implements OnInit{
 
       //update database
       this.videoService.updateVideo(this.video)
-        .subscribe(video =>{
+      .subscribe(video =>{
 
-          this.video = video;
-        });
+        this.video = video;
+      });
 
 
     }
@@ -366,10 +376,10 @@ export class VideodetailComponent implements OnInit{
 
       //update database
       this.videoService.updateVideo(this.video)
-        .subscribe(video =>{
-          this.video = video;
+      .subscribe(video =>{
+        this.video = video;
 
-        });
+      });
       //console.log(this.video.like);
 
     }
@@ -402,12 +412,12 @@ export class VideodetailComponent implements OnInit{
     //var author:User;
 
     if(!this.followClicked){
-      this.userService.subscribeUser(this.author).toPromise().then()
+    this.userService.subscribeUser(this.author).toPromise().then()
 
     }
     else if(this.followClicked){
 
-      this.userService.unSubscribeUser(this.author).toPromise().then()
+    this.userService.unSubscribeUser(this.author).toPromise().then()
     }
   }
 }

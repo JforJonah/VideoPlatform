@@ -67,6 +67,7 @@ export class UploadvideoComponent implements OnInit {
     this.video.title = this.secondFormGroup.value.title;
     this.video.tag = this.secondFormGroup.value.tag;
     this.video.description = (this.secondFormGroup.value.description === undefined ? 'none' : this.secondFormGroup.value.description);
+    this.video.comments=new Array()
     this.videoService.uploadVideo(this.video).subscribe();
   }
 
