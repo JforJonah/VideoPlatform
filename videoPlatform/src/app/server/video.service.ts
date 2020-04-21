@@ -13,10 +13,10 @@ export class VideoService {
   videoResource: string;
   videoResourceURL: string;
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
   cors = {
-    headers: new HttpHeaders({ 'Access-Control-Allow-Origin': '*' })
+    headers: new HttpHeaders({'Access-Control-Allow-Origin': '*'})
   };
 
   /**
@@ -41,7 +41,7 @@ export class VideoService {
   /**
    * GET: get the author of this video
    */
-  getAuthor(video: Video): Observable<User>{
+  getAuthor(video: Video): Observable<User> {
     const url = `${this.videoResourceURL}/auth/${video.auth}`;
     return this.http.get<User>(url).pipe(
       catchError(this.handleError<User>(`get author from video id = ${video.id}`))
@@ -51,12 +51,12 @@ export class VideoService {
   /**
    * GET: get the videos from the same author
    */
-  getAllVideosFromAuthor(id:string): Observable<Array<Video>>{
+  getAllVideosFromAuthor(id: string): Observable<Array<Video>> {
     const url = `http://localhost:3000/videos/find/${id}`;
     return this.http.get<Video[]>(url);
-    //pipe(
-     // catchError(this.handleError<Video[]>(`get videos by user id = ${video.id}`))
-    //);
+    // pipe(
+    // catchError(this.handleError<Video[]>(`get videos by user id = ${video.id}`))
+    // );
   }
 
   /**
@@ -71,7 +71,7 @@ export class VideoService {
   /**
    * PUT: update the video
    */
-  updateVideo(video: Video): Observable<Video>{
+  updateVideo(video: Video): Observable<Video> {
     console.log(`video id = ${video.id}`);
     const url = `${this.videoResourceURL}/${video.id}`;
     return this.http.put(url, video, this.httpOptions).pipe(
@@ -82,7 +82,7 @@ export class VideoService {
   /**
    * DELETE: delete the video
    */
-  deleteVideo(video: Video): Observable<Video>{
+  deleteVideo(video: Video): Observable<Video> {
     const url = `${this.videoResourceURL}/${video.id}`;
     return this.http.delete<Video>(url, this.httpOptions).pipe(
       catchError(this.handleError<Video>(`delete video id = ${video.id}`))
@@ -103,7 +103,7 @@ export class VideoService {
   /**
    * POST: upload the video
    */
-  uploadVideo(video: Video): Observable<Video>{
+  uploadVideo(video: Video): Observable<Video> {
     const url = `${this.videoResourceURL}/upload`;
     return this.http.post<Video>(url, video, this.cors).pipe(
       catchError(this.handleError<Video>(`upload video`))

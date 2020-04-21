@@ -10,6 +10,7 @@ export class Video {
   unlike: any[];
   comments: any[];
   tag: string;
+  history: any[];
   constructor(author: string, description: string, url: string, title: string) {
     this.auth = author;
     this.description = description;
