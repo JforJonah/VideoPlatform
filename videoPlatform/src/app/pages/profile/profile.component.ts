@@ -246,14 +246,14 @@ export class ProfileComponent implements OnInit {
   }
 
   editSAVE() {
-    this.pageID = "edit";
+    // this.pageID = "edit";
     alert('Save SUCCESSFULLY');
   }
 
   //pagesId = "My Video";
-  returnMyvideo(){ //编辑完视频之后应该回到My video页面 这里还有问题
-    this.tabKey="My Video";
-  }
+  // returnMyvideo(){ //编辑完视频之后应该回到My video页面 这里还有问题
+  //   this.tabKey="My Video";
+  // }
   ngAfterViewInit(): void { 
     //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
     //Add 'implements AfterViewInit' to the class.

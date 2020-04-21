@@ -41,11 +41,7 @@
                         <nb-option value="3">Secret</nb-option>
                     </nb-select>
                 </div>
-                <!-- <div class="input">
-                    <span class="title">Date of Birth</span>
-                    <input style="width:300px !important" nbInput placeholder="Choose Date" [nbDatepicker]="formpicker">
-                    <nb-datepicker #formpicker></nb-datepicker>
-                </div> -->
+              
                 <input style="margin: 20px;" (click)="onSave()" nbButton type="submit" value="Save" />
                 
                 <input class="picfiles" style="position: absolute; top:120px; left: 100px;" (click)="upload()" nbButton type="button"
@@ -55,9 +51,14 @@
                      [picture]="this.fileArr[0]?.url" (click)="upload1()"></nb-user>
             </div>
         </div>
-        <div class="videoContent">
-          <ng-container *ngFor="let item of likes">
-            <!-- <div class="likes">{{item.email}}</div> -->
+<!-- liked video part in profile page -->
+        <div *ngSwitchCase="'Liked'">
+            <div class="videoList">
+                    <div class="videoTitle">
+                        <div herf="" class="t">{{tabKeyL}}</div>
+                    </div>
+                <div class="videoContent">
+            <ng-container *ngFor="let item of likes">
             <div class="small-item">
               <div class="cover" [ngClass]="{'redBorder': editFlag && tabKeyL == 'Liked'}" (click)="toEdit(item)">
                 <iframe width="160" height="100" [src]="videourl | safe: 'resourceUrl'"></iframe>
@@ -68,18 +69,8 @@
       </div>
     </div>
     <button *ngIf="tabKey == 'Liked'" class="editItem" (click)="editStatus()" nbButton>Cancel</button>
-    <!-- 不要的<button (click)="functionone() ">1111</button> -->
 
-    <!-- Subscription video part in profile page -->
-    <div *ngSwitchCase="'Subscription'">
-      <div class="videoList">
-        <div class="videoTitle">
-          <div href="" class="t">{{tabKeyS}}</div>
-        </div>
-        <button *ngIf="tabKey == 'Liked'" class="editItem" (click)="editStatus()" nbButton>Cancel</button>
-        <!-- 不要的<button (click)="functionone() ">1111</button> -->
-
-        <!-- Subscription video part in profile page -->
+<!-- Subscription video part in profile page -->
         <div *ngSwitchCase="'Subscription'">
             <div class="videoList">
                 <div class="videoTitle">
@@ -89,19 +80,15 @@
                     <ng-container *ngFor="let item of sub">
                         <!-- <div class="sub">{{item.email}}</div> -->
                         <div class="small-item">
-                            <div class="cover" [ngClass]="{'redBorder': editFlag && tabKeyL == 'Subscription'}" (click)="toEdit(item)">
+                            <div class="cover" [ngClass]="{'redBorder': editFlag && tabKeyS == 'Subscription'}" (click)="toEdit(item)">
                                 <iframe width="160" height="100" [src]="videourl | safe: 'resourceUrl'"></iframe>
                             </div>
                         </div>
                     </ng-container>
                 </div>
             </div>
-          </ng-container>
-        </div>
-      </div>
-    </div>
+        </div>  
     <button *ngIf="tabKey == 'Subscription'" class="editItem" (click)="editStatus()" nbButton>Unsubscribe</button>
-
 
         <div *ngSwitchDefault>
             <section>
@@ -112,8 +99,6 @@
                     </div>
                     <div class="videoContent">
                         <ng-container *ngFor="let item of videos; let index =index"> 
-                            <!--let item of Arr; let index = index-->
-                            <!-- <div class="name">{{item.auth}}</div> -->
                             <div class="small-item">
                                 <div class="cover" [ngClass]="{'redBorder': editFlag && tabKey == 'My Video'}" (click)="toEdit(item)">
                                     <!-- <img
@@ -135,44 +120,16 @@
                     </div>
                 </div>
             </section>
-            <button *ngIf="tabKey == 'My Video'" class="editItem" (click)="editStatus()" nbButton>Edit</button>
+            <button *ngIf="tabKey === 'My Video'" class="editItem" (click)="editStatus()" nbButton>Edit</button>
             <button class="deleteItem" (click)="deleteItem()" nbButton>{{buttonText}}</button>
 
           </div>
-          <div class="videoContent">
-            <ng-container *ngFor="let item of videos; let index =index">
-              <!--let item of Arr; let index = index-->
-              <!-- <div class="name">{{item.auth}}</div> -->
-              <div class="small-item">
-                <div class="cover" [ngClass]="{'redBorder': editFlag && tabKey == 'My Video'}" (click)="toEdit(item)">
-                  <!-- <img
-                      src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1875705305,2952422048&fm=26&gp=0.jpg"
-                      > -->
-                  <iframe width="160" height="100" [src]="videourl | safe: 'resourceUrl'"></iframe>
-                  <!-- <span class="length">0{{item.number}}:48</span> -->
-                  <!-- <span class="i-watchlater"></span>
-                  <nb-icon *ngIf="item.edit" (click)="del($event,index)" class="icon"
-                  icon="close-outline" status="danger"></nb-icon> -->
-                  <!-- </div> -->
-                  <!-- <a href="//www.bilibili.com/video/BV1Ab411a7y9" target="_blank" title="title" class="title">title</a> -->
-                  <!-- <div class="meta"><span class="play"><i class="icon"></i>288 -->
-                  <!-- </span> -->
-                  <!-- <span class="time"><i class="icon"></i>2019-2-23</span> -->
-                </div>
-              </div>
-            </ng-container>
-          </div>
-        </div>
-      </section>
-      <button *ngIf="tabKey == 'My Video'" class="editItem" (click)="editStatus()" nbButton>Edit</button>
-      <button class="deleteItem" (click)="deleteItem()" nbButton>{{buttonText}}</button>
-
     </div>
-  </div>
 </div>
-<div class="wrapper" *ngIf="pageID === 'home'">
+
+<!-- <div class="wrapper" *ngIf="pageID === 'home'">
     <div class="cover" [ngClass]="{'redBorder': editFlag && tabKeyU == 'User-Info'}"></div>
-</div>
+</div> -->
 <div class="wrapper" *ngIf="pageID !=='home'"
     style="display: flex;flex-direction: column; justify-content: flex-start;align-items: center;">
     <div class="small-item">
@@ -181,10 +138,6 @@
                 <!-- (click)="toEdit(item)" -->
                 <iframe width="160" height="100" [src]="videourl | safe: 'resourceUrl'"></iframe>
             </div>
-            <!-- <img style="width : 320px; height: 200px;"
-                src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1875705305,2952422048&fm=26&gp=0.jpg"
-                alt=""> -->
-                <!-- <span class="length">0{{videoData.number}}:48</span> -->
                 <span class="i-watchlater"></span>
             <nb-icon *ngIf="videoData.edit" class="icon" icon="close-outline" status="danger">
             </nb-icon>
@@ -206,15 +159,10 @@
             <span class="title">Description</span>
             <input type="text" placeholder="Add description">
         </div>
-        <!-- //固定的
-        <div class="input">
-            <span class="title">Tag</span>
-            <input type="text" placeholder="Add tag">
-        </div> -->
 
         <div style="display: flex; flex-direction: row;">
 
-            <input (click)="returnMyvideo()" nbButton type="button" value="return" />
+            <input (click)="returnHome()" nbButton type="button" value="return" />
             &nbsp;
             <input (click)="editSAVE()" nbButton type="submit" value="upload" />
         </div>
