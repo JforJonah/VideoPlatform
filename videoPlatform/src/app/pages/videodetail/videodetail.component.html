@@ -6,7 +6,7 @@
         </div>
         <div class="videoframe">
             <iframe width="90%" height="500px" 
-            src="https://www.youtube.com/embed/{{video.url}}" 
+            [src]="videoUrl | safe:'resourceUrl'" 
             frameborder="0" 
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
         </iframe>
@@ -39,11 +39,12 @@
             <div class = "comment-txt">
                     <nb-user class="user-info" 
                     size="medium" 
-                    name={{user.username}}
-                    picture=""
+                    [name]="user?.username"
+                    [picture]=""
                     color = "green"
                     >
                 </nb-user>
+                
                 <div class="comment-input">
                     <textarea cols="80" 
                     rows="5" 
@@ -87,7 +88,7 @@
     <div class = "right">
             <nb-user class="user-info" 
                 size="large" 
-                name={{video?.auth}}
+                name={{author?.username}}
                 picture=""
                 color = "green">
         </nb-user>
@@ -106,20 +107,20 @@
         </div>
         
 
-        <!-- <div class = "video-list" scrollshow="true">
+        <div class = "video-list" scrollshow="true" >
             <div class="video-list-title">
                 <h5>More Videos</h5>
             </div>
             
-            <div class = "video-card">
+            <div class = "video-card" *ngFor="let video1 of videos">
                 <nb-card>
                     <nb-card-body>
                         <div class="video-pic">
-                            <img src="https://img.youtube.com/vi/n-O5mnscPQE/mqdefault.jpg">
+                            <img src="https://img.youtube.com/vi/{{video1?.url}}/mqdefault.jpg">
                         </div>
                         <div class="video-card-info">
-                            <a href="/watchlater" title="" class="title">
-                                国家队都是什么怪物？距话筒一米照样秒杀你！网友：你爸爸永远是你爸爸
+                            <a href="/pages/details/{{video1?.id}}" title="" class="title">
+                                {{video1?.title}}
                             </a>
                             <span>Monster Hunter</span>
                         </div>
@@ -127,24 +128,9 @@
                 </nb-card>
                 
             </div>
-            <div class = "video-card">
-                <nb-card>
-                    <nb-card-body>
-                        <div class="video-pic">
-                            <img src="https://img.youtube.com/vi/n-O5mnscPQE/mqdefault.jpg">
-                        </div>
-                        <div class="video-card-info">
-                            <a href="/watchlater" title="" class="title">
-                                国家队都是什么怪物？距话筒一米照样秒杀你！网友：你爸爸永远是你爸爸
-                            </a>
-                            <span>Monster Hunter</span>
-                        </div>
-                    </nb-card-body>
-                </nb-card>
-                
-            </div>
+            
 
-        </div> -->
+        </div>
         
     </div>
     

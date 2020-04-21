@@ -15,7 +15,7 @@ export interface User {
   videos: Array<string>;
   liked: [];
   unlike: [];
-  subscribe: [];
-  favorite: [];
-  subscribed: [];
+  subscribe: any[];
+  favorite: any[];
+  subscribed: any[];
 }

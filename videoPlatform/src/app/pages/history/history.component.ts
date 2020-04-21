@@ -1,7 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import {NbAuthJWTToken, NbAuthService} from "@nebular/auth";
-import {UserService} from "../../server/user.service";
-import {User} from "../../models/User";
+import { Component, OnInit, Input } from '@angular/core';
+import {NbMenuItem, NbMenuService ,NbCardModule} from '@nebular/theme';
+import { ChangeDetectionStrategy } from '@angular/core';
+import {Video} from '../../models/Video';
+import {User} from '../../models/User';
+import {Comment} from '../../models/Comment';
+import {UserService} from '../../server/user.service';
+import {VideoService} from '../../server/video.service';
+import {ActivatedRoute} from '@angular/router';
+import { NbAuthJWTToken, NbAuthService } from '@nebular/auth';
+import { JsonpInterceptor } from '@angular/common/http';
+import { SafePipe } from 'src/app/pipe';
+import { DomPortal } from '@angular/cdk/portal';
+import { DomSanitizer } from '@angular/platform-browser';
+import {  Inject,  OnChanges, SimpleChanges } from "@angular/core";
 
 @Component({
   selector: 'app-history',
@@ -12,19 +23,48 @@ export class HistoryComponent implements OnInit {
 
   userid;
   profile: User;
-  constructor(private authService: NbAuthService, private userService: UserService) {
-    this.authService.onTokenChange()
-      .subscribe((token: NbAuthJWTToken) => {
+  videos:Array<Video>;
+  constructor(private authService: NbAuthService, 
+              private userService: UserService,
+              private videoService : VideoService) {
+    
+                //init
+                this.videos=new Array();
 
-        if (token.isValid()) {
-          this.userid = token.getPayload()._id; // here we receive a payload from the token and assigns it to our `user` variable
-        }
 
-      });
-    userService.getUserById(this.userid).subscribe(profile => this.profile = profile);
+                this.authService.onTokenChange()
+                  .subscribe((token: NbAuthJWTToken) => {
+
+                    if (token.isValid()) {
+                      this.userid = token.getPayload()._id; // here we receive a payload from the token and assigns it to our `user` variable
+                    }
+
+                  });
+  
   }
 
   ngOnInit(): void {
+    this.getProfile();
+    //this.getHistory();
+  }
+  getProfile(){                
+    this.userService.getUserById(this.userid).subscribe(user =>{
+      this.profile=user
+      this.profile.history.forEach((Item)=>{
+        this.videoService.getVideoById(Item).subscribe((fan)=>{
+          this.videos.push(fan);
+        })
+     })
+    }
+  );
+  console.log(this.videos)
+
+
+  }
+
+
+  getHistory(){
+    
   }
 
   removeFromHistory(): void{
