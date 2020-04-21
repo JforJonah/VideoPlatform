@@ -1,5 +1,4 @@
 <div class="wrapper" *ngIf="pageID === 'home'">
-    <!-- <nb-user name="ABC"></nb-user> -->
         <nb-tabset (changeTab)="setKey($event)">
             <ng-container *ngFor="let item of tabs">
                 <nb-tab [tabTitle]="item">
@@ -48,12 +47,12 @@
                     <nb-datepicker #formpicker></nb-datepicker>
                 </div> -->
                 <input style="margin: 20px;" (click)="onSave()" nbButton type="submit" value="Save" />
-
-                <input class="picfiles" style="position: absolute; top:120px; left: 100px;" (click)="upload()" nbButton type="submit"
+                
+                <input class="picfiles" style="position: absolute; top:120px; left: 100px;" (click)="upload()" nbButton type="button"
                     value="Upload" />
 
                 <nb-user style="position: absolute; top: 30px; left: 100px;" size="large" [name]="user?.username"
-                     [picture]="this.fileArr[0]?.url" (click)="upload()"></nb-user>
+                     [picture]="this.fileArr[0]?.url" (click)="upload1()"></nb-user>
             </div>
         </div>
         <div *ngSwitchCase="'Setting'">
@@ -82,8 +81,9 @@
             </div>
         </div>
         <button *ngIf="tabKey == 'Liked'" class="editItem" (click)="editStatus()" nbButton>Cancel</button>
-        <!-- <button (click)="functionone() ">1111</button> -->
-<!-- Subscription video part in profile page -->
+        <!-- 不要的<button (click)="functionone() ">1111</button> -->
+
+        <!-- Subscription video part in profile page -->
         <div *ngSwitchCase="'Subscription'">
             <div class="videoList">
                 <div class="videoTitle">
@@ -109,10 +109,11 @@
                 <div class="videoList">
                     <div class="videoTitle">
                         <a href="" class="t">{{tabKey}}</a>
-                        <!-- <span class="count">{{Arr.length}}</span> -->
+                       
                     </div>
                     <div class="videoContent">
-                        <ng-container *ngFor="let item of videos; let index =index"> <!--let item of Arr; let index = index-->
+                        <ng-container *ngFor="let item of videos; let index =index"> 
+                            <!--let item of Arr; let index = index-->
                             <!-- <div class="name">{{item.auth}}</div> -->
                             <div class="small-item">
                                 <div class="cover" [ngClass]="{'redBorder': editFlag && tabKey == 'My Video'}" (click)="toEdit(item)">
@@ -145,7 +146,8 @@
     style="display: flex;flex-direction: column; justify-content: flex-start;align-items: center;">
     <div class="small-item">
         <div class="cover" style="width : 320px; height: 200px;">
-            <div class="cover" [ngClass]="{'redBorder': editFlag && tabKey == 'My Video'}" (click)="toEdit(item)">
+            <div class="cover" [ngClass]="{'redBorder': editFlag && tabKey == 'My Video'}" > 
+                <!-- (click)="toEdit(item)" -->
                 <iframe width="160" height="100" [src]="videourl | safe: 'resourceUrl'"></iframe>
             </div>
             <!-- <img style="width : 320px; height: 200px;"
@@ -157,7 +159,7 @@
             </nb-icon>
 
         </div>
-        <a target="_blank" title="title" class="title">{{videoTitle}}</a>
+        <a target="_blank" title="title" class="title">Title</a>
         <div class="meta"><span class="play">
             <i class="icon"></i>288
             </span><span class="time"><i class="icon"></i>2019-2-23
@@ -181,14 +183,14 @@
 
         <div style="display: flex; flex-direction: row;">
 
-            <input (click)="returnMyvideo()" nbButton type="submit" value="return" />
+            <input (click)="returnHome()" nbButton type="submit" value="return" />
             &nbsp;
             <input (click)="editSAVE()" nbButton type="submit" value="upload" />
         </div>
     </div>
 <!-- </div> -->
 <input type="file" #file1 style="display:none;" accept="image/png, image/jpeg, image/gif, image/jpg" />
-
+<!--ok的代码-->
 
 
 
