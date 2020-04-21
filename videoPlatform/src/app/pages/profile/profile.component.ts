@@ -206,9 +206,11 @@ export class ProfileComponent implements OnInit {
   }
 
   deleteItem(){//删除需要与后端连接
-    // var deleteitem = confirm('Delete?')
-    // if(deleteitem){
-     this.Arr.forEach((item) => (item.edit = true));
+    this.Arr.forEach((item) => (item.edit = true));
+    //  var deleteitem = confirm('Delete?')
+    //  if(deleteitem){
+    this.videoService.deleteVideo(this.video).subscribe();
+     
     //}
     //window.location.assign('');
   }
@@ -218,11 +220,13 @@ export class ProfileComponent implements OnInit {
     this.Arr.splice(index, 1);
   }
 
-  upload1(){
+  //local files open (prepare for upload)
+  upload1(){ 
       this.file.nativeElement.click();
     }
   
-  upload(){     //头像上传有问题
+  //upload profile image
+  upload(){     
     
     var file: File = this.fileArr.pop()
     var form = new FormData()
@@ -250,7 +254,7 @@ export class ProfileComponent implements OnInit {
   }
 
   pageID = "home";
-  //pages = "My Video";
+  //pageID = "My Video";
   videoData = {title: "123", edit: true, number: 1};
   toEdit(data) {
     if (!this.editFlag || this.tabKey !== 'My Video') return;
@@ -265,15 +269,14 @@ export class ProfileComponent implements OnInit {
   }
 
   editSAVE() {
-    this.pageID = "home";
+    this.pageID = "edit";
+    alert('Save SUCCESSFULLY');
   }
 
   //pagesId = "My Video";
-  // returnMyvideo(){ //编辑完视频之后应该回到My video页面 这里还有问题
-  //   if(this.pagesId !== 'My Video') return this.pagesId = "My Video";
-  //   this.pagesId = "My Video";
-  //   this.editFlag = false;
-  // }
+  returnMyvideo(){ //编辑完视频之后应该回到My video页面 这里还有问题
+    this.tabKey="My Video";
+  }
   ngAfterViewInit(): void { 
     //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
     //Add 'implements AfterViewInit' to the class.
