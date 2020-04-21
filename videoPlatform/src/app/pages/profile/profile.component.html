@@ -7,8 +7,8 @@
             </ng-container>
         </nb-tabset>
 
-    <div [ngSwitch]="tabKey">
-        <div *ngSwitchCase="'User Info'">
+  <div [ngSwitch]="tabKey">
+    <div *ngSwitchCase="'User Info'">
 
             <div class="userInfoContent">
                 <div class="input" >
@@ -55,30 +55,26 @@
                      [picture]="this.fileArr[0]?.url" (click)="upload1()"></nb-user>
             </div>
         </div>
-        <div *ngSwitchCase="'Setting'">
-            <div class="settings">
-                <nb-toggle labelPosition="start"><span class="text">Allow this website use my location</span></nb-toggle>
-                <nb-toggle labelPosition="start"><span class="text">Everyone can see my page</span></nb-toggle>
+        <div class="videoContent">
+          <ng-container *ngFor="let item of likes">
+            <!-- <div class="likes">{{item.email}}</div> -->
+            <div class="small-item">
+              <div class="cover" [ngClass]="{'redBorder': editFlag && tabKeyL == 'Liked'}" (click)="toEdit(item)">
+                <iframe width="160" height="100" [src]="videourl | safe: 'resourceUrl'"></iframe>
+              </div>
             </div>
+          </ng-container>
         </div>
+      </div>
+    </div>
+    <button *ngIf="tabKey == 'Liked'" class="editItem" (click)="editStatus()" nbButton>Cancel</button>
+    <!-- 不要的<button (click)="functionone() ">1111</button> -->
 
-<!-- liked video part in profile page -->
-        <div *ngSwitchCase="'Liked'">
-            <div class="videoList">
-                <div class="videoTitle">
-                    <div href="" class="t">{{tabKeyL}}</div>
-                </div>
-                <div class="videoContent">
-                    <ng-container *ngFor="let item of likes">
-                        <!-- <div class="likes">{{item.email}}</div> -->
-                        <div class="small-item">
-                            <div class="cover" [ngClass]="{'redBorder': editFlag && tabKeyL == 'Liked'}" (click)="toEdit(item)">
-                                <iframe width="160" height="100" [src]="videourl | safe: 'resourceUrl'"></iframe>
-                            </div>
-                        </div>
-                    </ng-container>
-                </div>
-            </div>
+    <!-- Subscription video part in profile page -->
+    <div *ngSwitchCase="'Subscription'">
+      <div class="videoList">
+        <div class="videoTitle">
+          <div href="" class="t">{{tabKeyS}}</div>
         </div>
         <button *ngIf="tabKey == 'Liked'" class="editItem" (click)="editStatus()" nbButton>Cancel</button>
         <!-- 不要的<button (click)="functionone() ">1111</button> -->
@@ -100,8 +96,11 @@
                     </ng-container>
                 </div>
             </div>
+          </ng-container>
         </div>
-        <button *ngIf="tabKey == 'Subscription'" class="editItem" (click)="editStatus()" nbButton>Unsubscribe</button>
+      </div>
+    </div>
+    <button *ngIf="tabKey == 'Subscription'" class="editItem" (click)="editStatus()" nbButton>Unsubscribe</button>
 
 
         <div *ngSwitchDefault>
@@ -139,8 +138,37 @@
             <button *ngIf="tabKey == 'My Video'" class="editItem" (click)="editStatus()" nbButton>Edit</button>
             <button class="deleteItem" (click)="deleteItem()" nbButton>{{buttonText}}</button>
 
+          </div>
+          <div class="videoContent">
+            <ng-container *ngFor="let item of videos; let index =index">
+              <!--let item of Arr; let index = index-->
+              <!-- <div class="name">{{item.auth}}</div> -->
+              <div class="small-item">
+                <div class="cover" [ngClass]="{'redBorder': editFlag && tabKey == 'My Video'}" (click)="toEdit(item)">
+                  <!-- <img
+                      src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1875705305,2952422048&fm=26&gp=0.jpg"
+                      > -->
+                  <iframe width="160" height="100" [src]="videourl | safe: 'resourceUrl'"></iframe>
+                  <!-- <span class="length">0{{item.number}}:48</span> -->
+                  <!-- <span class="i-watchlater"></span>
+                  <nb-icon *ngIf="item.edit" (click)="del($event,index)" class="icon"
+                  icon="close-outline" status="danger"></nb-icon> -->
+                  <!-- </div> -->
+                  <!-- <a href="//www.bilibili.com/video/BV1Ab411a7y9" target="_blank" title="title" class="title">title</a> -->
+                  <!-- <div class="meta"><span class="play"><i class="icon"></i>288 -->
+                  <!-- </span> -->
+                  <!-- <span class="time"><i class="icon"></i>2019-2-23</span> -->
+                </div>
+              </div>
+            </ng-container>
+          </div>
         </div>
+      </section>
+      <button *ngIf="tabKey == 'My Video'" class="editItem" (click)="editStatus()" nbButton>Edit</button>
+      <button class="deleteItem" (click)="deleteItem()" nbButton>{{buttonText}}</button>
+
     </div>
+  </div>
 </div>
 <div class="wrapper" *ngIf="pageID === 'home'">
     <div class="cover" [ngClass]="{'redBorder': editFlag && tabKeyU == 'User-Info'}"></div>
@@ -167,7 +195,7 @@
             <i class="icon"></i>288
             </span><span class="time"><i class="icon"></i>2019-2-23
             </span></div>
-    </div>
+  </div>
 
     <div class="userInfoContent" style="width: 820px; height: 400px; flex: unset;">
         <div class="input">
@@ -197,85 +225,84 @@
 
 
 
-        <!-- <nb-tab tabTitle="My Video">
+  <!-- <nb-tab tabTitle="My Video">
+  </nb-tab>
+  <nb-tab tabTitle="Liked">
+      Liked Video
+  </nb-tab>
+  <nb-tab tabTitle="Subscription">
+      Subscription
+  </nb-tab>
+  <nb-tab tabTitle="Watch Later">
+      Watch Later
+  </nb-tab>
+  <nb-tab tabTitle="Settings"> -->
+  <!-- <nb-toggle [(checked)]="checked"></nb-toggle> -->
+  <!-- <nb-toggle [(checked)]="checked"></nb-toggle> -->
+  <!-- </nb-tab>
+</nb-tabset>
+<section *ngIf="pageStatus == 'proPage'">
+  <ng-container *ngFor="let title of titleArr">
+      <div class="videoList">
+          <div class="videoTitle">
+              <a href="" class="t">{{title}}</a> -->
+  <!-- <span class="count">1</span> -->
+  <!-- <a class="more" (click)="more(title)">More</a>
+</div>
+<div class="videoContent"> -->
+  <!-- video time area -->
+  <!-- <ng-container *ngFor="let item of Arr">
+      <div class="small-item">
+          <a href="" target="_blank" class="cover"> -->
+  <!-- <img> -->
+  <!-- <span class="length">0{{item}}:48</span>
+  <span class="i-watchlater"></span>
+</a> -->
+  <!--video time area end-->
+  <!--href question, double check-->
+  <!-- <a href="" target="_blank" title="video1" class="title">
+      Video Title
+  </a>
+  <div class="meta">
+      <span class="play">
+          <i class="icon"></i>288
+          </span><span class="time"><i class="icon"></i>2020-4-8
+          </span></div>
+  </div>
+</ng-container>
+</div>   -->
 
-        </nb-tab>
-        <nb-tab tabTitle="Liked">
-            Liked Video
-        </nb-tab>
-        <nb-tab tabTitle="Subscription">
-            Subscription
-        </nb-tab>
-        <nb-tab tabTitle="Watch Later">
-            Watch Later
-        </nb-tab>
-        <nb-tab tabTitle="Settings"> -->
-            <!-- <nb-toggle [(checked)]="checked"></nb-toggle> -->
-            <!-- <nb-toggle [(checked)]="checked"></nb-toggle> -->
-        <!-- </nb-tab>
-    </nb-tabset>
-    <section *ngIf="pageStatus == 'proPage'">
-        <ng-container *ngFor="let title of titleArr">
-            <div class="videoList">
-                <div class="videoTitle">
-                    <a href="" class="t">{{title}}</a> -->
-                    <!-- <span class="count">1</span> -->
-                    <!-- <a class="more" (click)="more(title)">More</a>
-                </div>
-                <div class="videoContent"> -->
-                    <!-- video time area -->
-                    <!-- <ng-container *ngFor="let item of Arr">
-                        <div class="small-item">
-                            <a href="" target="_blank" class="cover"> -->
-                                <!-- <img> -->
-                                <!-- <span class="length">0{{item}}:48</span>
-                                <span class="i-watchlater"></span>
-                            </a> -->
-                            <!--video time area end-->
-                            <!--href question, double check-->
-                            <!-- <a href="" target="_blank" title="video1" class="title">
-                                Video Title
-                            </a>
-                            <div class="meta">
-                                <span class="play">
-                                    <i class="icon"></i>288
-                                    </span><span class="time"><i class="icon"></i>2020-4-8
-                                    </span></div>
-                            </div>
-                        </ng-container>
-                        </div>   -->
-
-                    <!-- </ng-container> -->
-                <!-- </div> -->
-            <!-- </div>
-        </ng-container>
-    </section>
-    <section *ngIf="pageStatus !== 'proPage'">
-        <div class="videoList">
-            <div class="videoTtiel">
-                <a href="" class="t">{{title}}</a>
-                <span class="count">1</span>
-                <a class="more" (click)="return()">return</a>
-            </div>
-            <div class="videoContent"> -->
-                <!-- <ng-container *ngFor="let item of Arr1">
-                    <div class="small-item">
-                        <a href="" target="_blank" class="corver"> -->
-                            <!-- <img> -->
-                            <!-- <span class="length">0{{item}}:48</span>
-                                <span class="i-watchlater"></span>
-                        </a>
-                        <a href="" target="_blank" title="video1" class="title">
-                            Video Title -->
-                        <!-- </a> href question, double check
-                        <div class="meta">
-                            <span class="play">
-                                <i class="icon"></i>288
-                                </span><span class="time"><i class="icon"></i>2020-4-8
-                                </span></div>
-                    </div>
-                </ng-container>
-            </div>
-        </div>
-    </section>
+  <!-- </ng-container> -->
+  <!-- </div> -->
+  <!-- </div>
+</ng-container>
+</section>
+<section *ngIf="pageStatus !== 'proPage'">
+<div class="videoList">
+  <div class="videoTtiel">
+      <a href="" class="t">{{title}}</a>
+      <span class="count">1</span>
+      <a class="more" (click)="return()">return</a>
+  </div>
+  <div class="videoContent"> -->
+  <!-- <ng-container *ngFor="let item of Arr1">
+      <div class="small-item">
+          <a href="" target="_blank" class="corver"> -->
+  <!-- <img> -->
+  <!-- <span class="length">0{{item}}:48</span>
+      <span class="i-watchlater"></span>
+</a>
+<a href="" target="_blank" title="video1" class="title">
+  Video Title -->
+  <!-- </a> href question, double check
+  <div class="meta">
+      <span class="play">
+          <i class="icon"></i>288
+          </span><span class="time"><i class="icon"></i>2020-4-8
+          </span></div>
+</div>
+</ng-container>
+</div>
+</div>
+</section>
 </div> -->

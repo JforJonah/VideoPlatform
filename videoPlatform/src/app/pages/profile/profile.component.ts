@@ -46,33 +46,31 @@ export class ProfileComponent implements OnInit {
   userid: string;
   videourl: string;
   video:Video;
-  
-  user:User;
-  videoid:string;
+
+  user: User;
+  videoid: string;
   videos: Array<Video>;//my video
-  videoIds:Array<string>;
-  likes:Video[]; //likes 后面声明
-  realsub:Array<User>;
-  sub:Array<User>//看情况
- 
+  videoIds: Array<string>;
+  likes: Video[]; //likes 后面声明
+  realsub: Array<User>;
+  sub: Array<User>//看情况
+
 
   requestId:string;
-  //imgUrl: any;
-  // videos:Array<Video>;
-  
+
   // picFile:File;
  
   
 
   constructor(private renderer: Renderer2, private authService: NbAuthService,
-    private userService: UserService,
-    private videoService: VideoService,
-    private route:ActivatedRoute) {
-      this.sub =new Array();
-      this.videos =new Array(); //my video 
-      this.likes = new Array(); //likes声明数组 找like的video
-      //this.videourl = this.videoService.getVideoImgURL(this.video.url);
-      this.authService.onTokenChange()
+              private userService: UserService,
+              private videoService: VideoService,
+              private route:ActivatedRoute) {
+    this.sub =new Array();
+    this.videos =new Array(); //my video
+    this.likes = new Array(); //likes声明数组 找like的video
+    //this.videourl = this.videoService.getVideoImgURL(this.video.url);
+    this.authService.onTokenChange()
       .subscribe((token: NbAuthJWTToken) => {
 
         if (token.isValid()) {
@@ -80,17 +78,13 @@ export class ProfileComponent implements OnInit {
           console.log(this.requestId);
           this.getMyVideos(this.requestId);
         }
-        console.log(this.videos)
       });
       this.videourl="";
   }
 
-  
+
 
   ngOnInit(): void {
-    //this.route.url.subscribe(url => {this.userid = url[2].toString()});
-    //console.log(this.userid);
-    // console.log(this.videourl);
     this.userService.getUserById(this.requestId).toPromise().then(user =>{
       this.user = user;
     });
@@ -138,28 +132,11 @@ export class ProfileComponent implements OnInit {
 
   }
 
-  
-  
-  functionone() {
-    // this.videoIds = this.user.videos;
-
-    // console.log(this.videoIds);
-    // this.likes = this.user.liked;
-    // this.sub = this.user.subscribe;
-    
-    //this.videourl = this.videoService.getVideoImgURL(this.video.url);
-        
-    // for (let i = 0; i < this.videoIds.length; i++) {
-    //   this.videos[i]=this.videoService.getVideoById(this.videoIds[i]);
-      //console.log(this.videos);
-      // this.videoService.getAllVideosFromAuthor()
-    
-  };
   getMyVideos(id:string):void{
     this.videoService.getAllVideosFromAuthor(id).toPromise().then(video=>{this.videos=video,console.log(video)});
   }
 
- 
+
 
 
 

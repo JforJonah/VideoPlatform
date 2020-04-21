@@ -9,7 +9,6 @@ import {VideoService} from '../../server/video.service';
 import {ActivatedRoute} from '@angular/router';
 import { NbAuthJWTToken, NbAuthService } from '@nebular/auth';
 import { JsonpInterceptor } from '@angular/common/http';
-import { SafePipe } from 'src/app/pipe';
 import { DomPortal } from '@angular/cdk/portal';
 import { DomSanitizer } from '@angular/platform-browser';
 import {  Inject,  OnChanges, SimpleChanges } from "@angular/core";
@@ -24,10 +23,10 @@ export class HistoryComponent implements OnInit {
   userid;
   profile: User;
   videos:Array<Video>;
-  constructor(private authService: NbAuthService, 
+  constructor(private authService: NbAuthService,
               private userService: UserService,
               private videoService : VideoService) {
-    
+
                 //init
                 this.videos=new Array();
 
@@ -40,14 +39,14 @@ export class HistoryComponent implements OnInit {
                     }
 
                   });
-  
+
   }
 
   ngOnInit(): void {
     this.getProfile();
     //this.getHistory();
   }
-  getProfile(){                
+  getProfile(){
     this.userService.getUserById(this.userid).subscribe(user =>{
       this.profile=user
       this.profile.history.forEach((Item)=>{
@@ -64,7 +63,7 @@ export class HistoryComponent implements OnInit {
 
 
   getHistory(){
-    
+
   }
 
   removeFromHistory(): void{

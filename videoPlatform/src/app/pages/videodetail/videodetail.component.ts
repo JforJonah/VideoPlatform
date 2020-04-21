@@ -9,14 +9,13 @@ import {VideoService} from '../../server/video.service';
 import {ActivatedRoute} from '@angular/router';
 import { NbAuthJWTToken, NbAuthService } from '@nebular/auth';
 import { JsonpInterceptor } from '@angular/common/http';
-import { SafePipe } from 'src/app/pipe';
 import { DomPortal } from '@angular/cdk/portal';
 import { DomSanitizer } from '@angular/platform-browser';
 import {  Inject,  OnChanges, SimpleChanges } from "@angular/core";
 
 @Component({
   selector: 'app-videodetail',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  //changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './videodetail.component.html',
   styleUrls: ['./videodetail.component.scss']
 })
@@ -44,6 +43,7 @@ userid;
 user:User;
 author:User;
 authorid;
+authorname:string;
 
 //video-url
 videoUrl:string;
@@ -56,15 +56,15 @@ videos:Video[];
 
 favorite: Video[] = [];
 
-change:Boolean;
+change: boolean;
 
 //history
 historys:Video[] = [];
-  
+
 
   constructor(private videoService: VideoService,
               private userService: UserService,
-              private route:ActivatedRoute,
+              private route: ActivatedRoute,
               private authService: NbAuthService,
               private sanitizer: DomSanitizer) {
 
@@ -86,6 +86,7 @@ historys:Video[] = [];
 
                 this.historys=new Array();
                 this.videoId="";
+                this.authorid=""
 
                 this.change = false;
 
@@ -99,16 +100,26 @@ historys:Video[] = [];
                       }
 
                     });
+                // get the authorid of this video
+                this.videoService.getVideoById(this.route.snapshot.paramMap.get('id')).subscribe(
+                  video => this.videoService.getAuthor(video).subscribe(
+                    author => {
+                    this.authorid=author.id,
+                    this.authorname=author.username
+
+                    }
+                  )
+                );
 
                }
 
   ngOnInit(): void {
-    
+
     this.getReadyData();
     //this.getReadyButton();
     //this.getVideo();
     //this.getProfile();
-    
+
   }
 
   getReadyData(): void{
@@ -144,13 +155,13 @@ historys:Video[] = [];
       )
     );
 
-    
+
     // get the author of this video
     this.videoService.getVideoById(this.route.snapshot.paramMap.get('id')).subscribe(
       video => this.videoService.getAuthor(video).subscribe(
         author => {
-        this.author = author,
-        this.authorid=author.id
+        this.author = author
+        //this.authorid=author.id
         }
       )
     );
@@ -173,7 +184,7 @@ historys:Video[] = [];
 
     // update history
     this.videoService.getVideoById(this.route.snapshot.paramMap.get('id')).subscribe(
-      video => this.userService.unpdateHistory(video).subscribe()
+      video => this.userService.unpdateHistory(video).toPromise().then()
     );
 
     //comments
@@ -182,7 +193,7 @@ historys:Video[] = [];
         this.comments.push(Item)
       })
     )
-    
+
     //init button
     //like
     this.videoService.getVideoById(this.route.snapshot.paramMap.get('id')).subscribe(
@@ -211,7 +222,7 @@ historys:Video[] = [];
     //follows
     this.userService.getUserById(this.userid).subscribe(
       user => {
-        //console.log(this.author.id)
+        //console.log("auth",this.authorid)
         if(user.subscribe.includes(this.authorid)){
           this.followClicked=true;
         }
@@ -251,7 +262,7 @@ historys:Video[] = [];
   // getVideo(){
   //   console.log(this.videoId)
   //   this.route.url.subscribe(url=>{this.videoId=url[1].toString()});
-    
+
   //   this.videoService.getVideoById(this.videoId).subscribe(video =>{
   //     this.video=video,console.log(this.video),
   //     this.videoUrl=this.videoService.getVideoURL(video.url),
@@ -273,14 +284,14 @@ historys:Video[] = [];
   //                 else{
   //                   this.likeClicked=false;
   //                 }
-      
+
   //   }
   //   );
-    
-  // }
-  
 
-  // getProfile(){                
+  // }
+
+
+  // getProfile(){
   //   this.userService.getUserById(this.userid).subscribe(user =>{
   //     this.user=user,
   //     //add favorite to list
@@ -294,7 +305,7 @@ historys:Video[] = [];
   //         if(!this.videos.includes(fan)) {
   //           this.videos.push(fan);
   //         }
-          
+
   //        })
   //     })
   //     //init button
@@ -308,8 +319,8 @@ historys:Video[] = [];
   //     //console.log(this.author.id)
   //     //if(user.subscribe.includes(this.author))
   //   }
-      
-      
+
+
 
   // );
   // }
@@ -388,7 +399,7 @@ historys:Video[] = [];
         //user.favorite.push(this.videoId);
         this.userService.setFavoriteVideo(this.video).toPromise().then()
         console.log(this.favorite)
-    
+
       }
 
     }
@@ -407,7 +418,7 @@ historys:Video[] = [];
 
     }
     else if(this.followClicked){
-  
+
     this.userService.unSubscribeUser(this.author).toPromise().then()
     }
   }
