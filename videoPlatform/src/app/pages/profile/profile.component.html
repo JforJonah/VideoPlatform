@@ -49,7 +49,7 @@
                 </div> -->
                 <input style="margin: 20px;" (click)="onSave()" nbButton type="submit" value="Save" />
 
-                <input style="position: absolute; top:120px; left: 100px;" (click)="upload()" nbButton type="submit"
+                <input class="picfiles" style="position: absolute; top:120px; left: 100px;" (click)="upload()" nbButton type="submit"
                     value="Upload" />
 
                 <nb-user style="position: absolute; top: 30px; left: 100px;" size="large" [name]="user?.username"
@@ -74,7 +74,7 @@
                         <!-- <div class="likes">{{item.email}}</div> -->
                         <div class="small-item">
                             <div class="cover" [ngClass]="{'redBorder': editFlag && tabKeyL == 'Liked'}" (click)="toEdit(item)">
-                                <iframe width="160" height="100" [src]="[videourl, 'NewPipePipe']"></iframe>
+                                <iframe width="160" height="100" [src]="videourl | safe: 'resourceUrl'"></iframe>
                             </div>
                         </div>
                     </ng-container>
@@ -91,10 +91,10 @@
                 </div>
                 <div class="videoContent">
                     <ng-container *ngFor="let item of sub">
-                        <div class="sub">{{item.email}}</div>
+                        <!-- <div class="sub">{{item.email}}</div> -->
                         <div class="small-item">
                             <div class="cover" [ngClass]="{'redBorder': editFlag && tabKeyL == 'Subscription'}" (click)="toEdit(item)">
-                                <iframe width="160" height="100" [src]="videourl | NewPipePipe"></iframe>
+                                <iframe width="160" height="100" [src]="videourl | safe: 'resourceUrl'"></iframe>
                             </div>
                         </div>
                     </ng-container>
@@ -113,13 +113,13 @@
                     </div>
                     <div class="videoContent">
                         <ng-container *ngFor="let item of videos; let index =index"> <!--let item of Arr; let index = index-->
-                            <div class="name">{{item.auth}}</div>
+                            <!-- <div class="name">{{item.auth}}</div> -->
                             <div class="small-item">
                                 <div class="cover" [ngClass]="{'redBorder': editFlag && tabKey == 'My Video'}" (click)="toEdit(item)">
                                     <!-- <img
                                         src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1875705305,2952422048&fm=26&gp=0.jpg"
                                         > -->
-                                        <iframe width="160" height="100" src="videourl | NewPipePipe"></iframe>
+                                        <iframe width="160" height="100" [src]="videourl | safe: 'resourceUrl'"></iframe>
                                     <!-- <span class="length">0{{item.number}}:48</span> -->
                                     <!-- <span class="i-watchlater"></span>
                                     <nb-icon *ngIf="item.edit" (click)="del($event,index)" class="icon"
@@ -144,16 +144,20 @@
 <div class="wrapper" *ngIf="pageID !=='home'"
     style="display: flex;flex-direction: column; justify-content: flex-start;align-items: center;">
     <div class="small-item">
-        <div class="cover" style="width : 320px; height: 200px;"><img style="width : 320px; height: 200px;"
+        <div class="cover" style="width : 320px; height: 200px;">
+            <div class="cover" [ngClass]="{'redBorder': editFlag && tabKey == 'My Video'}" (click)="toEdit(item)">
+                <iframe width="160" height="100" [src]="videourl | safe: 'resourceUrl'"></iframe>
+            </div>
+            <!-- <img style="width : 320px; height: 200px;"
                 src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1875705305,2952422048&fm=26&gp=0.jpg"
-                alt="">
+                alt=""> -->
                 <!-- <span class="length">0{{videoData.number}}:48</span> -->
                 <span class="i-watchlater"></span>
             <nb-icon *ngIf="videoData.edit" class="icon" icon="close-outline" status="danger">
             </nb-icon>
 
         </div>
-        <a href="//www.bilibili.com/video/BV1Ab411a7y9" target="_blank" title="title" class="title">title</a>
+        <a target="_blank" title="title" class="title">{{videoTitle}}</a>
         <div class="meta"><span class="play">
             <i class="icon"></i>288
             </span><span class="time"><i class="icon"></i>2019-2-23
@@ -177,12 +181,12 @@
 
         <div style="display: flex; flex-direction: row;">
 
-            <input (click)="returnHome()" nbButton type="submit" value="return" />
+            <input (click)="returnMyvideo()" nbButton type="submit" value="return" />
             &nbsp;
             <input (click)="editSAVE()" nbButton type="submit" value="upload" />
         </div>
     </div>
-</div>
+<!-- </div> -->
 <input type="file" #file1 style="display:none;" accept="image/png, image/jpeg, image/gif, image/jpg" />
 
 
