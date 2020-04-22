@@ -90,7 +90,8 @@
                 size="large"
                 name={{author?.username}}
                 picture=""
-                color = "green">
+                color = "green"
+                     routerLink="/pages/profile/{{author?.id}}">
         </nb-user>
         <div class = "follow-btn-div">
             <button nbButton status="danger"
@@ -124,8 +125,8 @@
                                 {{video1?.title}}
                             </a>
                             <!-- <span>{{authorname}}</span> -->
-                            <nb-user class="user-info" 
-                                size="small" 
+                            <nb-user class="user-info"
+                                size="small"
                                 [name]="authorname"
                                 picture=""
                                 color = "green">

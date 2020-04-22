@@ -1,13 +1,14 @@
 # final-project-monster-hunter
 
 ### Problem Statement
-
-### Technical Requirement
+Building a video-share-platform. Users are able to upload video and interact with other users in terms of subscription;
+like, favorite or comment with video. And users can update their information and videos on profile page. 
 
 ### Approaches
 
 - using node.js as back-end server.
 - using Angular as front-end technology.
+- using MongoDB as DataBase
 
 ### Member information
 
