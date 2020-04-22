@@ -13,7 +13,8 @@
           </a>
           <nb-card-footer>
             <nb-icon icon="people" [options]="{ fill: 'lightblue'}"></nb-icon>Follower {{follower.subscribed.length}}
-            <nb-icon icon="people-outline" [options]="{ fill: 'danger'}"></nb-icon>Followee {{follower.subscribe.length}}
+            &nbsp;
+            <nb-icon icon="people-outline" [options]="{ fill: 'danger'}"></nb-icon>Followee {{follower.subscribe.length}} 
           </nb-card-footer>
         </nb-card>
       </nb-card-body>
@@ -35,6 +36,7 @@
           </a>
           <nb-card-footer>
             <nb-icon icon="people" [options]="{ fill: 'lightblue'}"></nb-icon>Follower {{followee.subscribed.length}}
+            &nbsp;
             <nb-icon icon="people-outline" [options]="{ fill: 'danger'}"></nb-icon>Followee {{followee.subscribe.length}}
           </nb-card-footer>
         </nb-card>
