@@ -153,8 +153,9 @@ export class ProfileComponent implements OnInit {
 
   onSave() {
     this.userService.updateUser(this.user).subscribe();
-    //加alert
-    alert('Save SUCCESSFULLY');
+    
+    alert('Save SUCCESSFULLY'); 
+    //once saved successful, it will show an alert
   }
 
   deleteItem(){

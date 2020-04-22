@@ -12,9 +12,8 @@
           </nb-card-body>
           </a>
           <nb-card-footer>
-            <button nbButton>
-              Subscription <nb-icon icon="star" [options]="{ animation: {type: 'zoom'}, fill: 'red'}"></nb-icon>
-            </button>
+            <nb-icon icon="people" [options]="{ fill: 'lightblue'}"></nb-icon>Follower {{follower.subscribed.length}}
+            <nb-icon icon="people-outline" [options]="{ fill: 'danger'}"></nb-icon>Followee {{follower.subscribe.length}}
           </nb-card-footer>
         </nb-card>
       </nb-card-body>
@@ -35,9 +34,8 @@
           </nb-card-body>
           </a>
           <nb-card-footer>
-            <button nbButton>
-              Subscription <nb-icon icon="star-outline" [options]="{ animation: {type: 'zoom'}}" status="danger"></nb-icon>
-            </button>
+            <nb-icon icon="people" [options]="{ fill: 'lightblue'}"></nb-icon>Follower {{followee.subscribed.length}}
+            <nb-icon icon="people-outline" [options]="{ fill: 'danger'}"></nb-icon>Followee {{followee.subscribe.length}}
           </nb-card-footer>
         </nb-card>
       </nb-card-body>
