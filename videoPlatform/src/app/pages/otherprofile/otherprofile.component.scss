@@ -7,21 +7,37 @@
 a {
   text-decoration: none;
 }
+div{
+  display: inline-block;
+}
+
+.follow-btn{
+  margin-left: 20px;
+  .follow-unclicked{
+    background-color: white;
+    color: red;
+    .follow-icon{
+        color :red;
+        //margin-left: 10px;
+    }
+}
+}
+
 .video-like{
   margin-left:50px;
   .title{
     margin-bottom: 50px;
-    height: 150px;
-    width:250px;
-    line-height: 18px;
-    font-size: 14px;
-    font-weight: 500;
-    margin-bottom: 6px;
-    word-break: break-all;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
+                      height: 150px;
+                      width:250px;
+                      line-height: 18px;
+                      font-size: 14px;
+                      font-weight: 500;
+                      margin-bottom: 6px;
+                      word-break: break-all;
+                      overflow: hidden;
+                      text-overflow: ellipsis;
+                      display: -webkit-box;
+                      -webkit-line-clamp: 2;
   }
   .like-icon{
     color:red
