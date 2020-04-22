@@ -246,9 +246,7 @@ a{
         }
     }
 
-    .redBorder {
-        border: 1px solid #ff5a5b;
-    }
+   
 }
 
 .div-container{
@@ -261,22 +259,22 @@ a{
     text-decoration: none;
   }
 
-  .card-row {
+.card-row {
     display: flex;
     margin: 0 -0.5rem;
-  }
+}
   
-  .card-col {
+.card-col {
     flex: 1 0 calc(50% - 1rem);
     margin: 0 0.5rem;
-  }
+}
 
-  .small-video{
+.small-video{
       width: 280px;
       height: 160px;
-  }
+}
 
-  .infodetail{
+.infodetail{
       div{
           display: inline-block;
       }
@@ -284,47 +282,53 @@ a{
           margin-left: 10%;
           margin-top: 20px;
           margin-bottom: 20px;
-        //   text-align: center;
+           text-align: center;
       }
-  }
+}
 
-  .saveinput{
-      margin: 20px;
-  }
+.saveinput{
+    margin-right: 80px; 
+    margin-top:20px; 
+    margin-bottom: 30px;
+}
 
-  .uploadinput{
-      position: absolute;
-      top: 145px;
-      left: 100px;
-      margin-left: 4em;
-  }
-    .uploadin{
-        position: absolute;
-        top: 65px;
-        left:100px;
-        margin-left: 3em;
+ 
+.uploadin{
+    position: absolute;
+    top: 65px;
+    left:100px;
+    margin-left: 3.5em;
   }
   
+.fillout{
+    height: 100%;
+}
 
-  .centerpos{
+.centerpos{
       text-align: center;
-  }
+}
 
-  .cardpos{
+.cardpos{
       text-align: center;
       margin-top: 10px;
       margin-bottom: 10px;
-  }
+}
 
-  .userpos{
+.headerpos{
+    text-align: center; 
+    margin-top: 6px;
+}
+
+.userpos{
       margin-left: 10px;
       margin-bottom: 6px;
-  }
+}
 
-  .imgpos{
+.imgpos{
       padding-top: 1em;
-  }
+      margin-left: 53px;
+}
 
-  .pictype{
+.pictype{
       display: none;
-  }
+}
