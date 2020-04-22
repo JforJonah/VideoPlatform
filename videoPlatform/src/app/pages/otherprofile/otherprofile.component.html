@@ -17,7 +17,7 @@
       <nb-card-header>{{video.title}}</nb-card-header>
       <a routerLink="/pages/details/{{video.id}}">
       <nb-card-body>
-        <iframe [src]="videoService.getVideoImgURL(video.url) | safe: 'resourceUrl'"></iframe>
+        <img [src]="videoService.getVideoImgURL(video.url) | safe: 'resourceUrl'">
       </nb-card-body>
       </a>
     </nb-card>
