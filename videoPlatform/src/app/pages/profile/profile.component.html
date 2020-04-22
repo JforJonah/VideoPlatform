@@ -67,16 +67,16 @@
                 <div>
                   <nb-card>
                     <nb-card-header style="text-align: center;">{{video.title}}</nb-card-header>
-                    
-                    <a routerLink="/pages/details/{{video.id}}"></a>    
+
+                    <a routerLink="/pages/details/{{video.id}}"></a>
                     <nb-card-body>
                         <div style="text-align: center;">
                         <img src="https://img.youtube.com/vi/{{video.url}}/mqdefault.jpg">
                         </div>
                       <!-- <img [src]="videoService.getVideoImgURL(video.url) | safe: 'resourceUrl'"> -->
                     </nb-card-body>
-                
-                    
+
+
                     <nb-card-footer>
                       {{video.description}}
                     </nb-card-footer>
@@ -97,9 +97,9 @@
             </div>
             <div class="videoContent div-container">
                 <ng-container *ngFor="let video of sub">
-                    
+
                     <div>
-                      <nb-card>  
+                      <nb-card>
                             <nb-card-body>
                               <nb-card>
                                     <div style="text-align: center; margin-top: 10px; margin-bottom: 10px;">
@@ -108,14 +108,14 @@
                                         <nb-user style="margin-left: 10px; margin-bottom: 6px;"[name]="videoAuthors.get(video.id).username"></nb-user></a>
                                             {{video.title}}
                                 <!-- </nb-card-header> -->
-                       
+
                                         <a  routerLink="/pages/details/{{video.id}}"></a>
                                             <div class="pic" style="padding-top: 1em;">
                                 <!-- <nb-card-body> -->
                                             <img src="https://img.youtube.com/vi/{{video.url}}/mqdefault.jpg">
                                 <!-- <img [src]="videoService.getVideoImgURL(video.url) | safe: 'resourceUrl'"> -->
                                 <!-- </nb-card-body> -->
-                        
+
                                             </div>
                                     </div>
                                     <nb-card-footer>
@@ -123,8 +123,8 @@
                                       </nb-card-footer>
                               </nb-card>
                             </nb-card-body>
-                       
-                        
+
+
                       </nb-card>
 
                     </div>
@@ -145,7 +145,7 @@
                     <ng-container  *ngFor="let video of videos">
                         <!-- <div > -->
                             <div class="cover" [ngClass]="{'redBorder': editFlag && tabKey == 'My Video'}" (click)="toEdit(video)">
-                              <nb-card >
+                              <nb-card routerLink="/pages/updatevideo/{{video.id}}">
                                 <nb-card-header style="text-align: center;">{{video.title}}</nb-card-header>
                                 <nb-card-body style="text-align: center;">
                                     <img src="https://img.youtube.com/vi/{{video.url}}/mqdefault.jpg">

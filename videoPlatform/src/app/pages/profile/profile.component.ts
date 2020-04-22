@@ -55,7 +55,7 @@ export class ProfileComponent implements OnInit {
 
   // picFile:File;
 
-  constructor(private renderer: Renderer2, 
+  constructor(private renderer: Renderer2,
               private authService: NbAuthService,
               private userService: UserService,
               public videoService: VideoService,
@@ -88,7 +88,9 @@ export class ProfileComponent implements OnInit {
     this.userService.getUserById(this.requestId).subscribe(
       profile => profile.videos.forEach(
         videoid => this.videoService.getVideoById(videoid).subscribe(
-          video => this.videos.push(video)
+          video => {
+            if(video !== null && video !== undefined) {this.videos.push(video); }
+          }
         )
       )
     );
@@ -125,7 +127,7 @@ export class ProfileComponent implements OnInit {
   }
 
 
-  
+
 
   setKey(event) {
     this.tabKey = event.tabTitle;
@@ -153,9 +155,8 @@ export class ProfileComponent implements OnInit {
 
   onSave() {
     this.userService.updateUser(this.user).subscribe();
-    
-    alert('Save SUCCESSFULLY'); 
-    //once saved successful, it will show an alert
+    //加alert
+    alert('Save SUCCESSFULLY');
   }
 
   deleteItem(){
@@ -189,8 +190,8 @@ export class ProfileComponent implements OnInit {
 
 
    }
-  
-  
+
+
 
 
   editFlag: boolean = false;
