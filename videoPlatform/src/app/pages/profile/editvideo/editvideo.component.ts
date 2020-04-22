@@ -46,11 +46,15 @@ export class EditvideoComponent implements OnInit {
 
   }
 
+  //save function that save the title and description after edit
   save(): void {
     this.videoService.updateVideo(this.video).subscribe();
+    alert('Save SUCCESSFULLY');
     this.location.back();
   }
 
+
+  //delete the video that user do not want anymore
   delete(): void {
     this.profile.videos = this.profile.videos.filter( v => v !== this.route.snapshot.paramMap.get('id'));
     console.log(this.profile);

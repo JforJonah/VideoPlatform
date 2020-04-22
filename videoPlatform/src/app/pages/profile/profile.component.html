@@ -7,6 +7,7 @@
         </ng-container>
     </nb-tabset>
 
+<!------ User Info detail page (Editable) ------>
 <div class="userinfo" [ngSwitch]="tabKey">
 <div   *ngSwitchCase="'User Info'">
 
@@ -54,7 +55,7 @@
                  [picture]="this.fileArr[0]?.url" (click)="upload1()"></nb-user>
         </div>
     </div>
-<!-- liked video part in profile page -->
+<!------ liked video part in profile page ------>
     <div *ngSwitchCase="'Liked'">
         <div class="videoList">
                 <div class="videoTitle">
@@ -89,7 +90,7 @@
     </div>
 <!-- <button *ngIf="tabKey == 'Liked'" class="editItem" (click)="editStatus()" nbButton>Cancel</button> -->
 
-<!-- Subscription video part in profile page -->
+<!------ Subscription video part in profile page ------>
     <div *ngSwitchCase="'Subscription'">
         <div class="videoList">
             <div class="videoTitle">
@@ -130,7 +131,7 @@
     </div>
 <!-- <button *ngIf="tabKey == 'Subscription'" class="editItem" (click)="editStatus()" nbButton>Unsubscribe</button> -->
 
-<!-- My video part in profile page -->
+<!------ My video part in profile page ------>
     <div *ngSwitchDefault>
         <section>
             <div class="videoList">
