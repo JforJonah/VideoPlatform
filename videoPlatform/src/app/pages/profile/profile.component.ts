@@ -155,12 +155,12 @@ export class ProfileComponent implements OnInit {
 
   onSave() {
     this.userService.updateUser(this.user).subscribe();
-    //加alert
+    //save alert once save successfully
     alert('Save SUCCESSFULLY');
   }
 
   deleteItem(){
-    //删除需要与后端连接
+    
     this.Arr.forEach((item) => (item.edit = true));
     //  var deleteitem = confirm('Delete?')
     //  if(deleteitem){
@@ -170,7 +170,7 @@ export class ProfileComponent implements OnInit {
     //window.location.assign('');
   }
 
-  del(event, index) { //这个也需要
+  del(event, index) { 
     event.stopPropagation();
     this.Arr.splice(index, 1);
   }

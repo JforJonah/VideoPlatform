@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {NbAuthJWTToken, NbAuthService} from '@nebular/auth';
 import {VideoService} from '../../../server/video.service';
 import {UserService} from '../../../server/user.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, RouterLink} from '@angular/router';
 import {Video} from '../../../models/Video';
 import {User} from '../../../models/User';
 import {Location} from '@angular/common';
@@ -55,7 +55,12 @@ export class EditvideoComponent implements OnInit {
     this.profile.videos = this.profile.videos.filter( v => v !== this.route.snapshot.paramMap.get('id'));
     console.log(this.profile);
     this.userService.updateUser(this.profile).subscribe();
-    this.videoService.deleteVideo(this.video).subscribe();
+    // this.videoService.deleteVideo(this.video).subscribe();
+    var deleteitem = confirm('Delete?')
+      if(deleteitem){
+        this.videoService.deleteVideo(this.video).subscribe();
+        alert('Delete SUCCESSFULLY');
+      }
     this.location.back();
   }
 }
