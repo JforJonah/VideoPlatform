@@ -7,3 +7,18 @@
 a {
   text-decoration: none;
 }
+div{
+  display: inline-block;
+}
+
+.follow-btn{
+  margin-left: 20px;
+  .follow-unclicked{
+    background-color: white;
+    color: red;
+    .follow-icon{
+        color :red;
+        //margin-left: 10px;
+    }
+}
+}
