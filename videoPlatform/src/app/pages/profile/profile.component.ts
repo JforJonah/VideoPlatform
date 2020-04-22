@@ -14,8 +14,7 @@ import { User } from 'src/app/models/User';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  //[x: string]: any;
-  @ViewChild("file1") file: ElementRef;
+  @ViewChild('file1') file: ElementRef;
 
 
   Arr = Array.from(
@@ -25,20 +24,18 @@ export class ProfileComponent implements OnInit {
     }
   );
 
-  tabs= [
-    "User Info",
-    "My Video",
-    "Liked",
-    "Subscription",
-    // "Watch Later",
-    // "Setting",
+  tabs = [
+    'User Info',
+    'My Video',
+    'Liked',
+    'Subscription',
   ];
-  tabKey ="My Video";
-  tabKeyL ="Liked";
-  tabKeyS ="Subscription";
-  tabKeyU = "User-Info"
+  tabKey = 'My Video';
+  tabKeyL = 'Liked';
+  tabKeyS = 'Subscription';
+  tabKeyU = 'User-Info'
 
-  buttonText = "";
+  buttonText = '';
   fileArr = [];
 
   userid: string;
@@ -54,11 +51,9 @@ export class ProfileComponent implements OnInit {
   sub: Video[] = [];//看情况
   videoAuthors = new Map<string, User>();
 
-  requestId:string;
+  requestId: string;
 
   // picFile:File;
- 
-  
 
   constructor(private renderer: Renderer2, 
               private authService: NbAuthService,
@@ -130,10 +125,9 @@ export class ProfileComponent implements OnInit {
   }
 
 
-
+  
 
   setKey(event) {
-    console.log(event.tabTitle);
     this.tabKey = event.tabTitle;
 
     this.Arr = Array.from(
@@ -143,17 +137,17 @@ export class ProfileComponent implements OnInit {
       }
     );
     switch (event.tabTitle) {
-      case "My Video":
-        this.buttonText = "Delete Video";
+      case 'My Video':
+        this.buttonText = 'Delete Video';
         break;
-      case "Liked":
-        this.buttonText = "Unlike";
+      case 'Liked':
+        this.buttonText = 'Unlike';
         break;
-      case "Subscription":
-        this.buttonText = "Unsubscribe";
+      case 'Subscription':
+        this.buttonText = 'Unsubscribe';
         break;
       default:
-        this.buttonText = "";
+        this.buttonText = '';
     }
   }
 
@@ -163,12 +157,13 @@ export class ProfileComponent implements OnInit {
     alert('Save SUCCESSFULLY');
   }
 
-  deleteItem(){//删除需要与后端连接
+  deleteItem(){
+    //删除需要与后端连接
     this.Arr.forEach((item) => (item.edit = true));
     //  var deleteitem = confirm('Delete?')
     //  if(deleteitem){
     this.videoService.deleteVideo(this.video).subscribe();
-     
+
     //}
     //window.location.assign('');
   }
@@ -179,19 +174,19 @@ export class ProfileComponent implements OnInit {
   }
 
   //local files open (prepare for upload)
-  upload1(){ 
+  upload1(){
       this.file.nativeElement.click();
     }
-  
+
   //upload profile image
-  upload(){     
-    
+  upload(){
+
     var file: File = this.fileArr.pop()
     var form = new FormData()
     form.append("file", file)
     this.userService.uploadProfileImg(form).toPromise().then();
-       
-  
+
+
    }
   
   
@@ -213,7 +208,7 @@ export class ProfileComponent implements OnInit {
   }
 
   returnHome(){
-    this.pageID = "home";
+    this.pageID = 'home';
     this.editFlag = false;
   }
 
@@ -222,11 +217,7 @@ export class ProfileComponent implements OnInit {
     alert('Save SUCCESSFULLY');
   }
 
-  //pagesId = "My Video";
-  // returnMyvideo(){ //编辑完视频之后应该回到My video页面 这里还有问题
-  //   this.tabKey="My Video";
-  // }
-  ngAfterViewInit(): void { 
+  ngAfterViewInit(): void {
     //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
     //Add 'implements AfterViewInit' to the class.
     this.renderer.listen(this.file.nativeElement, "change", (event) => {
@@ -245,5 +236,5 @@ export class ProfileComponent implements OnInit {
       console.log(this.fileArr);
       this.file.nativeElement.value = "";
   });
-  }  
+  }
 }
