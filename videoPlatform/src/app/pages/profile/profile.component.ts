@@ -38,37 +38,43 @@ export class ProfileComponent implements OnInit {
   buttonText = '';
   fileArr = [];
 
-  videourl: string;
-  video: Video;
+  userid: string;
+  // videourl: string;
+  video:Video;
 
   user: User;
+  videoid: string;
   videos: Array<Video> = [];//my video
-  likes: Video[] = []; //likes 后面声明
+  // videoIds: Array<string>;
+  likes: Video[]=[]; //likes 后面声明
+  // realsub: Array<User>;
   sub: Video[] = [];//看情况
   videoAuthors = new Map<string, User>();
-
 
   requestId: string;
 
   // picFile:File;
 
-
-
-  constructor(private renderer: Renderer2,
+  constructor(private renderer: Renderer2, 
               private authService: NbAuthService,
               private userService: UserService,
               public videoService: VideoService,
-              private route: ActivatedRoute) {
+              private route:ActivatedRoute) {
+    // this.sub =new Array();
+    // this.videos =new Array(); //my video
+    // this.likes = new Array(); //likes声明数组 找like的video
+    //this.videourl = this.videoService.getVideoImgURL(this.video.url);
     this.authService.onTokenChange()
       .subscribe((token: NbAuthJWTToken) => {
 
         if (token.isValid()) {
           this.requestId = token.getPayload()._id; // here we receive a payload from the token and assigns it to our `user` variable
+          console.log(this.requestId);
         }
       });
-    this.userService.getUserById(this.requestId).subscribe(
-      profile => this.user = profile
-    );
+      this.userService.getUserById(this.requestId).subscribe(
+        profile => this.user = profile
+      );
   }
 
 
@@ -118,6 +124,9 @@ export class ProfileComponent implements OnInit {
 
   }
 
+
+  
+
   setKey(event) {
     this.tabKey = event.tabTitle;
 
@@ -144,6 +153,7 @@ export class ProfileComponent implements OnInit {
 
   onSave() {
     this.userService.updateUser(this.user).subscribe();
+    //加alert
     alert('Save SUCCESSFULLY');
   }
 
@@ -178,17 +188,8 @@ export class ProfileComponent implements OnInit {
 
 
    }
-  // onPicfileChange(event){//加了事件一直显示报错不知道为啥
-  //   if(event.target.files){
-  //     const [file] = event.target.files;
-  //     this.picFile = file;
-  //   }
-    // this.picfile = event.target.file[0];
-    // let Url = window.URL.createObjectURL(this.picfiles);
-    // this.Url = this.sanitizer.bypassSecurityTrustUrl(Url);
-    // console.log(Url);
-  //}
-
+  
+  
 
 
   editFlag: boolean = false;
@@ -237,4 +238,3 @@ export class ProfileComponent implements OnInit {
   });
   }
 }
-

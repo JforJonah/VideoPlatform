@@ -1,193 +1,218 @@
 <div class="wrapper" *ngIf="pageID === 'home'">
-        <nb-tabset (changeTab)="setKey($event)">
-            <ng-container *ngFor="let item of tabs">
-                <nb-tab [tabTitle]="item">
-                    <div> {{item}} </div>
-                </nb-tab>
-            </ng-container>
-        </nb-tabset>
+    <nb-tabset (changeTab)="setKey($event)">
+        <ng-container *ngFor="let item of tabs">
+            <nb-tab [tabTitle]="item">
+                <div> {{item}} </div>
+            </nb-tab>
+        </ng-container>
+    </nb-tabset>
 
-  <div [ngSwitch]="tabKey">
-    <div *ngSwitchCase="'User Info'">
+<div class="userinfo" [ngSwitch]="tabKey">
+<div   *ngSwitchCase="'User Info'">
 
-            <div class="userInfoContent" *ngIf="user">
-              <div class="input" >
-                <span class="title"> First Name </span>
-                <input type="text" nbInput fullWidth fieldSize="medium" ngDefaultControl
-                       placeholder="First Name" [(ngModel)]="user.firstName">
-              </div>
-              <div class="input">
-                <span class="title"> Last Name </span>
-                <input type="text" nbInput fullWidth fieldSize="medium" ngDefaultControl
-                       placeholder="Last Name" [(ngModel)]="user.lastName">
-              </div>
-              <div class="input">
-                <span class="title"> User Name </span>
-                <input type="text" nbInput fullWidth fieldSize="medium" ngDefaultControl
-                       placeholder="User Name" [(ngModel)]="user.username">
-                <a>Change User Name</a>
-              </div>
-              <div class="input">
-                <span class="title"> Email </span>
-                <input type="text" nbInput fullWidth fieldSize="medium" ngDefaultControl
-                       placeholder="Email" [disabled]="true" [(ngModel)]="user.email">
-              </div>
-              <div class="input">
-                <span class="title"> Password </span>
-                <input type="text" nbInput fullWidth fieldSize="medium" ngDefaultControl
-                       placeholder="Password" [disabled]="true" [(ngModel)]="user.password">
-                <a>Forget Password</a>
-              </div>
-              <div class="input" [ngModel]="user.sex" ngDefaultControl>
-                <span class="title"> Gender </span>
-                <nb-select placeholder="Select your gender">
-                  <nb-option value="1">Male</nb-option>
-                  <nb-option value="2">Female</nb-option>
-                  <nb-option value="3">Secret</nb-option>
-                </nb-select>
-              </div>
+        <div class="userInfoContent" *ngIf="user">
+          <div class="input">
+            <span class="title"> First Name </span>
+            <input type="text" nbInput fullWidth fieldSize="medium" ngDefaultControl
+                   placeholder="First Name" [(ngModel)]="user.firstName">
+          </div>
+          <div class="input">
+            <span class="title"> Last Name </span>
+            <input type="text" nbInput fullWidth fieldSize="medium" ngDefaultControl
+                   placeholder="Last Name" [(ngModel)]="user.lastName">
+          </div>
+          <div class="input">
+            <span class="title"> User Name </span>
+            <input type="text" nbInput fullWidth fieldSize="medium" ngDefaultControl
+                   placeholder="User Name" [(ngModel)]="user.username">
+            <a>Change User Name</a>
+          </div>
+          <div class="input">
+            <span class="title"> Email </span>
+            <input type="text" nbInput fullWidth fieldSize="medium" ngDefaultControl
+                   placeholder="Email" [disabled]="true" [(ngModel)]="user.email">
+          </div>
+          <div class="input">
+            <span class="title"> Password </span>
+            <input type="text" nbInput fullWidth fieldSize="medium" ngDefaultControl
+                   placeholder="Password" [disabled]="true" [(ngModel)]="user.password">
+            <a>Forget Password</a>
+          </div>
+          <div class="input" [ngModel]="user.sex" ngDefaultControl>
+            <span class="title"> Gender </span>
+            <nb-select placeholder="Select your gender">
+              <nb-option value="1">Male</nb-option>
+              <nb-option value="2">Female</nb-option>
+              <nb-option value="3">Secret</nb-option>
+            </nb-select>
+          </div>
 
-                <input style="margin: 20px;" (click)="onSave()" nbButton type="submit" value="Save" />
+            <input style="margin: 20px;" (click)="onSave()" nbButton type="submit" value="Save" />
 
-                <input class="picfiles" style="position: absolute; top:120px; left: 100px;" (click)="upload()" nbButton type="button"
-                    value="Upload" />
+            <input class="picfiles" style="position: absolute; top:145px; left: 100px; margin-left:4em" (click)="upload()" nbButton type="button"
+                value="Upload" />
 
-                <nb-user style="position: absolute; top: 30px; left: 100px;" size="large" [name]="user?.username"
-                     [picture]="this.fileArr[0]?.url" (click)="upload1()"></nb-user>
-            </div>
+            <nb-user style="position: absolute; top: 65px; left: 100px; margin-left:3.5em" size="large" [name]="user?.username"
+                 [picture]="this.fileArr[0]?.url" (click)="upload1()"></nb-user>
         </div>
+    </div>
 <!-- liked video part in profile page -->
-        <div *ngSwitchCase="'Liked'">
-            <div class="videoList">
-                    <div class="videoTitle">
-                        <div herf="" class="t">{{tabKeyL}}</div>
-                    </div>
-                <div class="videoContent" *ngIf="likes !== []">
-                  <ng-container class="div-container" *ngFor="let video of likes">
-                    <div class="small-item">
-                      <nb-card>
-                        <a routerLink="/pages/details/{{video.id}}">
-                        <nb-card-header>{{video.title}}</nb-card-header>
-                        <nb-card-body>
-                          <img [src]="videoService.getVideoImgURL(video.url) | safe: 'resourceUrl'">
-                        </nb-card-body>
-                        <nb-card-footer>
-                          {{video.description}}
-                        </nb-card-footer>
-                        </a>
-                      </nb-card>
-                    </div>
-                  </ng-container>
+    <div *ngSwitchCase="'Liked'">
+        <div class="videoList">
+                <div class="videoTitle">
+                    <!-- <div herf="" class="t">{{tabKeyL}}</div> -->
                 </div>
+            <div class="videoContent div-container" *ngIf="likes !== []">
+              <ng-container *ngFor="let video of likes">
+                <div>
+                  <nb-card>
+                    <nb-card-header style="text-align: center;">{{video.title}}</nb-card-header>
+                    
+                    <a routerLink="/pages/details/{{video.id}}"></a>    
+                    <nb-card-body>
+                        <div style="text-align: center;">
+                        <img src="https://img.youtube.com/vi/{{video.url}}/mqdefault.jpg">
+                        </div>
+                      <!-- <img [src]="videoService.getVideoImgURL(video.url) | safe: 'resourceUrl'"> -->
+                    </nb-card-body>
+                
+                    
+                    <nb-card-footer>
+                      {{video.description}}
+                    </nb-card-footer>
+                    <!-- </a> -->
+                  </nb-card>
+                </div>
+              </ng-container>
             </div>
         </div>
-    <button *ngIf="tabKey == 'Liked'" class="editItem" (click)="editStatus()" nbButton>Cancel</button>
+    </div>
+<button *ngIf="tabKey == 'Liked'" class="editItem" (click)="editStatus()" nbButton>Cancel</button>
 
 <!-- Subscription video part in profile page -->
-        <div *ngSwitchCase="'Subscription'">
+    <div *ngSwitchCase="'Subscription'">
+        <div class="videoList">
+            <div class="videoTitle">
+                <!-- <div href="" class="t">{{tabKeyS}}</div> -->
+            </div>
+            <div class="videoContent div-container">
+                <ng-container *ngFor="let video of sub">
+                    
+                    <div>
+                      <nb-card>  
+                            <nb-card-body>
+                              <nb-card>
+                                    <div style="text-align: center; margin-top: 10px; margin-bottom: 10px;">
+                                <!-- <nb-card-header> -->
+                                        <a routerLink="/pages/profile/{{videoAuthors.get(video.id).id}}">
+                                        <nb-user style="margin-left: 10px; margin-bottom: 6px;"[name]="videoAuthors.get(video.id).username"></nb-user></a>
+                                            {{video.title}}
+                                <!-- </nb-card-header> -->
+                       
+                                        <a  routerLink="/pages/details/{{video.id}}"></a>
+                                            <div class="pic" style="padding-top: 1em;">
+                                <!-- <nb-card-body> -->
+                                            <img src="https://img.youtube.com/vi/{{video.url}}/mqdefault.jpg">
+                                <!-- <img [src]="videoService.getVideoImgURL(video.url) | safe: 'resourceUrl'"> -->
+                                <!-- </nb-card-body> -->
+                        
+                                            </div>
+                                    </div>
+                                    <nb-card-footer>
+                                        {{video.description}}
+                                      </nb-card-footer>
+                              </nb-card>
+                            </nb-card-body>
+                       
+                        
+                      </nb-card>
+
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+<!-- <button *ngIf="tabKey == 'Subscription'" class="editItem" (click)="editStatus()" nbButton>Unsubscribe</button> -->
+
+    <div *ngSwitchDefault>
+        <section>
             <div class="videoList">
                 <div class="videoTitle">
-                    <div href="" class="t">{{tabKeyS}}</div>
+                    <!-- <a href="" class="t">{{tabKey}}</a> -->
+
                 </div>
                 <div class="videoContent div-container">
-                    <ng-container *ngFor="let video of sub">
-                        <!-- <div class="sub">{{item.email}}</div> -->
-                        <div class="small-item">
-                          <nb-card>
-                            <nb-card-header>
-                              <a routerLink="/pages/profile/{{videoAuthors.get(video.id).id}}">
-                                <nb-user [name]="videoAuthors.get(video.id).username"></nb-user></a>
-                              {{video.title}}</nb-card-header>
-                            <a routerLink="/pages/details/{{video.id}}">
-                            <nb-card-body>
-                              <img [src]="videoService.getVideoImgURL(video.url) | safe: 'resourceUrl'">
-                            </nb-card-body>
-                            <nb-card-footer>
-                              {{video.description}}
-                            </nb-card-footer>
-                            </a>
-                          </nb-card>
-
-                        </div>
+                    <ng-container  *ngFor="let video of videos">
+                        <!-- <div > -->
+                            <div class="cover" [ngClass]="{'redBorder': editFlag && tabKey == 'My Video'}" (click)="toEdit(video)">
+                              <nb-card >
+                                <nb-card-header style="text-align: center;">{{video.title}}</nb-card-header>
+                                <nb-card-body style="text-align: center;">
+                                    <img src="https://img.youtube.com/vi/{{video.url}}/mqdefault.jpg">
+                                <!-- <img [src]="videoService.getVideoImgURL(video.url) | safe: 'resourceUrl'"> -->
+                                </nb-card-body>
+                                <nb-card-footer>
+                                  {{video.description}}
+                                </nb-card-footer>
+                              </nb-card>
+                            </div>
+                        <!-- </div> -->
                     </ng-container>
                 </div>
             </div>
-        </div>
-    <button *ngIf="tabKey == 'Subscription'" class="editItem" (click)="editStatus()" nbButton>Unsubscribe</button>
+        </section>
+        <button *ngIf="tabKey === 'My Video'" class="editItem" (click)="editStatus()" nbButton>Edit</button>
+        <button class="deleteItem" (click)="deleteItem()" nbButton>{{buttonText}}</button>
 
-        <div *ngSwitchDefault>
-            <section>
-                <div class="videoList">
-                    <div class="videoTitle">
-                        <a href="" class="t">{{tabKey}}</a>
-
-                    </div>
-                    <div class="videoContent">
-                        <ng-container *ngFor="let video of videos">
-                            <div class="small-item">
-                                <div class="cover" [ngClass]="{'redBorder': editFlag && tabKey == 'My Video'}" (click)="toEdit(video)">
-                                  <nb-card>
-                                    <nb-card-header>{{video.title}}</nb-card-header>
-                                    <nb-card-body>
-                                    <img [src]="videoService.getVideoImgURL(video.url) | safe: 'resourceUrl'">
-                                    </nb-card-body>
-                                    <nb-card-footer>
-                                      {{video.description}}
-                                    </nb-card-footer>
-                                  </nb-card>
-                                </div>
-                            </div>
-                        </ng-container>
-                    </div>
-                </div>
-            </section>
-            <button *ngIf="tabKey === 'My Video'" class="editItem" (click)="editStatus()" nbButton>Edit</button>
-            <button class="deleteItem" (click)="deleteItem()" nbButton>{{buttonText}}</button>
-
-          </div>
-    </div>
+      </div>
+</div>
 </div>
 
 <!-- <div class="wrapper" *ngIf="pageID === 'home'">
-    <div class="cover" [ngClass]="{'redBorder': editFlag && tabKeyU == 'User-Info'}"></div>
+<div class="cover" [ngClass]="{'redBorder': editFlag && tabKeyU == 'User-Info'}"></div>
 </div> -->
 <div class="wrapper" *ngIf="pageID !=='home'"
-    style="display: flex;flex-direction: column; justify-content: flex-start;align-items: center;">
-    <div class="small-item">
-        <div class="cover" style="width : 320px; height: 200px;">
-            <div class="cover" [ngClass]="{'redBorder': editFlag && tabKey == 'My Video'}" >
-                <!-- (click)="toEdit(item)" -->
-                <img width="160" height="100" [src]="videourl | safe: 'resourceUrl'">
-            </div>
-                <span class="i-watchlater"></span>
-            <nb-icon *ngIf="videoData.edit" class="icon" icon="close-outline" status="danger">
-            </nb-icon>
-
+style="display: flex;flex-direction: column; justify-content: flex-start;align-items: center;">
+<div class="small-item">
+    <div class="cover" style="width : 320px; height: 200px;">
+        <div class="cover" [ngClass]="{'redBorder': editFlag && tabKey == 'My Video'}" >
+            <!-- (click)="toEdit(item)" -->
+            <!-- <img width="160" height="100" [src]="videourl | safe: 'resourceUrl'"> -->
         </div>
-        <a target="_blank" title="title" class="title">Title</a>
-        <div class="meta"><span class="play">
-            <i class="icon"></i>288
-            </span><span class="time"><i class="icon"></i>2019-2-23
-            </span></div>
-  </div>
+            <span class="i-watchlater"></span>
+        <nb-icon *ngIf="videoData.edit" class="icon" icon="close-outline" status="danger">
+        </nb-icon>
 
-    <div class="userInfoContent" style="width: 820px; height: 400px; flex: unset;">
-        <div class="input">
-            <span class="title">Title</span>
-            <input type="text" placeholder="Title">
-        </div>
-        <div class="input">
-            <span class="title">Description</span>
-            <input type="text" placeholder="Add description">
-        </div>
+    </div>
+    <a target="_blank" title="title" class="title">Title</a>
+    <!-- <div class="meta"><span class="play">
+        <i class="icon"></i>288
+        </span><span class="time"><i class="icon"></i>2019-2-23
+        </span>
+    </div> -->
+    </div>
 
-        <div style="display: flex; flex-direction: row;">
+<div class="userInfoContent" style="width: 820px; height: 400px; flex: unset;">
+    <div class="input">
+        <span class="title">Title</span>
+        <input type="text" placeholder="Title">
+    </div>
+    <div class="input">
+        <span class="title">Description</span>
+        <input type="text" placeholder="Add description">
+    </div>
 
-            <input (click)="returnHome()" nbButton type="button" value="return" />
-            &nbsp;
-            <input (click)="editSAVE()" nbButton type="submit" value="upload" />
-        </div>
+    <div style="display: flex; flex-direction: row;">
+
+        <input (click)="returnHome()" nbButton type="button" value="return" />
+        &nbsp;
+        <input (click)="editSAVE()" nbButton type="submit" value="upload" />
     </div>
 </div>
+</div>
 <input type="file" #file1 style="display:none;" accept="image/png, image/jpeg, image/gif, image/jpg" />
-<!--ok的代码-->
+
+
+
+
+
