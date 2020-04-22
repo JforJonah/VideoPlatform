@@ -1,3 +1,4 @@
+<!--Edit user's own video page-->
 <div class="poscenter" *ngIf="video">
   <iframe width="560px"
   height="315px" [src]="videoService.getVideoURL(video.url) | safe: 'resourceUrl'"></iframe>
@@ -8,10 +9,12 @@
 
   </nb-card-header>
   <nb-card-body>
+    <!--Edit video title area-->
     <label class="labsize"> Title:
       &nbsp;
       <input class="inputsize" nbInput [(ngModel)]="video.title" placeholder="{{video.title}}">
     </label>
+    <!--Edit video description area-->
     <label class="labelsize"> Description:
       &nbsp;
       <textarea class="desarea" nbInput [(ngModel)]="video.description" placeholder="{{video.description}}"></textarea>

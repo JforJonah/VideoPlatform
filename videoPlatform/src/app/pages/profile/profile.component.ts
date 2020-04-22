@@ -153,6 +153,7 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  //save the user info that updated by user
   onSave() {
     this.userService.updateUser(this.user).subscribe();
     //save alert once save successfully
@@ -219,6 +220,7 @@ export class ProfileComponent implements OnInit {
     alert('Save SUCCESSFULLY');
   }
 
+  //Add listener
   ngAfterViewInit(): void {
     //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
     //Add 'implements AfterViewInit' to the class.
