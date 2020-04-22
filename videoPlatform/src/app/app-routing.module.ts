@@ -5,7 +5,6 @@ import { HomeComponent } from './pages/home/home.component';
 import {FavoriteComponent} from './pages/favorite/favorite.component';
 import {UploadvideoComponent} from './pages/uploadvideo/uploadvideo.component';
 import {HistoryComponent} from './pages/history/history.component';
-import {WatchlaterComponent} from './pages/watchlater/watchlater.component';
 import {FollowsComponent} from './pages/follows/follows.component';
 import {ProfileComponent} from './pages/profile/profile.component';
 import { AuthGuard } from './server/auth-guard.service';

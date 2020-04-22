@@ -22,7 +22,6 @@ import {HomeComponent} from './home/home.component';
 import {NavBarComponent} from './nav-bar/nav-bar.component';
 import {UploadvideoComponent} from './uploadvideo/uploadvideo.component';
 import {VideodetailComponent} from './videodetail/videodetail.component';
-import {WatchlaterComponent} from './watchlater/watchlater.component';
 import { OtherprofileComponent } from './otherprofile/otherprofile.component';
 import {SafePipe} from './pipe/SafePipe';
 import { EditvideoComponent } from './profile/editvideo/editvideo.component';
@@ -38,7 +37,6 @@ import { EditvideoComponent } from './profile/editvideo/editvideo.component';
     NavBarComponent,
     UploadvideoComponent,
     VideodetailComponent,
-    WatchlaterComponent,
     OtherprofileComponent,
     SafePipe,
     EditvideoComponent

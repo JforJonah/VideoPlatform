@@ -1,4 +1,4 @@
-<nb-card *ngFor="let tag of videoList.keys(); index as i">
+<nb-card *ngFor="let tag of videoListKeys; index as i">
   <nb-card-header>{{tag}}</nb-card-header>
   <nb-card-body class="div-container" *ngIf="videoList.get(tag)">
     <nb-card *ngFor="let video of videoList.get(tag)">

@@ -15,6 +15,8 @@ export class HomeComponent implements OnInit {
   tags = Tags;
   videoList = new Map<string, Video[]>();
   userList = new Map<string, User>();
+  videoListKeys = [];
+  userListKeys;
 
   // url = 'https://www.youtube.com/embed/3yxNUbYZEWU';
   // videoList: Array<Array<Video>> = [];
@@ -33,6 +35,7 @@ export class HomeComponent implements OnInit {
         videos => {
           if (videos !== undefined) {
             this.videoList.set(this.tags[i], videos);
+            this.videoListKeys.push(this.tags[i]);
             videos.forEach(
               video => this.userService.getUserById(video.auth).subscribe(
                 user => this.userList.set(video.id, user)
