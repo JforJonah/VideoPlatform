@@ -1,16 +1,21 @@
 <nb-card size="giant">
   <nb-card-header>
-    <nb-user [name]="profile?.username" [picture]="profile?.profileImage"></nb-user>
-    <button nbButton status="danger"
+    <div class = "user">
+      <nb-user [name]="profile?.username" [picture]="profile?.profileImage"></nb-user>
+    </div>
+    <div class = "follow-btn">
+      <button nbButton status="danger"
             class="follow-btn"
             (click)="addFollow();
             followClicked=!followClicked"
-            [class.follow-clicked]="followClicked">
+            [class.follow-unclicked]="!followClicked">
       Follow
       <nb-icon icon="heart"
                class="follow-icon"></nb-icon>
       <span class ="followCount"></span>
     </button>
+    </div>
+    
   </nb-card-header>
   <nb-card-body class="container">
     <nb-card *ngFor="let video of videos">

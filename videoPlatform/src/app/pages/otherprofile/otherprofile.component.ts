@@ -35,6 +35,7 @@ export class OtherprofileComponent implements OnInit {
     );
   }
 
+
   addFollow(): void{
     if (!this.followClicked) {
       this.userService.subscribeUser(this.profile).toPromise().then();
