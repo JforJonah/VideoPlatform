@@ -8,7 +8,7 @@
           </nb-card-header>
           <a routerLink="/pages/profile/{{follower.id}}">
           <nb-card-body>
-            <nb-user [name]="follower?.username" [picture]="follower?.profileImage"></nb-user>
+            <nb-user class="space" [name]="follower?.username" [picture]="follower?.profileImage"></nb-user>
           </nb-card-body>
           </a>
           <nb-card-footer>
@@ -31,7 +31,7 @@
           </nb-card-header>
           <a routerLink="/pages/profile/{{followee.id}}">
           <nb-card-body>
-            <nb-user [name]="followee?.username" [picture]="followee?.profileImage"></nb-user>
+            <nb-user class="space" [name]="followee?.username" [picture]="followee?.profileImage"></nb-user>
           </nb-card-body>
           </a>
           <nb-card-footer>
