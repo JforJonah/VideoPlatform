@@ -287,3 +287,44 @@ a{
         //   text-align: center;
       }
   }
+
+  .saveinput{
+      margin: 20px;
+  }
+
+  .uploadinput{
+      position: absolute;
+      top: 145px;
+      left: 100px;
+      margin-left: 4em;
+  }
+    .uploadin{
+        position: absolute;
+        top: 65px;
+        left:100px;
+        margin-left: 3em;
+  }
+  
+
+  .centerpos{
+      text-align: center;
+  }
+
+  .cardpos{
+      text-align: center;
+      margin-top: 10px;
+      margin-bottom: 10px;
+  }
+
+  .userpos{
+      margin-left: 10px;
+      margin-bottom: 6px;
+  }
+
+  .imgpos{
+      padding-top: 1em;
+  }
+
+  .pictype{
+      display: none;
+  }
