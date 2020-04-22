@@ -1,6 +1,14 @@
 
 .wrapper{
-    max-width   : 1200px;
+    max-width   : 2000px;
+   
+    .userinfo{
+        margin-left     : 100px;
+        margin-right    : 100px;
+        
+        position        : relative;
+        
+    }
 }
 
 .videoList{
@@ -52,6 +60,7 @@
     .videoContent {
         // max-height: 935px;
         overflow     : hidden;
+        margin-top   : 3em;
 
 
     }
@@ -75,10 +84,11 @@
         background-size : cover;
         border-radius   : 4px;
         display         : block;
-        width           : 160px;
-        height          : 100px;
+        width           : 200px;
+        height          : 150px;
         overflow        : hidden;
         position        : relative;
+        
 
         .icon{
             position : absolute;
@@ -178,9 +188,10 @@
         flex-direction : row;
         justify-content: flex-start;
         align-items    : center;
-        margin-bottom  : 20px;
+        // margin-bottom  : 20px;
         position       : relative;
         margin-left    : 30px;
+        margin-top: 30px;
 
         .title {
             width: 100px;
@@ -241,11 +252,38 @@ a{
 }
 
 .div-container{
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  column-gap: 10px;
-  row-gap: 1em;
-}
-a {
-  text-decoration: none;
-}
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 100px;
+    row-gap: 3em;
+  }
+  a {
+    text-decoration: none;
+  }
+
+  .card-row {
+    display: flex;
+    margin: 0 -0.5rem;
+  }
+  
+  .card-col {
+    flex: 1 0 calc(50% - 1rem);
+    margin: 0 0.5rem;
+  }
+
+  .small-video{
+      width: 280px;
+      height: 160px;
+  }
+
+  .infodetail{
+      div{
+          display: inline-block;
+      }
+      .pic{
+          margin-left: 10%;
+          margin-top: 20px;
+          margin-bottom: 20px;
+        //   text-align: center;
+      }
+  }
