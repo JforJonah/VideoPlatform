@@ -25,6 +25,7 @@ import {VideodetailComponent} from './videodetail/videodetail.component';
 import {WatchlaterComponent} from './watchlater/watchlater.component';
 import { OtherprofileComponent } from './otherprofile/otherprofile.component';
 import {SafePipe} from './pipe/SafePipe';
+import { EditvideoComponent } from './profile/editvideo/editvideo.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import {SafePipe} from './pipe/SafePipe';
     VideodetailComponent,
     WatchlaterComponent,
     OtherprofileComponent,
-    SafePipe
+    SafePipe,
+    EditvideoComponent
   ],
   imports: [
     FormsModule,
